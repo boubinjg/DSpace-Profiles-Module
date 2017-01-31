@@ -58,7 +58,7 @@ public class Profiles extends AbstractDSpaceTransformer
     public static final Message T_trail =
         message("Profiles");
     public static final Message T_head =
-        message("Bo Brinkman");
+        message("BO BRINKMAN");
     public static final Message T_para =
         message("This page displays profiles");
     
@@ -185,8 +185,8 @@ public class Profiles extends AbstractDSpaceTransformer
 	    testSql.addPara(test);
 	    testSql.addPara(error);
 	
-	    Division testForm = page.addDivision("testForm");
-	    List form = page.addList("form", List.TYPE_FORM);
-	    form.addItem().addButton("submit?").setValue(T_changeToOpen);
+	    //Division testForm = page.addDivision("testForm");
+	    //List form = page.addList("form", List.TYPE_FORM);
+	    //form.addItem().addButton("submit?").setValue(T_changeToOpen);
 	}
 }
