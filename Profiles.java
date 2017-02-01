@@ -103,6 +103,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		String schoolName, degreeAndAttended;
 		String grantTitle = "Grant Title: ", grantLength = "Grant Length: ", grantNumber = "Grant Number: ";
 		String orcid, academia, googlePlus, linkedin, researchGate, twitter;
+		String organization, orgJobTitle, dateRange;
 		
 		try {
 			Connection conn = null;
@@ -166,6 +167,16 @@ public class Profiles extends AbstractDSpaceTransformer {
 			}
 			rs3.close();
 			
+			sql4 = "SELECT * FROM employment WHERE uid = '" + newM + "'";
+			ResultSet rs4 = stmt.executeQuery(sql4);
+			while(rs4.next()) {
+				uniqueId += rs.getString("uid");
+				organization += rs.getString("organization");
+				orgJobTitle += rs.getString("jobtitle");
+				dateRange += rs.getString("daterange");
+			}
+			rs4.close();
+			
 			stmt.close();
 			conn.close();
 			test += "closed";
@@ -210,9 +221,9 @@ public class Profiles extends AbstractDSpaceTransformer {
 		education.addPara(school);
 		education.addPara(degreeAndAttended);
 
-		employment.addPara("Miami University: Oxford, OH, United States");
-		employment.addPara("Associate Professor - Computer Science and Software Engineering");
-		employment.addPara("July, 2010 - Present");
+		employment.addPara(organization);
+		employment.addPara(orgJobTitle);
+		employment.addPara(dateRange);
 
 		funding.addPara(grantTitle);
 		funding.addPara(grantLength);
