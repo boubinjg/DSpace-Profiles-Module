@@ -242,12 +242,16 @@ public class Profiles extends AbstractDSpaceTransformer {
 		// twitter
 		links.addParaFigure("", "", twitterLoc, twitter, "");
 
-		Division testSql = page.addDivision("testSql");
-		testSql.addPara(test);
-		testSql.addPara(error);
+		//Division testSql = page.addDivision("testSql");
+		//testSql.addPara(test);
+		//testSql.addPara(error);
 
-		//Division testForm = page.addDivision("testForm");
-		//List form = page.addList("form", List.TYPE_FORM);
-		//form.addItem().addButton("submit?").setValue(T_changeToOpen);
+		/*Division testForm = page.addInteractiveDivision("testForm", 
+					 request.getRequestURI(), Division.METHOD_POST, "primary");
+		
+		List form = testForm.addList("form", List.TYPE_FORM);
+		Text name = form.addItem().addTest("name");
+		form.addItem().addButton("submit?").setValue(T_changeToOpen);
+		*/
 	}
 }
