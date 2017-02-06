@@ -1,4 +1,5 @@
-/*
+/
+
  AboutPage.java
  *
  * Basead on the code by Peter Dietz:
@@ -135,44 +136,44 @@ public class Profiles extends AbstractDSpaceTransformer {
 			sql1 = "SELECT * FROM bio WHERE uid = '" + newM + "'";
 			ResultSet rs1 = stmt.executeQuery(sql1);
 			while(rs1.next()) {
-				uniqueId += rs.getString("uid");
-				school += rs.getString("school");
-				degreeAndAttended += rs.getString("degree");
+				uniqueId += rs1.getString("uid");
+				school += rs1.getString("school");
+				degreeAndAttended += rs1.getString("degree");
 				degreeAndAttended += ", ";
-				degreeAndAttended += rs.getString("dateEarned");
+				degreeAndAttended += rs1.getString("dateEarned");
 			}
 			rs1.close();
 			
 			sql2 = "SELECT * FROM funding WHERE uid = '" + newM + "'";
 			ResultSet rs2 = stmt.executeQuery(sql2);
 			while(rs2.next()) {
-				uniqueId += rs.getString("uid");
-				grantTitle += rs.getString("granttitle");
-				grantLength += rs.getString("grantlength");
-				grantNumber += rs.getString("grantnumber");
+				uniqueId += rs2.getString("uid");
+				grantTitle += rs2.getString("granttitle");
+				grantLength += rs2.getString("grantlength");
+				grantNumber += rs2.getString("grantnumber");
 			}
 			rs2.close();
 			
 			sql3 = "SELECT * FROM links WHERE uid = '" + newM + "'";
 			ResultSet rs3 = stmt.executeQuery(sql3);
 			while(rs3.next()) {
-				uniqueId += rs.getString("uid");
-				orcid += rs.getString("orcid");
-				academia += rs.getString("academia");
-				googlePlus += rs.getString("googleplus");
-				linkedin += rs.getString("linkedin");
-				researchGate += rs.getString("researchgate");
-				twitter += rs.getString("twitter");
+				uniqueId += rs3.getString("uid");
+				orcid += rs3.getString("orcid");
+				academia += rs3.getString("academia");
+				googlePlus += rs3.getString("googleplus");
+				linkedin += rs3.getString("linkedin");
+				researchGate += rs3.getString("researchgate");
+				twitter += rs3.getString("twitter");
 			}
 			rs3.close();
 			
 			sql4 = "SELECT * FROM employment WHERE uid = '" + newM + "'";
 			ResultSet rs4 = stmt.executeQuery(sql4);
 			while(rs4.next()) {
-				uniqueId += rs.getString("uid");
-				organization += rs.getString("organization");
-				orgJobTitle += rs.getString("jobtitle");
-				dateRange += rs.getString("daterange");
+				uniqueId += rs4.getString("uid");
+				organization += rs4.getString("organization");
+				orgJobTitle += rs4.getString("jobtitle");
+				dateRange += rs4.getString("daterange");
 			}
 			rs4.close();
 			
