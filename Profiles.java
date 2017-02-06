@@ -58,6 +58,18 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 	// AbstractDSpaceTransformer d = new AbstractDSpaceTransformer();
 	// static String curUrl = d.url;
+	
+	//form variables
+	private static final Message F_head =
+        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.head");
+ 
+        private static final Message F_para1 =
+        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.para1");
+ 
+        private static final Message F_email =
+        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.email");
+
+	//end formvariables
 
 	public String s = url;
 	public static final Message T_dspace_home = message("xmlui.general.dspace_home");
@@ -253,31 +265,22 @@ public class Profiles extends AbstractDSpaceTransformer {
 		links.addParaFigure("", "", researchGateLoc, researchGate, "");
 		// twitter
 		links.addParaFigure("", "", twitterLoc, twitter, "");
-
-		private static final Message T_head =
-		message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.head");
-
-		private static final Message T_para1 =
-		message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.para1");
-
-		private static final Message T_email =
-		message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.email");
-
+	
 		// Build the item viewer division.
 		Division formDiv = page.addInteractiveDivision("form",
 			request.getRequestURI(),Division.METHOD_POST,"primary");
-		formDiv.setHead(T_head);
+		formDiv.setHead(F_head);
 
-		formDiv.addPara(T_para1);
+		formDiv.addPara(F_para1);
 
 		List form = formDiv.addList("form",List.TYPE_FORM);
 
 		Text name = form.addItem().addText("name");
-		name.setLabel(T_name);
+		name.setLabel(F_name);
 		name.setValue(parameters.getParameter("name",""));
 
 		Text mail = form.addItem().addText("email");
-		mail.setLabel(T_email);
+		mail.setLabel(F_email);
 		mail.setValue(parameters.getParameter("email",""));
 
 		/*if(request.getParameter("openAccess")!=null){
