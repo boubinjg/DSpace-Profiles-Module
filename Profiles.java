@@ -53,15 +53,15 @@ public class Profiles extends AbstractDSpaceTransformer {
 	public static final Message T_trail = message("Profiles");
 	public static final Message T_head = message("Bo Brinkman");
 	public static final Message T_para = message("This page displays profiles");
-	public static final Message databaseConnection = "jdbc:postgresql://localhost:5432/profiles";
-	public static final Message databaseUsername = "postgres";
-	public static final Message databasePassword = "capstone";
-	public static final Message orcidLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/orcid-logo.png";
-	public static final Message academiaLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/academia-logo.png";
-	public static final Message googlePlusLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/google-plus-logo.png";
-	public static final Message linkedinLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/linkedin-logo.png";
-	public static final Message researchGateLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/researchgate-logo.png";
-	public static final Message twitterLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/twitter-logo.png";
+	public static final String databaseConnection = "jdbc:postgresql://localhost:5432/profiles";
+	public static final String databaseUsername = "postgres";
+	public static final String databasePassword = "capstone";
+	public static final String orcidLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/orcid-logo.png";
+	public static final String academiaLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/academia-logo.png";
+	public static final String googlePlusLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/google-plus-logo.png";
+	public static final String linkedinLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/linkedin-logo.png";
+	public static final String researchGateLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/researchgate-logo.png";
+	public static final String twitterLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/twitter-logo.png";
 
 	public Message test = message(s);
 	public Message test2 = message("test2");
@@ -71,8 +71,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 	/**
 	 * Add a page title and trail links.
-	 */
-	public void addPageMeta(PageMeta pageMeta) throws SAXException, WingException {
+	 */	public void addPageMeta(PageMeta pageMeta) throws SAXException, WingException {
 		// Set the page title
 
 		// pageMeta.addMetadata("title").addContent("About Us");
@@ -98,12 +97,12 @@ public class Profiles extends AbstractDSpaceTransformer {
 		// sql test / Variables
 		String test = "Test: ";
 		String error = "No Errors!";
-		String uniqueId, name, pictureURL, jobTitle, researchArea = "Research: ", address = "Address: ";
+		String uniqueId = "", name = "", pictureURL = "", jobTitle = "", researchArea = "Research: ", address = "Address: ";
 		String phone = "Phone: ", email = "Email: ", website = "Personal Website: ";
-		String schoolName, degreeAndAttended;
+		String school = "", degreeAndAttended = "";
 		String grantTitle = "Grant Title: ", grantLength = "Grant Length: ", grantNumber = "Grant Number: ";
-		String orcid, academia, googlePlus, linkedin, researchGate, twitter;
-		String organization, orgJobTitle, dateRange;
+		String orcid = "", academia = "", googlePlus = "", linkedin = "", researchGate = "", twitter = "";
+		String organization = "", orgJobTitle = "", dateRange = "";
 		
 		try {
 			Connection conn = null;
@@ -247,8 +246,8 @@ public class Profiles extends AbstractDSpaceTransformer {
 		testSql.addPara(test);
 		testSql.addPara(error);
 
-		Division testForm = page.addDivision("testForm");
-		List form = page.addList("form", List.TYPE_FORM);
-		form.addItem().addButton("submit?").setValue(T_changeToOpen);
+		//Division testForm = page.addDivision("testForm");
+		//List form = page.addList("form", List.TYPE_FORM);
+		//form.addItem().addButton("submit?").setValue(T_changeToOpen);
 	}
 }
