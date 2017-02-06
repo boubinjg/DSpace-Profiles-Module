@@ -15,6 +15,17 @@ package org.dspace.app.xmlui.aspect.artifactbrowser;
 import java.sql.*;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
+//imports for the form
+import org.apache.cocoon.util.HashUtil;
+import org.apache.commons.lang.StringUtils;
+import org.dspace.app.xmlui.utils.HandleUtil;
+import org.dspace.app.xmlui.wing.element.List;
+import org.dspace.app.xmlui.wing.element.Radio;
+import org.dspace.app.xmlui.wing.element.Text;
+import org.dspace.app.xmlui.wing.element.TextArea;
+import org.dspace.content.Metadatum;
+import org.dspace.content.DSpaceObject;
+import org.dspace.content.Item;
 //end
 import org.apache.log4j.Logger;
 import org.dspace.app.xmlui.cocoon.AbstractDSpaceTransformer;
@@ -243,16 +254,42 @@ public class Profiles extends AbstractDSpaceTransformer {
 		// twitter
 		links.addParaFigure("", "", twitterLoc, twitter, "");
 
-		//Division testSql = page.addDivision("testSql");
-		//testSql.addPara(test);
-		//testSql.addPara(error);
+		private static final Message T_head =
+		message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.head");
 
-		/*Division testForm = page.addInteractiveDivision("testForm", 
-					 request.getRequestURI(), Division.METHOD_POST, "primary");
-		
-		List form = testForm.addList("form", List.TYPE_FORM);
-		Text name = form.addItem().addTest("name");
-		form.addItem().addButton("submit?").setValue(T_changeToOpen);
-		*/
+		private static final Message T_para1 =
+		message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.para1");
+
+		private static final Message T_email =
+		message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.email");
+
+		// Build the item viewer division.
+		Division formDiv = page.addInteractiveDivision("form",
+			request.getRequestURI(),Division.METHOD_POST,"primary");
+		formDiv.setHead(T_head);
+
+		formDiv.addPara(T_para1);
+
+		List form = formDiv.addList("form",List.TYPE_FORM);
+
+		Text name = form.addItem().addText("name");
+		name.setLabel(T_name);
+		name.setValue(parameters.getParameter("name",""));
+
+		Text mail = form.addItem().addText("email");
+		mail.setLabel(T_email);
+		mail.setValue(parameters.getParameter("email",""));
+
+		/*if(request.getParameter("openAccess")!=null){
+				if(StringUtils.isEmpty(parameters.getParameter("name", ""))){
+					name.addError(T_name_error);
+				}
+                        if(StringUtils.isEmpty(parameters.getParameter("email", ""))){
+                                mail.addError(T_email_error);
+                        }
+                }*/
+       		// mail.setValue(parameters.getParameter("mail",""));
+        	form.addItem().addHidden("isSent").setValue("true");
+        	form.addItem().addButton("openAccess").setValue(T_changeToOpen);
 	}
 }
