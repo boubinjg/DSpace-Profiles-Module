@@ -69,6 +69,9 @@ public class Profiles extends AbstractDSpaceTransformer {
         private static final Message F_email =
         message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.email");
 
+	private static final Message F_name =
+        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.name");
+
 	private static final Message T_changeToOpen =
         message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.changeToOpen");
 
@@ -124,13 +127,17 @@ public class Profiles extends AbstractDSpaceTransformer {
 		// sql test / Variables
 		String test = "Test: ";
 		String error = "No Errors!";
-		String uniqueId = "", name = "", pictureURL = "", jobTitle = "", researchArea = "Research: ", address = "Address: ";
+		String uniqueId = "", name = ""; 
+		String pictureURL = "http://www.sawyoo.com/postpic/2010/11/facebook-no-profile-picture-icon_698652.jpg";
+		String jobTitle = "", researchArea = "Research: ", address = "Address: ";
 		String phone = "Phone: ", email = "Email: ", website = "Personal Website: ";
 		String school = "", degreeAndAttended = "";
 		String grantTitle = "Grant Title: ", grantLength = "Grant Length: ", grantNumber = "Grant Number: ";
 		String orcid = "", academia = "", googlePlus = "", linkedin = "", researchGate = "", twitter = "";
 		String organization = "", orgJobTitle = "", dateRange = "";
 		
+		
+
 		try {
 			Connection conn = null;
 			
@@ -256,18 +263,18 @@ public class Profiles extends AbstractDSpaceTransformer {
 		funding.addPara(grantNumber);
 
 		Division links = page.addDivision("links");
-		// orcid
-		links.addParaFigure("", "", orcidLoc, orcid, "");
+		// orcid/
+		links.addParaFigure("", "", orcidLoc, orcid, "", "");
 		// adacemia.edu
-		links.addParaFigure("", "", academiaLoc, academia, "");
+		links.addParaFigure("", "", academiaLoc, academia, "" , "");
 		// google+
-		links.addParaFigure("", "", googlePlusLoc, googlePlus, "");
+		links.addParaFigure("", "", googlePlusLoc, googlePlus, "", "");
 		// linkedin
-		links.addParaFigure("", "", linkedinLoc, linkedin, "");
+		links.addParaFigure("", "", linkedinLoc, linkedin, "", "");
 		// researchgate
 		links.addParaFigure("", "", researchGateLoc, researchGate, "");
 		// twitter
-		links.addParaFigure("", "", twitterLoc, twitter, "");
+		links.addParaFigure("", "", twitterLoc, twitter, "", "");
 	
 		// Build the item viewer division.
 		Division formDiv = page.addInteractiveDivision("form",
@@ -280,7 +287,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 		Text fname = form.addItem().addText("name");
 		fname.setLabel(F_name);
-		fnname.setValue(parameters.getParameter("name",""));
+		fname.setValue(parameters.getParameter("name",""));
 
 		Text fmail = form.addItem().addText("email");
 		fmail.setLabel(F_email);
