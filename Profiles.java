@@ -69,6 +69,9 @@ public class Profiles extends AbstractDSpaceTransformer {
         private static final Message F_email =
         message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.email");
 
+	private static final Message T_changeToOpen =
+        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.changeToOpen");
+
 	//end formvariables
 
 	public String s = url;
@@ -275,13 +278,13 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 		List form = formDiv.addList("form",List.TYPE_FORM);
 
-		Text name = form.addItem().addText("name");
-		name.setLabel(F_name);
-		name.setValue(parameters.getParameter("name",""));
+		Text fname = form.addItem().addText("name");
+		fname.setLabel(F_name);
+		fnname.setValue(parameters.getParameter("name",""));
 
-		Text mail = form.addItem().addText("email");
-		mail.setLabel(F_email);
-		mail.setValue(parameters.getParameter("email",""));
+		Text fmail = form.addItem().addText("email");
+		fmail.setLabel(F_email);
+		fmail.setValue(parameters.getParameter("email",""));
 
 		/*if(request.getParameter("openAccess")!=null){
 				if(StringUtils.isEmpty(parameters.getParameter("name", ""))){
