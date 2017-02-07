@@ -264,17 +264,17 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 		Division links = page.addDivision("links");
 		// orcid/
-		links.addParaFigure("", "", orcidLoc, orcid, "", "");
+		links.addParaFigure("", "", orcidLoc, orcid, "");
 		// adacemia.edu
-		links.addParaFigure("", "", academiaLoc, academia, "" , "");
+		links.addParaFigure("", "", academiaLoc, academia, "");
 		// google+
-		links.addParaFigure("", "", googlePlusLoc, googlePlus, "", "");
+		links.addParaFigure("", "", googlePlusLoc, googlePlus, "");
 		// linkedin
-		links.addParaFigure("", "", linkedinLoc, linkedin, "", "");
+		links.addParaFigure("", "", linkedinLoc, linkedin, "");
 		// researchgate
 		links.addParaFigure("", "", researchGateLoc, researchGate, "");
 		// twitter
-		links.addParaFigure("", "", twitterLoc, twitter, "", "");
+		links.addParaFigure("", "", twitterLoc, twitter, "");
 	
 		// Build the item viewer division.
 		Division formDiv = page.addInteractiveDivision("form",
