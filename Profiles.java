@@ -116,6 +116,11 @@ public class Profiles extends AbstractDSpaceTransformer {
 	/**
 	 * Add some basic contents
 	 */
+	public void doPost(HttpServletRequest request, HttpServletResponse response) 
+		throws ServletException, IOException, SQLException
+	{
+		
+	}
 	public void addBody(Body body) throws SAXException, WingException {
 
 		// 110523 modified with internationalization
@@ -155,6 +160,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			test += "got query ";
 			
 			sql5 = "SELECT uniqueid FROM bio WHERE uid = '" + newM + "'";
+			ResultSet rs5 = stmt.executeQuery(sql5);		
 			String uniqueIdCheck;
 			while(rs5.next()) {
 				uniqueIdCheck += rs5.getString(1);
@@ -231,15 +237,14 @@ public class Profiles extends AbstractDSpaceTransformer {
 				error = se.getSQLState();
 			}
 		// end sql test
+		Division division = body.addDivision("profile", "primary");
+		division.setHead(name);
+
+		// division.addPara(newM);
+
+		// the divisions for the page
+		Division page = division.addDivision("page");
 		if (containsUser) {
-			Division division = body.addDivision("profile", "primary");
-			division.setHead(name);
-
-			// division.addPara(newM);
-
-			// the divisions for the page
-			Division page = division.addDivision("page");
-
 			Division picture = division.addDivision("picture");
 			picture.addParaFigure("", "", pictureURL, "", "");
 
