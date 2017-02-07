@@ -128,7 +128,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		String req = request.getPathInfo();
 		String[] tok = req.split("/");
 		String newM = tok[2];
-		boolean containsUser;
+		boolean containsUser = false;;
 
 		// sql test / Variables
 		String test = "Test: ";
@@ -161,15 +161,15 @@ public class Profiles extends AbstractDSpaceTransformer {
 			
 			sql5 = "SELECT uniqueid FROM bio WHERE uid = '" + newM + "'";
 			ResultSet rs5 = stmt.executeQuery(sql5);		
-			String uniqueIdCheck;
+			String uniqueIdCheck = "";
 			while(rs5.next()) {
 				uniqueIdCheck += rs5.getString(1);
 			}
 			
-			if(uniqueIdCheck.equals(newM))
+			if(!uniqueIdCheck.isEmpty())
 				containsUser = true;
 			
-			if(containsUser = true) {
+			if(containsUser) {
 
 				while (rs.next()) {
 					uniqueId += rs.getString("uniqueid");
