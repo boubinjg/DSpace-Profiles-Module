@@ -116,11 +116,11 @@ public class Profiles extends AbstractDSpaceTransformer {
 	/**
 	 * Add some basic contents
 	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response) 
+	/*public void doPost(HttpServletRequest request, HttpServletResponse response) 
 		throws ServletException, IOException, SQLException
 	{
 		
-	}
+	}*/
 	public void addBody(Body body) throws SAXException, WingException {
 
 		// 110523 modified with internationalization
