@@ -122,13 +122,13 @@ public class Profiles extends AbstractDSpaceTransformer {
 		Request request = ObjectModelHelper.getRequest(objectModel);
 		String req = request.getPathInfo();
 		String[] tok = req.split("/");
-		Message newM = message(tok[2]);
+		String newM = tok[2];
 
 		// sql test / Variables
 		String test = "Test: ";
 		String error = "No Errors!";
 		String uniqueId = "", name = ""; 
-		String pictureURL = "http://www.sawyoo.com/postpic/2010/11/facebook-no-profile-picture-icon_698652.jpg";
+		String pictureURL = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/orcid-logo.png";
 		String jobTitle = "", researchArea = "Research: ", address = "Address: ";
 		String phone = "Phone: ", email = "Email: ", website = "Personal Website: ";
 		String school = "", degreeAndAttended = "";
@@ -156,7 +156,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			while (rs.next()) {
 				uniqueId += rs.getString("uniqueid");
 				name += rs.getString("name");
-				pictureURL += rs.getString("pictureurl");
+				pictureURL = rs.getString("pictureurl");
 				jobTitle += rs.getString("jobtitle");
 				researchArea += rs.getString("research");
 				address += rs.getString("address");
@@ -293,15 +293,6 @@ public class Profiles extends AbstractDSpaceTransformer {
 		fmail.setLabel(F_email);
 		fmail.setValue(parameters.getParameter("email",""));
 
-		/*if(request.getParameter("openAccess")!=null){
-				if(StringUtils.isEmpty(parameters.getParameter("name", ""))){
-					name.addError(T_name_error);
-				}
-                        if(StringUtils.isEmpty(parameters.getParameter("email", ""))){
-                                mail.addError(T_email_error);
-                        }
-                }*/
-       		// mail.setValue(parameters.getParameter("mail",""));
         	form.addItem().addHidden("isSent").setValue("true");
         	form.addItem().addButton("openAccess").setValue(T_changeToOpen);
 	}
