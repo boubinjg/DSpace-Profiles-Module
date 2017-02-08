@@ -155,22 +155,21 @@ public class Profiles extends AbstractDSpaceTransformer {
 			stmt = conn.createStatement();
 			test += "got statement ";
 			String sql, sql1, sql2, sql3, sql4, sql5;
-			sql = "SELECT * FROM faculty WHERE uniqueid = '" + newM + "'";
-			ResultSet rs = stmt.executeQuery(sql);
 			test += "got query ";
 			
-			sql5 = "SELECT uniqueid FROM bio WHERE uid = '" + newM + "'";
+			sql5 = "SELECT * FROM faculty WHERE uniqueid = '" + newM + "'";
 			ResultSet rs5 = stmt.executeQuery(sql5);		
 			String uniqueIdCheck = "";
 			while(rs5.next()) {
 				uniqueIdCheck += rs5.getString(1);
 			}
-			
+			rs5.close();
 			if(!uniqueIdCheck.isEmpty())
 				containsUser = true;
 			
 			if(containsUser) {
-
+				sql = "SELECT * FROM faculty WHERE uniqueid = '" + newM + "'";
+				ResultSet rs = stmt.executeQuery(sql);
 				while (rs.next()) {
 					uniqueId += rs.getString("uniqueid");
 					name += rs.getString("name");
