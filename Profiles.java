@@ -11,10 +11,18 @@
 
 package org.dspace.app.xmlui.aspect.artifactbrowser;
 
-//JB 
+//imports for context path
 import java.sql.*;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
+//imports for servlet
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 //imports for the form
 import org.apache.cocoon.util.HashUtil;
 import org.apache.commons.lang.StringUtils;
@@ -116,11 +124,16 @@ public class Profiles extends AbstractDSpaceTransformer {
 	/**
 	 * Add some basic contents
 	 */
-	/*public void doPost(HttpServletRequest request, HttpServletResponse response) 
+	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 		throws ServletException, IOException, SQLException
 	{
-		
-	}*/
+		String rinfo = request.getPathInfo();
+		try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+             	     new FileOutputStream("test.txt"), "utf-8"))) {
+   			writer.write(s);
+			writer.write("it posted");
+		}	
+	}
 	public void addBody(Body body) throws SAXException, WingException {
 
 		// 110523 modified with internationalization
