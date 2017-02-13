@@ -18,11 +18,12 @@ import org.apache.cocoon.environment.Request;
 //imports for servlet
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
+import java.io.*;
 //imports for the form
 import org.apache.cocoon.util.HashUtil;
 import org.apache.commons.lang.StringUtils;
@@ -119,7 +120,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 	public Message test = message(s);
 	public Message test2 = message("test2");
-	public String str = "variable";
+	public String str = "Not Posted";
 	public Message var = message(str);
 	private static Logger log = Logger.getLogger(Profiles.class);
 
@@ -144,11 +145,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		throws ServletException, IOException, SQLException
 	{
 		String rinfo = request.getPathInfo();
-		try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-             	     new FileOutputStream("test.txt"), "utf-8"))) {
-   			writer.write(s);
-			writer.write("it posted");
-		}	
+		str = "posted " + rinfo;
 	}
 	public void addBody(Body body) throws SAXException, WingException {
 
@@ -370,6 +367,9 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 			form.addItem().addHidden("isSent").setValue("true");
 			form.addItem().addButton("openAccess").setValue(T_changeToOpen);
+
+			Division testPost = page.addDivision("testPost");
+			testPost.addPara(str);
 		}
 	}
 }
