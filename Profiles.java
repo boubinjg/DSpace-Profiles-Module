@@ -72,14 +72,77 @@ public class Profiles extends AbstractDSpaceTransformer {
 	private static final Message F_head =
         message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.head");
  
-        private static final Message F_para1 =
+    private static final Message F_para1 =
         message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.para1");
  
-        private static final Message F_email =
-        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.email");
+    private static final Message F_jobTitle =
+        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.jobTitle");
 
 	private static final Message F_name =
         message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.name");
+	
+	private static final Message F_research =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.research");
+	
+	private static final Message F_address =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.address");
+	
+	private static final Message F_phone =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.phone");
+	
+	private static final Message F_email =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.email");
+	
+	private static final Message F_website =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.website");
+	
+	private static final Message F_picurl =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.picurl");
+	
+	private static final Message F_degree =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.degree");
+	
+	private static final Message F_earnedFrom =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.earnedFrom");
+	
+	private static final Message F_datesAttended =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.datesAttended");
+	
+	private static final Message F_grantTitle =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.grantTitle");
+	
+	private static final Message F_grantLength =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.grantLength");
+	
+	private static final Message F_grantNumber =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.grantNumber");
+	
+	private static final Message F_organization =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.organization");
+	
+	private static final Message F_orgJobTitle =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.orgJobTitle");
+	
+	private static final Message F_dateWorked =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.dateWorked");
+	
+	private static final Message F_orcidURL =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.orcidURL");
+	
+	private static final Message F_academiaURL =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.academiaURL");
+	
+	private static final Message F_googleplusURL =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.googleplusURL");
+	
+	private static final Message F_linkedinURL =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.linkedinURL");
+	
+	private static final Message F_researchgateURL =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.researchgateURL");
+	
+	private static final Message F_twitterURL =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.twitterURL");
 
 	private static final Message T_changeToOpen =
         message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.changeToOpen");
@@ -90,8 +153,6 @@ public class Profiles extends AbstractDSpaceTransformer {
 	public static final Message T_dspace_home = message("xmlui.general.dspace_home");
 	public static final Message T_title = message("Profiles");
 	public static final Message T_trail = message("Profiles");
-	public static final Message T_head = message("Bo Brinkman");
-	public static final Message T_para = message("This page displays profiles");
 	public static final String databaseConnection = "jdbc:postgresql://localhost:5432/profiles";
 	public static final String databaseUsername = "postgres";
 	public static final String databasePassword = "capstone";
@@ -320,10 +381,94 @@ public class Profiles extends AbstractDSpaceTransformer {
 			Text fname = form.addItem().addText("name");
 			fname.setLabel(F_name);
 			fname.setValue(parameters.getParameter("name", ""));
+			
+			Text fPictureURL = form.addItem().addText("Picture URL");
+			fPictureURL.setLabel(F_picurl);
+			fPictureURL.setValue(parameters.getParameter("Picture URL", ""));
 
-			Text fmail = form.addItem().addText("email");
-			fmail.setLabel(F_email);
-			fmail.setValue(parameters.getParameter("email", ""));
+			Text fJobTitle = form.addItem().addText("job title");
+			fJobTitle.setLabel(F_jobTitle);
+			fJobTitle.setValue(parameters.getParameter("job title", ""));
+			
+			Text fResearch = form.addItem().addText("research");
+			fResearch.setLabel(F_research);
+			fResearch.setValue(parameters.getParameter("research", ""));
+			
+			Text fAddress = form.addItem().addText("address");
+			fAddress.setLabel(F_address);
+			fAddress.setValue(parameters.getParameter("address", ""));
+			
+			Text fPhone = form.addItem().addText("phone");
+			fPhone.setLabel(F_phone);
+			fPhone.setValue(parameters.getParameter("phone", ""));
+			
+			Text fEmail = form.addItem().addText("email");
+			fEmail.setLabel(F_email);
+			fEmail.setValue(parameters.getParameter("email", ""));
+			
+			Text fWebsite = form.addItem().addText("website");
+			fWebsite.setLabel(F_website);
+			fWebsite.setValue(parameters.getParameter("website", ""));
+			
+			Text fDegree = form.addItem().addText("degree");
+			fDegree.setLabel(F_degree);
+			fDegree.setValue(parameters.getParameter("degree", ""));
+			
+			Text fEarnedFrom = form.addItem().addText("earned from");
+			fEarnedFrom.setLabel(F_earnedFrom);
+			fEarnedFrom.setValue(parameters.getParameter("earned from", ""));
+			
+			Text fDatesAttended = form.addItem().addText("dates attended");
+			fDatesAttended.setLabel(F_datesAttended);
+			fDatesAttended.setValue(parameters.getParameter("dates attended", ""));
+			
+			Text fOrganization = form.addItem().addText("organization");
+			fOrganization.setLabel(F_organization);
+			fOrganization.setValue(parameters.getParameter("organization", ""));
+			
+			Text fOrgJobTitle = form.addItem().addText("job title");
+			fOrgJobTitle.setLabel(F_orgJobTitle);
+			fOrgJobTitle.setValue(parameters.getParameter("job title", ""));
+			
+			Text fdateWorked = form.addItem().addText("date worked");
+			fdateWorked.setLabel(F_dateWorked);
+			fdateWorked.setValue(parameters.getParameter("date worked", ""));
+			
+			Text fGrantTitle = form.addItem().addText("grant title");
+			fGrantTitle.setLabel(F_grantTitle);
+			fGrantTitle.setValue(parameters.getParameter("grant title", ""));
+			
+			Text fGrantLength = form.addItem().addText("grant length");
+			fGrantLength.setLabel(F_grantLength);
+			fGrantLength.setValue(parameters.getParameter("grant length", ""));
+			
+			Text fGrantNumber = form.addItem().addText("grant number");
+			fGrantNumber.setLabel(F_grantNumber);
+			fGrantNumber.setValue(parameters.getParameter("grant number", ""));
+			
+			Text fOrcidURL = form.addItem().addText("orcid");
+			fOrcidURL.setLabel(F_orcidURL);
+			fOrcidURL.setValue(parameters.getParameter("orcid", ""));
+			
+			Text fAcademiaURL = form.addItem().addText("academia");
+			fAcademiaURL.setLabel(F_academiaURL);
+			fAcademiaURL.setValue(parameters.getParameter("academia", ""));
+			
+			Text fGooglePlusURL = form.addItem().addText("google plus");
+			fGooglePlusURL.setLabel(F_googleplusURL);
+			fGooglePlusURL.setValue(parameters.getParameter("google plus", ""));
+			
+			Text fLinkedinURL = form.addItem().addText("linkedin");
+			fLinkedinURL.setLabel(F_linkedinURL);
+			fLinkedinURL.setValue(parameters.getParameter("linkedin", ""));
+			
+			Text fResearchGateURL = form.addItem().addText("research gate");
+			fResearchGateURL.setLabel(F_researchgateURL);
+			fResearchGateURL.setValue(parameters.getParameter("research gate", ""));
+			
+			Text fTwitterURL = form.addItem().addText("twitter");
+			fTwitterURL.setLabel(F_twitterURL);
+			fTwitterURL.setValue(parameters.getParameter("twitter", ""));
 
 			form.addItem().addHidden("isSent").setValue("true");
 			form.addItem().addButton("openAccess").setValue(T_changeToOpen);
