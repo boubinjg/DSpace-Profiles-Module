@@ -370,8 +370,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		else if (!containsUser) {
 
 			// Build the item viewer division.
-			Division formDiv = page.addInteractiveDivision("form", request.getRequestURI(), Division.METHOD_GET,
-					"primary");
+			Division formDiv = page.addInteractiveDivision("form", request.getRequestURI(), Division.METHOD_GET, "primary");
 			formDiv.setHead(F_head);
 
 			formDiv.addPara(F_para1);
@@ -473,7 +472,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			form.addItem().addHidden("isSent").setValue("true");
 			form.addItem().addButton("openAccess").setValue(T_changeToOpen);
 
-			Division testPost = page.addDivision("testPost");
+			Division testPost = page.addDivision("testGet");
 			String s = "Not Posted";
 			try {
 				s = request.getParameter("param1");
