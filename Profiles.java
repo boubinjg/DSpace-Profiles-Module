@@ -71,14 +71,32 @@ public class Profiles extends AbstractDSpaceTransformer {
 	private static final Message F_head =
         message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.head");
  
-        private static final Message F_para1 =
+    private static final Message F_para1 =
         message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.para1");
  
-        private static final Message F_email =
-        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.email");
+    private static final Message F_jobTitle =
+        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.jobTitle");
 
 	private static final Message F_name =
         message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.name");
+	
+	private static final Message F_research =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.research");
+	
+	private static final Message F_address =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.address");
+	
+	private static final Message F_phone =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.phone");
+	
+	private static final Message F_email =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.email");
+	
+	private static final Message F_website =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.website");
+	
+	private static final Message F_picurl =
+	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.picurl");
 
 	private static final Message T_changeToOpen =
         message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.changeToOpen");
@@ -89,8 +107,6 @@ public class Profiles extends AbstractDSpaceTransformer {
 	public static final Message T_dspace_home = message("xmlui.general.dspace_home");
 	public static final Message T_title = message("Profiles");
 	public static final Message T_trail = message("Profiles");
-	public static final Message T_head = message("Bo Brinkman");
-	public static final Message T_para = message("This page displays profiles");
 	public static final String databaseConnection = "jdbc:postgresql://localhost:5432/profiles";
 	public static final String databaseUsername = "postgres";
 	public static final String databasePassword = "capstone";
@@ -323,10 +339,34 @@ public class Profiles extends AbstractDSpaceTransformer {
 			Text fname = form.addItem().addText("name");
 			fname.setLabel(F_name);
 			fname.setValue(parameters.getParameter("name", ""));
+			
+			Text fPictureURL = form.addItem().addText("Picture URL");
+			fPictureURL.setLabel(F_picurl);
+			fPictureURL.setValue(parameters.getParameter("Picture URL", ""));
 
-			Text fmail = form.addItem().addText("email");
-			fmail.setLabel(F_email);
-			fmail.setValue(parameters.getParameter("email", ""));
+			Text fJobTitle = form.addItem().addText("job title");
+			fJobTitle.setLabel(F_jobTitle);
+			fJobTitle.setValue(parameters.getParameter("job title", ""));
+			
+			Text fResearch = form.addItem().addText("research");
+			fResearch.setLabel(F_research);
+			fResearch.setValue(parameters.getParameter("research", ""));
+			
+			Text fAddress = form.addItem().addText("address");
+			fAddress.setLabel(F_address);
+			fAddress.setValue(parameters.getParameter("address", ""));
+			
+			Text fPhone = form.addItem().addText("phone");
+			fPhone.setLabel(F_phone);
+			fPhone.setValue(parameters.getParameter("phone", ""));
+			
+			Text fEmail = form.addItem().addText("email");
+			fEmail.setLabel(F_email);
+			fEmail.setValue(parameters.getParameter("email", ""));
+			
+			Text fWebsite = form.addItem().addText("website");
+			fWebsite.setLabel(F_website);
+			fWebsite.setValue(parameters.getParameter("website", ""));
 
 			form.addItem().addHidden("isSent").setValue("true");
 			form.addItem().addButton("openAccess").setValue(T_changeToOpen);
