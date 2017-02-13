@@ -309,7 +309,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		else if (!containsUser) {
 
 			// Build the item viewer division.
-			Division formDiv = page.addInteractiveDivision("form", request.getRequestURI(), Division.METHOD_POST,
+			Division formDiv = page.addInteractiveDivision("form", request.getRequestURI(), Division.METHOD_GET,
 					"primary");
 			formDiv.setHead(F_head);
 
@@ -329,7 +329,16 @@ public class Profiles extends AbstractDSpaceTransformer {
 			form.addItem().addButton("openAccess").setValue(T_changeToOpen);
 
 			Division testPost = page.addDivision("testPost");
-			testPost.addPara(str);
+			String s = "Not Posted";
+			try {
+				s = request.getParameter("param1");
+			} catch(Exception e) {
+				s = "error";
+			}
+			
+			testPost.addPara(s);
+			testPost.addPara(request.getQueryString());
+			//testPost.addPara(request.getRemoteAddr());
 		}
 	}
 }
