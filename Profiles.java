@@ -70,7 +70,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 	
 	//form variables
 	private static final Message F_head =
-        message("Test1");
+        message("Create Your Profile");
  
     private static final Message F_para1 =
         message("Test2");
@@ -373,7 +373,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			Division formDiv = page.addInteractiveDivision("form", request.getRequestURI(), Division.METHOD_GET, "primary");
 			formDiv.setHead(F_head);
 
-			formDiv.addPara(F_para1);
+			//formDiv.addPara(F_para1);
 
 			List form = formDiv.addList("form", List.TYPE_FORM);
 
