@@ -70,10 +70,10 @@ public class Profiles extends AbstractDSpaceTransformer {
 	
 	//form variables
 	private static final Message F_head =
-        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.head");
+        message("Test1");
  
     private static final Message F_para1 =
-        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.para1");
+        message("Test2");
  
     private static final Message F_jobTitle =
         message("Job Title:");
