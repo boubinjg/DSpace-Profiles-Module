@@ -482,7 +482,32 @@ public class Profiles extends AbstractDSpaceTransformer {
 			
 			testPost.addPara(s);
 			testPost.addPara(request.getQueryString());
-			//testPost.addPara(request.getRemoteAddr());
+			
+			//parse get variables
+			//currently adds them to to the bottom of page
+			testPost.addPara("Name: " + request.getParameter("name"));
+			testPost.addPara("Picture URL: "+request.getParameter("Picture URL"));
+			testPost.addPara("Job Title: "+request.getParameter("job title"));
+			testPost.addPara("Research: "+request.getParameter("research"));
+			testPost.addPara("Address: "+request.getParameter("address"));
+			testPost.addPara("Phone: "+request.getParameter("phone"));
+			testPost.addPara("email: "+request.getParameter("email"));
+			testPost.addPara("website: "+request.getParameter("website"));
+			testPost.addPara("degree: "+request.getParameter("degree"));
+			testPost.addPara("earned from: "+request.getParameter("earned from"));
+			testPost.addPara("dates attended: "+request.getParameter("dates attended"));
+			testPost.addPara("organization: "+request.getParameter("organization"));
+			testPost.addPara("job title: "+request.getParameter("job title"));
+			testPost.addPara("date worked: "+request.getParameter("date worked"));
+			testPost.addPara("grant title: "+request.getParameter("grant title"));
+			testPost.addPara("grant length: "+request.getParameter("grant length"));
+			testPost.addPara("grant number: "+request.getParameter("grant number"));
+			testPost.addPara("orcid: "+request.getParameter("orcid"));
+			testPost.addPara("academia: "+request.getParameter("academia"));
+			testPost.addPara("google plus: "+request.getParameter("google plus"));
+			testPost.addPara("linkedin: "+request.getParameter("linkedin"));
+			testPost.addPara("research gate: "+request.getParameter("research gate"));
+			testPost.addPara("twitter: "+request.getParameter("twitter"));
 		}
 	}
 }
