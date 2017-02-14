@@ -70,79 +70,79 @@ public class Profiles extends AbstractDSpaceTransformer {
 	
 	//form variables
 	private static final Message F_head =
-        message("Test1");
+        message("Create Your Profile");
  
     private static final Message F_para1 =
         message("Test2");
  
     private static final Message F_jobTitle =
-        message("Job Title:");
+        message("Job Title");
 
 	private static final Message F_name =
-        message("Name:");
+        message("Name");
 	
 	private static final Message F_research =
-	        message("Research:");
+	        message("Research");
 	
 	private static final Message F_address =
-	        message("Office:");
+	        message("Office");
 	
 	private static final Message F_phone =
-	        message("Phone:");
+	        message("Phone");
 	
 	private static final Message F_email =
-	        message("Email:");
+	        message("Email");
 	
 	private static final Message F_website =
-	        message("Website:");
+	        message("Website");
 	
 	private static final Message F_picurl =
-	        message("Picture URL:");
+	        message("Picture URL");
 	
 	private static final Message F_degree =
-	        message("Degree:");
+	        message("Degree");
 	
 	private static final Message F_earnedFrom =
-	        message("Degree Earned From:");
+	        message("Degree Earned From");
 	
 	private static final Message F_datesAttended =
-	        message("Dates Attended:");
+	        message("Dates Attended");
 	
 	private static final Message F_grantTitle =
-	        message("Grant Title:");
+	        message("Grant Title");
 	
 	private static final Message F_grantLength =
-	        message("Grant Length:");
+	        message("Grant Length");
 	
 	private static final Message F_grantNumber =
-	        message("Grant Number:");
+	        message("Grant Number");
 	
 	private static final Message F_organization =
-	        message("Organization:");
+	        message("Organization");
 	
 	private static final Message F_orgJobTitle =
-	        message("Job Title:");
+	        message("Job Title");
 	
 	private static final Message F_dateWorked =
-	        message("Dates Worked:");
+	        message("Dates Worked");
 	
 	private static final Message F_orcidURL =
-	        message("Orcid URL:");
+	        message("Orcid URL");
 	
 	private static final Message F_academiaURL =
-	        message("Academia URL:");
+	        message("Academia URL");
 	
 	private static final Message F_googleplusURL =
-	        message("Google Plus URL:");
+	        message("Google Plus URL");
 	
 	private static final Message F_linkedinURL =
-	        message("LinkedIn URL:");
+	        message("LinkedIn URL");
 	
 	private static final Message F_researchgateURL =
-	        message("ResearchGate URL:");
+	        message("ResearchGate URL");
 	
 	private static final Message F_twitterURL =
-	        message("Twitter URL:");
+	        message("Twitter URL");
 
 	private static final Message T_changeToOpen =
         message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.changeToOpen");
@@ -373,7 +373,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			Division formDiv = page.addInteractiveDivision("form", request.getRequestURI(), Division.METHOD_GET, "primary");
 			formDiv.setHead(F_head);
 
-			formDiv.addPara(F_para1);
+			//formDiv.addPara(F_para1);
 
 			List form = formDiv.addList("form", List.TYPE_FORM);
 
