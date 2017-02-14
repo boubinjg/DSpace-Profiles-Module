@@ -480,34 +480,33 @@ public class Profiles extends AbstractDSpaceTransformer {
 				s = "error";
 			}
 			
-			testPost.addPara(s);
-			testPost.addPara(request.getQueryString());
-			
 			//parse get variables
 			//currently adds them to to the bottom of page
-			testPost.addPara("Name: " + request.getParameter("name"));
-			testPost.addPara("Picture URL: "+request.getParameter("Picture URL"));
-			testPost.addPara("Job Title: "+request.getParameter("job title"));
-			testPost.addPara("Research: "+request.getParameter("research"));
-			testPost.addPara("Address: "+request.getParameter("address"));
-			testPost.addPara("Phone: "+request.getParameter("phone"));
-			testPost.addPara("email: "+request.getParameter("email"));
-			testPost.addPara("website: "+request.getParameter("website"));
-			testPost.addPara("degree: "+request.getParameter("degree"));
-			testPost.addPara("earned from: "+request.getParameter("earned from"));
-			testPost.addPara("dates attended: "+request.getParameter("dates attended"));
-			testPost.addPara("organization: "+request.getParameter("organization"));
-			testPost.addPara("job title: "+request.getParameter("job title"));
-			testPost.addPara("date worked: "+request.getParameter("date worked"));
-			testPost.addPara("grant title: "+request.getParameter("grant title"));
-			testPost.addPara("grant length: "+request.getParameter("grant length"));
-			testPost.addPara("grant number: "+request.getParameter("grant number"));
-			testPost.addPara("orcid: "+request.getParameter("orcid"));
-			testPost.addPara("academia: "+request.getParameter("academia"));
-			testPost.addPara("google plus: "+request.getParameter("google plus"));
-			testPost.addPara("linkedin: "+request.getParameter("linkedin"));
-			testPost.addPara("research gate: "+request.getParameter("research gate"));
-			testPost.addPara("twitter: "+request.getParameter("twitter"));
+			
+			String 	formname = request.getParameter("name") 
+			       	formPicURL = request.getParameter("Picture URL");
+			       	formJobTitle = request.getParameter("job title");
+			       	formResearch = request.getParameter("research");
+				formAddr = request.getParameter("address");
+				formPhone = request.getParameter("phone");
+				formEmail = request.getParameter("email");
+				formWebsite = request.getParameter("website");
+				formDeg = request.getParameter("degree");
+				formEarned = request.getParameter("earned from");
+				formAttend = request.getParameter("dates attended");
+				formOrg = request.getParameter("organization");
+				formReq = request.getParameter("job title");
+				formWorked = request.getParameter("date worked");
+				formGrantTitle = request.getParameter("grant title");
+				formGrantLen = request.getParameter("grant length");
+				formGrantNum = request.getParameter("grant number");
+				formOrcid = request.getParameter("orcid");
+				formAcadem = request.getParameter("academia");
+				formGP = request.getParameter("google plus");
+				formLink = request.getParameter("linkedin");
+				formResGate = request.getParameter("research gate");
+				formTwitter = request.getParameter("twitter");
+			
 		}
 	}
 }
