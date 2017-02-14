@@ -76,73 +76,73 @@ public class Profiles extends AbstractDSpaceTransformer {
         message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.para1");
  
     private static final Message F_jobTitle =
-        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.jobTitle");
+        message("Job Title:");
 
 	private static final Message F_name =
-        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.name");
+        message("Name:");
 	
 	private static final Message F_research =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.research");
+	        message("Research:");
 	
 	private static final Message F_address =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.address");
+	        message("Office:");
 	
 	private static final Message F_phone =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.phone");
+	        message("Phone:");
 	
 	private static final Message F_email =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.email");
+	        message("Email:");
 	
 	private static final Message F_website =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.website");
+	        message("Website:");
 	
 	private static final Message F_picurl =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.picurl");
+	        message("Picture URL:");
 	
 	private static final Message F_degree =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.degree");
+	        message("Degree:");
 	
 	private static final Message F_earnedFrom =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.earnedFrom");
+	        message("Degree Earned From:");
 	
 	private static final Message F_datesAttended =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.datesAttended");
+	        message("Dates Attended:");
 	
 	private static final Message F_grantTitle =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.grantTitle");
+	        message("Grant Title:");
 	
 	private static final Message F_grantLength =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.grantLength");
+	        message("Grant Length:");
 	
 	private static final Message F_grantNumber =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.grantNumber");
+	        message("Grant Number:");
 	
 	private static final Message F_organization =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.organization");
+	        message("Organization:");
 	
 	private static final Message F_orgJobTitle =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.orgJobTitle");
+	        message("Job Title:");
 	
 	private static final Message F_dateWorked =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.dateWorked");
+	        message("Dates Worked:");
 	
 	private static final Message F_orcidURL =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.orcidURL");
+	        message("Orcid URL:");
 	
 	private static final Message F_academiaURL =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.academiaURL");
+	        message("Academia URL:");
 	
 	private static final Message F_googleplusURL =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.googleplusURL");
+	        message("Google Plus URL:");
 	
 	private static final Message F_linkedinURL =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.linkedinURL");
+	        message("LinkedIn URL:");
 	
 	private static final Message F_researchgateURL =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.researchgateURL");
+	        message("ResearchGate URL:");
 	
 	private static final Message F_twitterURL =
-	        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.twitterURL");
+	        message("Twitter URL:");
 
 	private static final Message T_changeToOpen =
         message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.changeToOpen");
