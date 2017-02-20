@@ -380,95 +380,118 @@ public class Profiles extends AbstractDSpaceTransformer {
 			Text fname = form.addItem().addText("name");
 			fname.setLabel(F_name);
 			fname.setValue(parameters.getParameter("name", ""));
-			
+			fname.setSize(0,50);			
+
 			Text fPictureURL = form.addItem().addText("Picture URL");
 			fPictureURL.setLabel(F_picurl);
 			fPictureURL.setValue(parameters.getParameter("Picture URL", ""));
+			fPictureURL.setSize(0,100);
 
 			Text fJobTitle = form.addItem().addText("job title");
 			fJobTitle.setLabel(F_jobTitle);
 			fJobTitle.setValue(parameters.getParameter("job title", ""));
-			
+			fJobTitle.setSize(0,100);
+
 			Text fResearch = form.addItem().addText("research");
 			fResearch.setLabel(F_research);
 			fResearch.setValue(parameters.getParameter("research", ""));
-			
+			fResearch.setSize(0,100);
+
 			Text fAddress = form.addItem().addText("address");
 			fAddress.setLabel(F_address);
 			fAddress.setValue(parameters.getParameter("address", ""));
-			
+			fAddress.setSize(0,50);
+
 			Text fPhone = form.addItem().addText("phone");
 			fPhone.setLabel(F_phone);
 			fPhone.setValue(parameters.getParameter("phone", ""));
-			
+			fPhone.setSize(0,12);
+
 			Text fEmail = form.addItem().addText("email");
 			fEmail.setLabel(F_email);
 			fEmail.setValue(parameters.getParameter("email", ""));
-			
+			fEmail.setSize(0,50);
+
 			Text fWebsite = form.addItem().addText("website");
 			fWebsite.setLabel(F_website);
 			fWebsite.setValue(parameters.getParameter("website", ""));
-			
+			fWebsite.setSize(0,100);
+
 			Text fDegree = form.addItem().addText("degree");
 			fDegree.setLabel(F_degree);
 			fDegree.setValue(parameters.getParameter("degree", ""));
-			
+			fDegree.setSize(0,100);
+
 			Text fEarnedFrom = form.addItem().addText("earned from");
 			fEarnedFrom.setLabel(F_earnedFrom);
 			fEarnedFrom.setValue(parameters.getParameter("earned from", ""));
-			
+			fEarnedFrom.setSize(0,100);
+
 			Text fDatesAttended = form.addItem().addText("dates attended");
 			fDatesAttended.setLabel(F_datesAttended);
 			fDatesAttended.setValue(parameters.getParameter("dates attended", ""));
-			
+			fDatesAttended.setSize(0,50);
+
 			Text fOrganization = form.addItem().addText("organization");
 			fOrganization.setLabel(F_organization);
 			fOrganization.setValue(parameters.getParameter("organization", ""));
-			
+			fOrganization.setSize(0,100);
+
 			Text fOrgJobTitle = form.addItem().addText("job title");
 			fOrgJobTitle.setLabel(F_orgJobTitle);
 			fOrgJobTitle.setValue(parameters.getParameter("job title", ""));
-			
+			fOrgJobTitle.setSize(0,100);
+
 			Text fdateWorked = form.addItem().addText("date worked");
 			fdateWorked.setLabel(F_dateWorked);
 			fdateWorked.setValue(parameters.getParameter("date worked", ""));
-			
+			fdateWorked.setSize(0,50);
+
 			Text fGrantTitle = form.addItem().addText("grant title");
 			fGrantTitle.setLabel(F_grantTitle);
 			fGrantTitle.setValue(parameters.getParameter("grant title", ""));
-			
+			fGrantTitle.setSize(0,100);
+
 			Text fGrantLength = form.addItem().addText("grant length");
 			fGrantLength.setLabel(F_grantLength);
 			fGrantLength.setValue(parameters.getParameter("grant length", ""));
-			
+			fGrantLength.setSize(0,50);
+
 			Text fGrantNumber = form.addItem().addText("grant number");
 			fGrantNumber.setLabel(F_grantNumber);
 			fGrantNumber.setValue(parameters.getParameter("grant number", ""));
-			
+			fGrantNumber.setSize(0,50);
+
 			Text fOrcidURL = form.addItem().addText("orcid");
 			fOrcidURL.setLabel(F_orcidURL);
 			fOrcidURL.setValue(parameters.getParameter("orcid", ""));
-			
+			fOrcidURL.setSize(0,100);
+
 			Text fAcademiaURL = form.addItem().addText("academia");
 			fAcademiaURL.setLabel(F_academiaURL);
 			fAcademiaURL.setValue(parameters.getParameter("academia", ""));
-			
+			fAcademiaURL.setSize(0,100);
+
 			Text fGooglePlusURL = form.addItem().addText("google plus");
 			fGooglePlusURL.setLabel(F_googleplusURL);
 			fGooglePlusURL.setValue(parameters.getParameter("google plus", ""));
-			
+			fGooglePlusURL.setSize(0,100);
+
 			Text fLinkedinURL = form.addItem().addText("linkedin");
 			fLinkedinURL.setLabel(F_linkedinURL);
 			fLinkedinURL.setValue(parameters.getParameter("linkedin", ""));
-			
+			fLinkedinURL.setSize(0,100);
+
 			Text fResearchGateURL = form.addItem().addText("research gate");
 			fResearchGateURL.setLabel(F_researchgateURL);
 			fResearchGateURL.setValue(parameters.getParameter("research gate", ""));
-			
+			fResearchGateURL.setSize(0,100);
+
 			Text fTwitterURL = form.addItem().addText("twitter");
 			fTwitterURL.setLabel(F_twitterURL);
 			fTwitterURL.setValue(parameters.getParameter("twitter", ""));
-
+			fTwitterURL.setSize(0,100);
+			
 			form.addItem().addHidden("isSent").setValue("true");
 			form.addItem().addButton("openAccess").setValue(T_changeToOpen);
 
