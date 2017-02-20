@@ -483,28 +483,28 @@ public class Profiles extends AbstractDSpaceTransformer {
 			//parse get variables
 			//currently adds them to to the bottom of page
 			
-			String 	formname = request.getParameter("name") 
-			       	formPicURL = request.getParameter("Picture URL");
-			       	formJobTitle = request.getParameter("job title");
-			       	formResearch = request.getParameter("research");
-				formAddr = request.getParameter("address");
-				formPhone = request.getParameter("phone");
-				formEmail = request.getParameter("email");
-				formWebsite = request.getParameter("website");
-				formDeg = request.getParameter("degree");
-				formEarned = request.getParameter("earned from");
-				formAttend = request.getParameter("dates attended");
-				formOrg = request.getParameter("organization");
-				formReq = request.getParameter("job title");
-				formWorked = request.getParameter("date worked");
-				formGrantTitle = request.getParameter("grant title");
-				formGrantLen = request.getParameter("grant length");
-				formGrantNum = request.getParameter("grant number");
-				formOrcid = request.getParameter("orcid");
-				formAcadem = request.getParameter("academia");
-				formGP = request.getParameter("google plus");
-				formLink = request.getParameter("linkedin");
-				formResGate = request.getParameter("research gate");
+			String 	formname = request.getParameter("name"), 
+			       	formPicURL = request.getParameter("Picture URL"),
+			       	formJobTitle = request.getParameter("job title"),
+			       	formResearch = request.getParameter("research"),
+				formAddr = request.getParameter("address"),
+				formPhone = request.getParameter("phone"),
+				formEmail = request.getParameter("email"),
+				formWebsite = request.getParameter("website"),
+				formDeg = request.getParameter("degree"),
+				formEarned = request.getParameter("earned from"),
+				formAttend = request.getParameter("dates attended"),
+				formOrg = request.getParameter("organization"),
+				formReq = request.getParameter("job title"),
+				formWorked = request.getParameter("date worked"),
+				formGrantTitle = request.getParameter("grant title"),
+				formGrantLen = request.getParameter("grant length"),
+				formGrantNum = request.getParameter("grant number"),
+				formOrcid = request.getParameter("orcid"),
+				formAcadem = request.getParameter("academia"),
+				formGP = request.getParameter("google plus"),
+				formLink = request.getParameter("linkedin"),
+				formResGate = request.getParameter("research gate"),
 				formTwitter = request.getParameter("twitter");
 			
 		}
