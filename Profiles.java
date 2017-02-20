@@ -439,7 +439,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 			Text fOrgJobTitle = form.addItem().addText("job title");
 			fOrgJobTitle.setLabel(F_orgJobTitle);
-			fOrgJobTitle.setValue(parameters.getParameter("job title", ""));
+			fOrgJobTitle.setValue(parameters.getParameter("forg job title", ""));
 			fOrgJobTitle.setSize(0,100);
 
 			Text fdateWorked = form.addItem().addText("date worked");
@@ -518,7 +518,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 				formEarned = request.getParameter("earned from"),
 				formAttend = request.getParameter("dates attended"),
 				formOrg = request.getParameter("organization"),
-				formReq = request.getParameter("job title"),
+				formOrgJobTitle = request.getParameter("forg job title"),
 				formWorked = request.getParameter("date worked"),
 				formGrantTitle = request.getParameter("grant title"),
 				formGrantLen = request.getParameter("grant length"),
