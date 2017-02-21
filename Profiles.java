@@ -556,7 +556,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 				" VALUES" + " (" + newM + ", " + formGrantTitle + 
 				", " + formGrantLen + ", " + formGrantNum + ");";
 				
-			String insrtLink = "INSERT INT links"
+			String insrtLink = "INSERT INTO links"
 				+ "(uid, orcid, academia, googlePlus, linkedin, researchGate, twitter)"
 				+ " VALUES"
 				+ " (" + newM + ", " + formOrcid + ", " + formAcadem 
