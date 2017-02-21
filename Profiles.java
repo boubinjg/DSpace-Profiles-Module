@@ -534,7 +534,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			test += "connected ";
 			stmt = conn.createStatement();
 			
-			String insrtFac = "INSERT INTO faculty" + 
+			String insrtFac = "INSERT INTO faculty " + 
 			"(uniqueid, name, pictureURL, jobTitle, research, address, phone, email, website) " + 
 			" VALUES" + 
 			" (" + newM + ", " + formname + ", " + formPicURL + ", " + 
@@ -562,6 +562,13 @@ public class Profiles extends AbstractDSpaceTransformer {
 				+ " (" + newM + ", " + formOrcid + ", " + formAcadem 
 				+ ", " + formGP + ", " + formLink 
 				+ ", " + formResGate + ", " + formTwitter + ");";
+			
+			Division sql = page.addDivision("sql");
+			sql.addPara(insrtFac);
+			sql.addPara(insrtEmploy);
+			sql.addPara(insrtBio);
+			sql.addPara(insrtFund);
+			sql.addPara(insrtLink);
 			
 			stmt.executeUpdate(insrtFac);
 			test+="insertFac ";
