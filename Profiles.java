@@ -533,42 +533,46 @@ public class Profiles extends AbstractDSpaceTransformer {
 			conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
 			test += "connected ";
 			stmt = conn.createStatement();
-			test += "got statement ";
 			
 			String insrtFac = "INSERT INTO faculty" + 
 			"(uniqueid, name, pictureURL, jobTitle, research, address, phone, email, website) " + 
 			" VALUES" + 
 			" (" + newM + ", " + formname + ", " + formPicURL + ", " + 
 			formJobTitle + ", " + formResearch + ", " + formAddr + ", " + 
-			formPhone + ", " + formEmail + ", " + formWebsite + ")";
+			formPhone + ", " + formEmail + ", " + formWebsite + ");";
 				
 			String insrtEmploy = "INSERT INTO employment"
 				+ "(uid, organization, jobTitle, dateRange)"
 				+ " VALUES"
-				+ " (" + newM + ", " + formOrg + ", " + formOrgJobTitle + ", " + formWorked + ")"; 
+				+ " (" + newM + ", " + formOrg + ", " + formOrgJobTitle + ", " + formWorked + ");"; 
 				
 			String insrtBio = "INSERT INTO bio"
 				+ "(uid, school, degree, dateEarned)"
 				+ " VALUES"
-				+ " (" + newM + ", " + formEarned + ", " + formDeg + ", " + formAttend + ")";
+				+ " (" + newM + ", " + formEarned + ", " + formDeg + ", " + formAttend + ");";
 				
 			String insrtFund = "INSERT INTO funding" + 
 				"(uid, grantTitle, grantLength, grantNumber)" + 
 				" VALUES" + " (" + newM + ", " + formGrantTitle + 
-				", " + formGrantLen + ", " + formGrantNum + ")";
+				", " + formGrantLen + ", " + formGrantNum + ");";
 				
 			String insrtLink = "INSERT INT links"
 				+ "(uid, orcid, academia, googlePlus, linkedin, researchGate, twitter)"
 				+ " VALUES"
 				+ " (" + newM + ", " + formOrcid + ", " + formAcadem 
 				+ ", " + formGP + ", " + formLink 
-				+ ", " + formResGate + ", " + formTwitter + ")";
+				+ ", " + formResGate + ", " + formTwitter + ");";
 			
 			stmt.executeUpdate(insrtFac);
+			test+="insertFac ";
 			stmt.executeUpdate(insrtEmploy);
+			test+="insertEmploy ";
 			stmt.executeUpdate(insrtBio);
+			test+="insertBio ";
 			stmt.executeUpdate(insrtFund);
+			test+="insertFund ";
 			stmt.executeUpdate(insrtLink);
+			test+="insertLink ";
 			
 			} catch (SQLException se) {
 				error = se.getSQLState();
