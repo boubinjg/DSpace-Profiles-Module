@@ -522,7 +522,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 				formLink = request.getParameter("linkedin"),
 				formResGate = request.getParameter("research gate"),
 				formTwitter = request.getParameter("twitter");
-			
+			//getting postgres error 42601 SYNTAX ERROR, find out which line is causing the error	
 			try {
 			
 			Connection conn = null;
