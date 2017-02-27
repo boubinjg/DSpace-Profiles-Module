@@ -541,31 +541,31 @@ public class Profiles extends AbstractDSpaceTransformer {
 			String insrtFac = "INSERT INTO faculty " + 
 			"(uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) " + 
 			" VALUES" + 
-			" (" + newM + ", " + formname + ", " + formPicURL + ", " + 
-			formJobTitle + ", " + formResearch + ", " + formAddr + ", " + 
-			formPhone + ", " + formEmail + ", " + formWebsite + ");";
+			" ('" + newM + "', '" + formname + "', '" + formPicURL + "', '" + 
+			formJobTitle + "', '" + formResearch + "', '" + formAddr + "', '" + 
+			formPhone + "', '" + formEmail + "', '" + formWebsite + "');";
 				
 			String insrtEmploy = "INSERT INTO employment"
 				+ "(uid, organization, jobtitle, daterange)"
 				+ " VALUES"
-				+ " (" + newM + ", " + formOrg + ", " + formOrgJobTitle + ", " + formWorked + ");"; 
+				+ " ('" + newM + "', '" + formOrg + "', '" + formOrgJobTitle + "', '" + formWorked + "');"; 
 				
 			String insrtBio = "INSERT INTO bio"
 				+ "(uid, school, degree, dateearned)"
 				+ " VALUES"
-				+ " (" + newM + ", " + formEarned + ", " + formDeg + ", " + formAttend + ");";
+				+ " ('" + newM + "', '" + formEarned + "', '" + formDeg + "', '" + formAttend + "');";
 				
 			String insrtFund = "INSERT INTO funding" + 
 				"(uid, granttitle, grantlength, grantnumber)" + 
-				" VALUES" + " (" + newM + ", " + formGrantTitle + 
-				", " + formGrantLen + ", " + formGrantNum + ");";
+				" VALUES" + " ('" + newM + "', '" + formGrantTitle + 
+				"', '" + formGrantLen + "', '" + formGrantNum + "');";
 				
 			String insrtLink = "INSERT INTO links"
 				+ "(uid, orcid, academia, googleplus, linkedin, researchgate, twitter)"
 				+ " VALUES"
-				+ " (" + newM + ", " + formOrcid + ", " + formAcadem 
-				+ ", " + formGP + ", " + formLink 
-				+ ", " + formResGate + ", " + formTwitter + ");";
+				+ " ('" + newM + "', '" + formOrcid + "', '" + formAcadem 
+				+ "', '" + formGP + "', '" + formLink 
+				+ "', '" + formResGate + "', '" + formTwitter + "');";
 			
 			Division sql = page.addDivision("sql");
 			sql.addPara(insrtFac);
