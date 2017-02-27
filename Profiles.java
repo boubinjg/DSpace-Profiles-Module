@@ -366,7 +366,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			Division formDiv = page.addInteractiveDivision("form", request.getRequestURI(), Division.METHOD_GET, "primary");
 			formDiv.setHead(F_head);
 
-			//formDiv.addPara(F_para1);
+			formDiv.addPara("Faculty Information");
 
 			List form = formDiv.addList("form", List.TYPE_FORM);
 
@@ -410,6 +410,8 @@ public class Profiles extends AbstractDSpaceTransformer {
 			fWebsite.setValue(parameters.getParameter("website", ""));
 			fWebsite.setSize(0,100);
 
+                        formDiv.addpara("Academic Information & Previous Work Experience");
+
 			Text fDegree = form.addItem().addText("degree");
 			fDegree.setLabel(F_degree);
 			fDegree.setValue(parameters.getParameter("degree", ""));
@@ -439,6 +441,8 @@ public class Profiles extends AbstractDSpaceTransformer {
 			fdateWorked.setLabel(F_dateWorked);
 			fdateWorked.setValue(parameters.getParameter("date worked", ""));
 			fdateWorked.setSize(0,50);
+
+                        formDiv.addPara("Grants & External Links");
 
 			Text fGrantTitle = form.addItem().addText("grant title");
 			fGrantTitle.setLabel(F_grantTitle);
