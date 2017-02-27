@@ -490,7 +490,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			fTwitterURL.setSize(0,100);
 			
 			form.addItem().addHidden("isSent").setValue("true");
-			form.addItem().addButton("submit").setValue(T_changeToOpen);
+			form.addItem().addButton("submit").setValue(T_submit);
 
 			Division testPost = page.addDivision("testGet");
 			String s = "Not Posted";
