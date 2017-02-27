@@ -338,7 +338,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 			employment.addPara(organization);
 			employment.addPara(orgJobTitle);
-			employment.wefawefawegawegawegwegawefawefawegawegawaddPara(dateRange);
+			employment.addPara(dateRange);
 
 			funding.addPara(grantTitle);
 			funding.addPara(grantLength);
@@ -410,7 +410,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			fWebsite.setValue(parameters.getParameter("website", ""));
 			fWebsite.setSize(0,100);
 
-                        formDiv.addpara("Academic Information & Previous Work Experience");
+                        formDiv.addPara("Academic Information & Previous Work Experience");
 
 			Text fDegree = form.addItem().addText("degree");
 			fDegree.setLabel(F_degree);
