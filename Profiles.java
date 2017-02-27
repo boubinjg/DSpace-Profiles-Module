@@ -432,7 +432,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			fOrganization.setValue(parameters.getParameter("organization", ""));
 			fOrganization.setSize(0,100);
 
-			Text fOrgJobTitle = form.addItem().addText("job title");
+			Text fOrgJobTitle = form.addItem().addText("forg job title");
 			fOrgJobTitle.setLabel(F_orgJobTitle);
 			fOrgJobTitle.setValue(parameters.getParameter("forg job title", ""));
 			fOrgJobTitle.setSize(0,100);
