@@ -144,8 +144,8 @@ public class Profiles extends AbstractDSpaceTransformer {
 	private static final Message F_twitterURL =
 	        message("Twitter URL");
 
-	private static final Message T_changeToOpen =
-        message("xmlui.ArtifactBrowser.ItemRequestChangeStatusForm.changeToOpen");
+	private static final Message T_submit =
+        message("Submit");
 
 	//end formvariables
 
@@ -338,7 +338,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 			employment.addPara(organization);
 			employment.addPara(orgJobTitle);
-			employment.addPara(dateRange);
+			employment.wefawefawegawegawegwegawefawefawegawegawaddPara(dateRange);
 
 			funding.addPara(grantTitle);
 			funding.addPara(grantLength);
@@ -486,7 +486,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			fTwitterURL.setSize(0,100);
 			
 			form.addItem().addHidden("isSent").setValue("true");
-			form.addItem().addButton("openAccess").setValue(T_changeToOpen);
+			form.addItem().addButton("submit").setValue(T_changeToOpen);
 
 			Division testPost = page.addDivision("testGet");
 			String s = "Not Posted";
