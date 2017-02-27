@@ -219,14 +219,9 @@ public class Profiles extends AbstractDSpaceTransformer {
 			Connection conn = null;
 			
 			Statement stmt = null;
-			// might be just localhost:5432/dspace
-			test += "attempting to connect ";
 			conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
-			test += "connected ";
 			stmt = conn.createStatement();
-			test += "got statement ";
 			String sql, sql1, sql2, sql3, sql4, sql5;
-			test += "got query ";
 			
 			sql5 = "SELECT * FROM faculty WHERE uniqueid = '" + newM + "'";
 			ResultSet rs5 = stmt.executeQuery(sql5);		
@@ -300,8 +295,6 @@ public class Profiles extends AbstractDSpaceTransformer {
 			
 				stmt.close();
 				conn.close();
-				
-				test += "closed";
 			}
 			} catch (SQLException se) {
 				error = se.getSQLState();
@@ -533,7 +526,71 @@ public class Profiles extends AbstractDSpaceTransformer {
 				formLink = request.getParameter("linkedin"),
 				formResGate = request.getParameter("research gate"),
 				formTwitter = request.getParameter("twitter");
+			//getting postgres error 42601 SYNTAX ERROR, find out which line is causing the error	
+			try {
 			
+			Connection conn = null;
+			
+			Statement stmt = null;
+
+			test += "attempting to connect ";
+			conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
+			test += "connected ";
+			stmt = conn.createStatement();
+			
+			String insrtFac = "INSERT INTO faculty " + 
+			"(uniqueid, name, pictureURL, jobTitle, research, address, phone, email, website) " + 
+			" VALUES" + 
+			" (" + newM + ", " + formname + ", " + formPicURL + ", " + 
+			formJobTitle + ", " + formResearch + ", " + formAddr + ", " + 
+			formPhone + ", " + formEmail + ", " + formWebsite + ");";
+				
+			String insrtEmploy = "INSERT INTO employment"
+				+ "(uid, organization, jobTitle, dateRange)"
+				+ " VALUES"
+				+ " (" + newM + ", " + formOrg + ", " + formOrgJobTitle + ", " + formWorked + ");"; 
+				
+			String insrtBio = "INSERT INTO bio"
+				+ "(uid, school, degree, dateEarned)"
+				+ " VALUES"
+				+ " (" + newM + ", " + formEarned + ", " + formDeg + ", " + formAttend + ");";
+				
+			String insrtFund = "INSERT INTO funding" + 
+				"(uid, grantTitle, grantLength, grantNumber)" + 
+				" VALUES" + " (" + newM + ", " + formGrantTitle + 
+				", " + formGrantLen + ", " + formGrantNum + ");";
+				
+			String insrtLink = "INSERT INTO links"
+				+ "(uid, orcid, academia, googlePlus, linkedin, researchGate, twitter)"
+				+ " VALUES"
+				+ " (" + newM + ", " + formOrcid + ", " + formAcadem 
+				+ ", " + formGP + ", " + formLink 
+				+ ", " + formResGate + ", " + formTwitter + ");";
+			
+			Division sql = page.addDivision("sql");
+			sql.addPara(insrtFac);
+			sql.addPara(insrtEmploy);
+			sql.addPara(insrtBio);
+			sql.addPara(insrtFund);
+			sql.addPara(insrtLink);
+			
+			stmt.executeUpdate(insrtFac);
+			test+="insertFac ";
+			stmt.executeUpdate(insrtEmploy);
+			test+="insertEmploy ";
+			stmt.executeUpdate(insrtBio);
+			test+="insertBio ";
+			stmt.executeUpdate(insrtFund);
+			test+="insertFund ";
+			stmt.executeUpdate(insrtLink);
+			test+="insertLink ";
+			
+			} catch (SQLException se) {
+				error = se.getSQLState();
+				error += test;
+				Division testDiv = page.addDivision("testdiv");
+				testDiv.addPara(error);	
+			}  
 		}
 	}
 }
