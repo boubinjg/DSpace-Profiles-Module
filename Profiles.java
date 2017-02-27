@@ -539,29 +539,29 @@ public class Profiles extends AbstractDSpaceTransformer {
 			stmt = conn.createStatement();
 			
 			String insrtFac = "INSERT INTO faculty " + 
-			"(uniqueid, name, pictureURL, jobTitle, research, address, phone, email, website) " + 
+			"(uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) " + 
 			" VALUES" + 
 			" (" + newM + ", " + formname + ", " + formPicURL + ", " + 
 			formJobTitle + ", " + formResearch + ", " + formAddr + ", " + 
 			formPhone + ", " + formEmail + ", " + formWebsite + ");";
 				
 			String insrtEmploy = "INSERT INTO employment"
-				+ "(uid, organization, jobTitle, dateRange)"
+				+ "(uid, organization, jobtitle, daterange)"
 				+ " VALUES"
 				+ " (" + newM + ", " + formOrg + ", " + formOrgJobTitle + ", " + formWorked + ");"; 
 				
 			String insrtBio = "INSERT INTO bio"
-				+ "(uid, school, degree, dateEarned)"
+				+ "(uid, school, degree, dateearned)"
 				+ " VALUES"
 				+ " (" + newM + ", " + formEarned + ", " + formDeg + ", " + formAttend + ");";
 				
 			String insrtFund = "INSERT INTO funding" + 
-				"(uid, grantTitle, grantLength, grantNumber)" + 
+				"(uid, granttitle, grantlength, grantnumber)" + 
 				" VALUES" + " (" + newM + ", " + formGrantTitle + 
 				", " + formGrantLen + ", " + formGrantNum + ");";
 				
 			String insrtLink = "INSERT INTO links"
-				+ "(uid, orcid, academia, googlePlus, linkedin, researchGate, twitter)"
+				+ "(uid, orcid, academia, googlePlus, linkedin, researchgate, twitter)"
 				+ " VALUES"
 				+ " (" + newM + ", " + formOrcid + ", " + formAcadem 
 				+ ", " + formGP + ", " + formLink 
