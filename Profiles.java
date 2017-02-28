@@ -527,71 +527,72 @@ public class Profiles extends AbstractDSpaceTransformer {
 				formResGate = request.getParameter("research gate"),
 				formTwitter = request.getParameter("twitter");
 	
-			//getting postgres error 42601 SYNTAX ERROR, find out which line is causing the error	
-			try {
-			if (request.getParameter("isSent").equals("true")) {
-			Connection conn = null;
-			
-			Statement stmt = null;
+			String isSent = request.getParameter("isSent");
 
-			test += "attempting to connect ";
-			conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
-			test += "connected ";
-			stmt = conn.createStatement();
-			
-			String insrtFac = "INSERT INTO faculty " + 
-			"(uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) " + 
-			" VALUES" + 
-			" ('" + newM + "', '" + formname + "', '" + formPicURL + "', '" + 
-			formJobTitle + "', '" + formResearch + "', '" + formAddr + "', '" + 
-			formPhone + "', '" + formEmail + "', '" + formWebsite + "');";
-				
-			String insrtEmploy = "INSERT INTO employment"
-				+ "(uid, organization, jobtitle, daterange)"
-				+ " VALUES"
-				+ " ('" + newM + "', '" + formOrg + "', '" + formOrgJobTitle + "', '" + formWorked + "');"; 
-				
-			String insrtBio = "INSERT INTO bio"
-				+ "(uid, school, degree, dateearned)"
-				+ " VALUES"
-				+ " ('" + newM + "', '" + formEarned + "', '" + formDeg + "', '" + formAttend + "');";
-				
-			String insrtFund = "INSERT INTO funding" + 
-				"(uid, granttitle, grantlength, grantnumber)" + 
-				" VALUES" + " ('" + newM + "', '" + formGrantTitle + 
-				"', '" + formGrantLen + "', '" + formGrantNum + "');";
-				
-			String insrtLink = "INSERT INTO links"
-				+ "(uid, orcid, academia, googleplus, linkedin, researchgate, twitter)"
-				+ " VALUES"
-				+ " ('" + newM + "', '" + formOrcid + "', '" + formAcadem 
-				+ "', '" + formGP + "', '" + formLink 
-				+ "', '" + formResGate + "', '" + formTwitter + "');";
-			
-			Division sql = page.addDivision("sql");
-			sql.addPara(insrtFac);
-			sql.addPara(insrtEmploy);
-			sql.addPara(insrtBio);
-			sql.addPara(insrtFund);
-			sql.addPara(insrtLink);
-			
-			stmt.executeUpdate(insrtFac);
-			test+="insertFac ";
-			stmt.executeUpdate(insrtEmploy);
-			test+="insertEmploy ";
-			stmt.executeUpdate(insrtBio);
-			test+="insertBio ";
-			stmt.executeUpdate(insrtFund);
-			test+="insertFund ";
-			stmt.executeUpdate(insrtLink);
-			test+="insertLink ";
-			}
-			} catch (SQLException se) {
-				error = se.getSQLState();
-				error += test;
-				Division testDiv = page.addDivision("testdiv");
-				testDiv.addPara(error);	
-			}  
+			//getting postgres error 42601 SYNTAX ERROR, find out which line is causing the error	
+			if (isSent.equals("true")) {
+				try {
+					Connection conn = null;
+					
+					Statement stmt = null;
+
+					test += "attempting to connect ";
+					conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
+					test += "connected ";
+					stmt = conn.createStatement();
+					
+					String insrtFac = "INSERT INTO faculty " + 
+					"(uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) " + 
+					" VALUES" + 
+					" ('" + newM + "', '" + formname + "', '" + formPicURL + "', '" + 
+					formJobTitle + "', '" + formResearch + "', '" + formAddr + "', '" + 
+					formPhone + "', '" + formEmail + "', '" + formWebsite + "');";
+						
+					String insrtEmploy = "INSERT INTO employment"
+						+ "(uid, organization, jobtitle, daterange)"
+						+ " VALUES"
+						+ " ('" + newM + "', '" + formOrg + "', '" + formOrgJobTitle + "', '" + formWorked + "');"; 
+						
+					String insrtBio = "INSERT INTO bio"
+						+ "(uid, school, degree, dateearned)"
+						+ " VALUES"
+						+ " ('" + newM + "', '" + formEarned + "', '" + formDeg + "', '" + formAttend + "');";
+						
+					String insrtFund = "INSERT INTO funding" + 
+						"(uid, granttitle, grantlength, grantnumber)" + 
+						" VALUES" + " ('" + newM + "', '" + formGrantTitle + 
+						"', '" + formGrantLen + "', '" + formGrantNum + "');";
+						
+					String insrtLink = "INSERT INTO links"
+						+ "(uid, orcid, academia, googleplus, linkedin, researchgate, twitter)"
+						+ " VALUES"
+						+ " ('" + newM + "', '" + formOrcid + "', '" + formAcadem 
+						+ "', '" + formGP + "', '" + formLink 
+						+ "', '" + formResGate + "', '" + formTwitter + "');";
+					
+					Division sql = page.addDivision("sql");
+					sql.addPara(insrtFac);
+					sql.addPara(insrtEmploy);
+					sql.addPara(insrtBio);
+					sql.addPara(insrtFund);
+					sql.addPara(insrtLink);
+					
+					stmt.executeUpdate(insrtFac);
+					test+="insertFac ";
+					stmt.executeUpdate(insrtEmploy);
+					test+="insertEmploy ";
+					stmt.executeUpdate(insrtBio);
+					test+="insertBio ";
+					stmt.executeUpdate(insrtFund);
+					test+="insertFund ";
+					stmt.executeUpdate(insrtLink);
+					test+="insertLink ";
+				} catch (SQLException se) {
+					error = se.getSQLState();
+					error += test;
+					Division testDiv = page.addDivision("testdiv");
+					testDiv.addPara(error);	
+				}  
 		}
 	}
 }
