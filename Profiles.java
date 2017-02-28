@@ -526,9 +526,14 @@ public class Profiles extends AbstractDSpaceTransformer {
 				formLink = request.getParameter("linkedin"),
 				formResGate = request.getParameter("research gate"),
 				formTwitter = request.getParameter("twitter");
+                                if (request.getParameter("isSent").equals("true"){
+                                boolean isSent = true;
+}else {
+                                boolean isSent = false;
+}
 			//getting postgres error 42601 SYNTAX ERROR, find out which line is causing the error	
 			try {
-			
+			if (isSent) {
 			Connection conn = null;
 			
 			Statement stmt = null;
@@ -584,7 +589,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			test+="insertFund ";
 			stmt.executeUpdate(insrtLink);
 			test+="insertLink ";
-			
+			}
 			} catch (SQLException se) {
 				error = se.getSQLState();
 				error += test;
