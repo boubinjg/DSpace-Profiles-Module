@@ -530,7 +530,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			String isSent = request.getParameter("isSent");
 
 			//getting postgres error 42601 SYNTAX ERROR, find out which line is causing the error	
-			if (isSent.equals("true")) {
+			if (isSent != null && isSent.equals("true")) {
 				try {
 					Connection conn = null;
 					
