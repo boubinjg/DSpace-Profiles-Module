@@ -145,7 +145,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 	        message("Twitter URL");
 
 	private static final Message T_submit =
-        message("Submit");
+         	message("xmlui.ArtifactBrowser.ItemRequestForm.submit");
 
 	//end formvariables
 
@@ -490,7 +490,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			fTwitterURL.setSize(0,100);
 			
 			form.addItem().addHidden("isSent").setValue("true");
-			form.addItem().addButton("submit").setValue(T_submit);
+			form.addItem().addButton("submit").setValue("Submit");
 
 			Division testPost = page.addDivision("testGet");
 			String s = "Not Posted";
