@@ -592,7 +592,8 @@ public class Profiles extends AbstractDSpaceTransformer {
 					error += test;
 					Division testDiv = page.addDivision("testdiv");
 					testDiv.addPara(error);	
-				}  
+				}
+			}  
 		}
 	}
 }
