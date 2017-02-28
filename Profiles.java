@@ -363,7 +363,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		else if (!containsUser) {
 
 			// Build the item viewer division.
-			Division formDiv = page.addInteractiveDivision("form", request.getRequestURI(), Division.METHOD_GET, "primary");
+			Division formDiv = page.addInteractiveDivision("form", request.getRequestURI(), Division.METHOD_POST, "primary");
 			formDiv.setHead(F_head);
 
 			formDiv.addPara("Faculty Information");
