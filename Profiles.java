@@ -1,12 +1,15 @@
 /*
 
- AboutPage.java
+ Profiles.java
  *
  * Basead on the code by Peter Dietz:
  * https://gist.github.com/842301#file_dspace_add_about.diff (acessed 11-05-23)
  *
  * Modified to work with internationalization (i18n locales) and breadcrumbs
  * by Andre Nito Assada e Josi Perez Alvarez on 11-05-23
+ *
+ * Modified again by Miami University capstone team A-3 to allow users to 
+ * create and add profiles for scholars in DSpace.
  */
 
 package org.dspace.app.xmlui.aspect.artifactbrowser;
@@ -35,7 +38,7 @@ import org.dspace.app.xmlui.wing.element.TextArea;
 import org.dspace.content.Metadatum;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
-//end
+//general imports
 import org.apache.log4j.Logger;
 import org.dspace.app.xmlui.cocoon.AbstractDSpaceTransformer;
 import org.dspace.app.xmlui.wing.WingException;
@@ -55,107 +58,76 @@ import org.dspace.app.xmlui.wing.Message;
 import org.dspace.authorize.AuthorizeException;
 
 /**
- * Display about us page.
+ * Profiles pages
  *
- * @author Peter Dietz
+ * @author Capstone Team A-3
  */
 public class Profiles extends AbstractDSpaceTransformer {
 
-	/**
-	 * Internationalization 110523
-	 */
-
-	// AbstractDSpaceTransformer d = new AbstractDSpaceTransformer();
-	// static String curUrl = d.url;
-	
-	//form variables
+	//private form variables
 	private static final Message F_head =
-        message("Create Your Profile");
- 
-    private static final Message F_para1 =
-        message("Test2");
- 
-    private static final Message F_jobTitle =
-        message("Job Title");
-
+        	message("Create Your Profile");
+    	private static final Message F_para1 =
+        	message("Test2");
+    	private static final Message F_jobTitle =
+        	message("Job Title");
 	private static final Message F_name =
-        message("Name");
-	
+	        message("Name");
 	private static final Message F_research =
 	        message("Research");
-	
 	private static final Message F_address =
 	        message("Office");
-	
 	private static final Message F_phone =
 	        message("Phone");
-	
 	private static final Message F_email =
 	        message("Email");
-	
 	private static final Message F_website =
 	        message("Website");
-	
 	private static final Message F_picurl =
 	        message("Picture URL");
-	
 	private static final Message F_degree =
 	        message("Degree");
-	
 	private static final Message F_earnedFrom =
 	        message("Degree Earned From");
-	
 	private static final Message F_datesAttended =
 	        message("Dates Attended");
-	
 	private static final Message F_grantTitle =
 	        message("Grant Title");
-	
 	private static final Message F_grantLength =
 	        message("Grant Length");
-	
 	private static final Message F_grantNumber =
 	        message("Grant Number");
-	
 	private static final Message F_organization =
 	        message("Organization");
-	
 	private static final Message F_orgJobTitle =
 	        message("Job Title");
-	
 	private static final Message F_dateWorked =
 	        message("Dates Worked");
-	
 	private static final Message F_orcidURL =
 	        message("Orcid URL");
-	
 	private static final Message F_academiaURL =
 	        message("Academia URL");
-	
 	private static final Message F_googleplusURL =
 	        message("Google Plus URL");
-	
 	private static final Message F_linkedinURL =
 	        message("LinkedIn URL");
-	
 	private static final Message F_researchgateURL =
 	        message("ResearchGate URL");
-	
 	private static final Message F_twitterURL =
 	        message("Twitter URL");
-
 	private static final Message T_submit =
          	message("xmlui.ArtifactBrowser.ItemRequestForm.submit");
-
 	//end formvariables
 
-	public String s = url;
+	//breadcrumb information
 	public static final Message T_dspace_home = message("xmlui.general.dspace_home");
 	public static final Message T_title = message("Profiles");
 	public static final Message T_trail = message("Profiles");
+	//database information
 	public static final String databaseConnection = "jdbc:postgresql://localhost:5432/profiles";
 	public static final String databaseUsername = "postgres";
 	public static final String databasePassword = "capstone";
+	//image location information
 	public static final String orcidLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/orcid-logo.png";
 	public static final String academiaLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/academia-logo.png";
 	public static final String googlePlusLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/google-plus-logo.png";
@@ -163,21 +135,16 @@ public class Profiles extends AbstractDSpaceTransformer {
 	public static final String researchGateLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/researchgate-logo.png";
 	public static final String twitterLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/twitter-logo.png";
 
-	public Message test = message(s);
-	public Message test2 = message("test2");
-	public String str = "Not Posted";
-	public Message var = message(str);
 	private static Logger log = Logger.getLogger(Profiles.class);
 
 	/**
 	 * Add a page title and trail links.
-	 */	public void addPageMeta(PageMeta pageMeta) throws SAXException, WingException {
+	 */	
+	public void addPageMeta(PageMeta pageMeta) throws SAXException, WingException {
 		// Set the page title
 
-		// pageMeta.addMetadata("title").addContent("About Us");
-		// 110523 modified page title with internationalization and added
 		// breadcrumbs
-		pageMeta.addMetadata("title").addContent(T_title);
+		pageMeta.addMetadata("Title").addContent(T_title);
 		// add trail
 		pageMeta.addTrailLink(contextPath + "/", T_dspace_home);
 		pageMeta.addTrail().addContent(T_trail);
@@ -186,26 +153,18 @@ public class Profiles extends AbstractDSpaceTransformer {
 	/**
 	 * Add some basic contents
 	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response) 
-		throws ServletException, IOException, SQLException
-	{
-		String rinfo = request.getPathInfo();
-		str = "posted " + rinfo;
-	}
+
 	public void addBody(Body body) throws SAXException, WingException {
 
-		// 110523 modified with internationalization
+		//parses the request to obtain user information
 		Request request = ObjectModelHelper.getRequest(objectModel);
 		String req = request.getPathInfo();
 		String[] tok = req.split("/");
 		String newM = tok[2];
 		boolean containsUser = false;;
 
-		// sql test / Variables
-		String test = "Test: ";
-		String error = "No Errors!";
-		String uniqueId = "", name = ""; 
-		String pictureURL = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/orcid-logo.png";
+		//database variables
+		String uniqueId = "", name = "", pictureURL = "";
 		String jobTitle = "", researchArea = "Research: ", address = "Address: ";
 		String phone = "Phone: ", email = "Email: ", website = "Personal Website: ";
 		String school = "", degreeAndAttended = "";
@@ -213,8 +172,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		String orcid = "", academia = "", googlePlus = "", linkedin = "", researchGate = "", twitter = "";
 		String organization = "", orgJobTitle = "", dateRange = "";
 		
-		
-
+		//database connection
 		try {
 			Connection conn = null;
 			
@@ -297,16 +255,16 @@ public class Profiles extends AbstractDSpaceTransformer {
 				conn.close();
 			}
 			} catch (SQLException se) {
-				error = se.getSQLState();
+				
 			}
-		// end sql test
+		
 		Division division = body.addDivision("profile", "primary");
 		division.setHead(name);
 
-		// division.addPara(newM);
-
 		// the divisions for the page
 		Division page = division.addDivision("page");
+
+		//if user is in database, build profile
 		if (containsUser) {
 			Division picture = division.addDivision("picture");
 			picture.addParaFigure("", "", pictureURL, "", "");
@@ -359,7 +317,8 @@ public class Profiles extends AbstractDSpaceTransformer {
 			links.addParaFigure("", "", twitterLoc, twitter, "");
 
 		}
-		
+
+		//if user is not in database, build form
 		else if (!containsUser) {
 
 			// Build the item viewer division.
@@ -410,8 +369,6 @@ public class Profiles extends AbstractDSpaceTransformer {
 			fWebsite.setValue(parameters.getParameter("website", ""));
 			fWebsite.setSize(0,100);
 
-                        //formDiv.addPara("Academic Information & Previous Work Experience");
-
 			Text fDegree = form.addItem().addText("degree");
 			fDegree.setLabel(F_degree);
 			fDegree.setValue(parameters.getParameter("degree", ""));
@@ -441,8 +398,6 @@ public class Profiles extends AbstractDSpaceTransformer {
 			fdateWorked.setLabel(F_dateWorked);
 			fdateWorked.setValue(parameters.getParameter("date worked", ""));
 			fdateWorked.setSize(0,50);
-
-                        //formDiv.addPara("Grants & External Links");
 
 			Text fGrantTitle = form.addItem().addText("grant title");
 			fGrantTitle.setLabel(F_grantTitle);
@@ -529,7 +484,6 @@ public class Profiles extends AbstractDSpaceTransformer {
 	
 			String isSent = request.getParameter("isSent");
 
-			//getting postgres error 42601 SYNTAX ERROR, find out which line is causing the error	
 			if (isSent != null && isSent.equals("true")) {
 				try {
 					Connection conn = null;
@@ -569,29 +523,8 @@ public class Profiles extends AbstractDSpaceTransformer {
 						+ " ('" + newM + "', '" + formOrcid + "', '" + formAcadem 
 						+ "', '" + formGP + "', '" + formLink 
 						+ "', '" + formResGate + "', '" + formTwitter + "');";
-					
-					Division sql = page.addDivision("sql");
-					sql.addPara(insrtFac);
-					sql.addPara(insrtEmploy);
-					sql.addPara(insrtBio);
-					sql.addPara(insrtFund);
-					sql.addPara(insrtLink);
-					
-					stmt.executeUpdate(insrtFac);
-					test+="insertFac ";
-					stmt.executeUpdate(insrtEmploy);
-					test+="insertEmploy ";
-					stmt.executeUpdate(insrtBio);
-					test+="insertBio ";
-					stmt.executeUpdate(insrtFund);
-					test+="insertFund ";
-					stmt.executeUpdate(insrtLink);
-					test+="insertLink ";
 				} catch (SQLException se) {
-					error = se.getSQLState();
-					error += test;
-					Division testDiv = page.addDivision("testdiv");
-					testDiv.addPara(error);	
+					
 				}
 			}  
 		}
