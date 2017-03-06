@@ -266,10 +266,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 		//if user is in database, build profile
 		if (containsUser) {
-			
-			Division infoBar = division.addDivision("infoBar");
-			
-			Division picture = infoBar.addDivision("picture");
+			Division picture = division.addDivision("picture");
 			picture.addParaFigure("", "", pictureURL, "", "");
 
 			Division pinfo = page.addDivision("personalInformation");
@@ -284,34 +281,26 @@ public class Profiles extends AbstractDSpaceTransformer {
 			info2.addPara(website);
 
 			// pictures
-			
+
 			Division bios = page.addDivision("bios");
-			
-			Division academicContainer = bios.addDivision("academicContainer");
-			Division employmentContainer = bios.addDivision("employmentContainer");
-			Division grantsContainer = bios.addDivision("grantsContainer");
-			
-			// Set the headers of the bio containers
-			Division academicHeader = academicContainer.addDivision("academicHeader");
-			academicHeader.addPara("Education");
-			Division employmentHeader = employmentContainer.addDivision("employmentHeader");
-			employmentHeader.addPara("Employment");
-			Division grantsHeader = grantsContainer.addDivision("grantsHeader");
-			grantsHeader.addPara("Funding");
-			
-			Division educationContent = academicContainer.addDivision("educationContent");
-			educationContent.addPara(school);
-			educationContent.addPara(degreeAndAttended);
-			
-			Division employmentContent = employmentContainer.addDivision("employmentContent");
-			employmentContent.addPara(organization);
-			employmentContent.addPara(orgJobTitle);
-			employmentContent.addPara(dateRange);
-			
-			Division fundingContent = grantsContainer.addDivision("fundingContent");
-			fundingContent.addPara(grantTitle);
-			fundingContent.addPara(grantLength);
-			fundingContent.addPara(grantNumber);
+			Division education = bios.addDivision("education");
+			Division employment = bios.addDivision("employment");
+			Division funding = bios.addDivision("funding");
+
+			education.setHead("Education");
+			employment.setHead("Employment");
+			funding.setHead("Funding");
+
+			education.addPara(school);
+			education.addPara(degreeAndAttended);
+
+			employment.addPara(organization);
+			employment.addPara(orgJobTitle);
+			employment.addPara(dateRange);
+
+			funding.addPara(grantTitle);
+			funding.addPara(grantLength);
+			funding.addPara(grantNumber);
 
 			Division links = page.addDivision("links");
 			// orcid/
@@ -469,10 +458,10 @@ public class Profiles extends AbstractDSpaceTransformer {
 			//parse get variables
 			//currently adds them to to the bottom of page
 			
-		String 	formname = request.getParameter("name"), 
-			    formPicURL = request.getParameter("Picture URL"),
-			    formJobTitle = request.getParameter("job title"),
-			    formResearch = request.getParameter("research"),
+			String 	formname = request.getParameter("name"), 
+			       	formPicURL = request.getParameter("Picture URL"),
+			       	formJobTitle = request.getParameter("job title"),
+			       	formResearch = request.getParameter("research"),
 				formAddr = request.getParameter("address"),
 				formPhone = request.getParameter("phone"),
 				formEmail = request.getParameter("email"),
