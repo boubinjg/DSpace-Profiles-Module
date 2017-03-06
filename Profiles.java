@@ -153,6 +153,13 @@ public class Profiles extends AbstractDSpaceTransformer {
 	/**
 	 * Add some basic contents
 	 */
+	
+	Text getText(List form, String textTitle, static final Message textLabel, int size) {
+		Text t = form.addItem().addText(textTitle);
+		t.setLabel(textLabel);
+		t.setValue(parameters.getParameter(textTitle, ""));
+		t.setSize(0, size);
+	}
 
 	public void addBody(Body body) throws SAXException, WingException {
 
@@ -329,10 +336,11 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 			List form = formDiv.addList("form", List.TYPE_FORM);
 
-			Text fname = form.addItem().addText("name");
+			/*Text fname = form.addItem().addText("name");
 			fname.setLabel(F_name);
 			fname.setValue(parameters.getParameter("name", ""));
-			fname.setSize(0,50);			
+			fname.setSize(0,50);	*/
+			Text fname = getText(form, "name", F_name, 50);		
 
 			Text fPictureURL = form.addItem().addText("Picture URL");
 			fPictureURL.setLabel(F_picurl);
