@@ -349,7 +349,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			List form = formDiv.addList("form", List.TYPE_FORM);
 
 			Text fname = getText(form, "name", F_name, 50);		
-			Text fPictureURL = getTExt(form, "Picture URL", F_picurl, 100);			
+			Text fPictureURL = getText(form, "Picture URL", F_picurl, 100);			
 			Text fJobTitle = getText(form, "job title", F_jobTitle, 100);
 			Text fResearch = getText(form, "research", F_research, 100);
 			Text fAddress = getText(form,"address", F_address, 50);
@@ -386,29 +386,29 @@ public class Profiles extends AbstractDSpaceTransformer {
 			//parse get variables
 			//currently adds them to to the bottom of page
 			
-		String 	formname = request.getParameter("name"), 
-			    formPicURL = request.getParameter("Picture URL"),
-			    formJobTitle = request.getParameter("job title"),
-			    formResearch = request.getParameter("research"),
-				formAddr = request.getParameter("address"),
-				formPhone = request.getParameter("phone"),
-				formEmail = request.getParameter("email"),
-				formWebsite = request.getParameter("website"),
-				formDeg = request.getParameter("degree"),
-				formEarned = request.getParameter("earned from"),
-				formAttend = request.getParameter("dates attended"),
-				formOrg = request.getParameter("organization"),
-				formOrgJobTitle = request.getParameter("forg job title"),
-				formWorked = request.getParameter("date worked"),
-				formGrantTitle = request.getParameter("grant title"),
-				formGrantLen = request.getParameter("grant length"),
-				formGrantNum = request.getParameter("grant number"),
-				formOrcid = request.getParameter("orcid"),
-				formAcadem = request.getParameter("academia"),
-				formGP = request.getParameter("google plus"),
-				formLink = request.getParameter("linkedin"),
-				formResGate = request.getParameter("research gate"),
-				formTwitter = request.getParameter("twitter");
+			String 	formname = request.getParameter("name"), 
+			formPicURL = request.getParameter("Picture URL"),
+			formJobTitle = request.getParameter("job title"),
+			formResearch = request.getParameter("research"),
+			formAddr = request.getParameter("address"),
+			formPhone = request.getParameter("phone"),
+			formEmail = request.getParameter("email"),
+			formWebsite = request.getParameter("website"),
+			formDeg = request.getParameter("degree"),
+			formEarned = request.getParameter("earned from"),
+			formAttend = request.getParameter("dates attended"),
+			formOrg = request.getParameter("organization"),
+			formOrgJobTitle = request.getParameter("forg job title"),
+			formWorked = request.getParameter("date worked"),
+			formGrantTitle = request.getParameter("grant title"),
+			formGrantLen = request.getParameter("grant length"),
+			formGrantNum = request.getParameter("grant number"),
+			formOrcid = request.getParameter("orcid"),
+			formAcadem = request.getParameter("academia"),
+			formGP = request.getParameter("google plus"),
+			formLink = request.getParameter("linkedin"),
+			formResGate = request.getParameter("research gate"),
+			formTwitter = request.getParameter("twitter");
 	
 			String isSent = request.getParameter("isSent");
 
@@ -449,6 +449,11 @@ public class Profiles extends AbstractDSpaceTransformer {
 						+ " ('" + newM + "', '" + formOrcid + "', '" + formAcadem 
 						+ "', '" + formGP + "', '" + formLink 
 						+ "', '" + formResGate + "', '" + formTwitter + "');";
+					stmt.executeUpdate(insrtFac);
+					stmt.executeUpdate(insrtEmploy);
+					stmt.executeUpdate(insrtBio);
+					stmt.executeUpdate(insrtFund);
+					stmt.executeUpdate(insrtLink);
 				} catch (SQLException se) {
 					
 				}
