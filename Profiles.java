@@ -490,9 +490,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 					
 					Statement stmt = null;
 
-					test += "attempting to connect ";
 					conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
-					test += "connected ";
 					stmt = conn.createStatement();
 					
 					String insrtFac = "INSERT INTO faculty " + 
