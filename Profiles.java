@@ -137,6 +137,15 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 	private static Logger log = Logger.getLogger(Profiles.class);
 
+	//page data retrieved from database
+	private String uniqueId = "", name = "", pictureURL = "";
+	private String jobTitle = "", researchArea = "Research: ", address = "Address: ";
+	private String phone = "Phone: ", email = "Email: ", website = "Personal Website: ";
+	private String school = "", degreeAndAttended = "";
+	private String grantTitle = "Grant Title: ", grantLength = "Grant Length: ", grantNumber = "Grant Number: ";
+	private String orcid = "", academia = "", googlePlus = "", linkedin = "", researchGate = "", twitter = "";
+	private String organization = "", orgJobTitle = "", dateRange = "";
+		
 	/**
 	 * Add a page title and trail links.
 	 */	
@@ -151,9 +160,8 @@ public class Profiles extends AbstractDSpaceTransformer {
 	}
 
 	/**
-	 * Add some basic contents
+	 * Creates form textbox elements
 	 */
-	
 	public Text getText(List form, String textTitle, Message textLabel, int size) throws WingException {
 		Text t = form.addItem().addText(textTitle);
 		t.setLabel(textLabel);
@@ -162,24 +170,19 @@ public class Profiles extends AbstractDSpaceTransformer {
 		return t;
 	}
 
+	/**
+	 * creates Profile/Form page
+	 */
+
 	public void addBody(Body body) throws SAXException, WingException {
 
 		//parses the request to obtain user information
 		Request request = ObjectModelHelper.getRequest(objectModel);
 		String req = request.getPathInfo();
 		String[] tok = req.split("/");
-		String newM = tok[2];
+		String pageUID = tok[2];
 		boolean containsUser = false;;
 
-		//database variables
-		String uniqueId = "", name = "", pictureURL = "";
-		String jobTitle = "", researchArea = "Research: ", address = "Address: ";
-		String phone = "Phone: ", email = "Email: ", website = "Personal Website: ";
-		String school = "", degreeAndAttended = "";
-		String grantTitle = "Grant Title: ", grantLength = "Grant Length: ", grantNumber = "Grant Number: ";
-		String orcid = "", academia = "", googlePlus = "", linkedin = "", researchGate = "", twitter = "";
-		String organization = "", orgJobTitle = "", dateRange = "";
-		
 		//database connection
 		try {
 			Connection conn = null;
@@ -189,7 +192,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			stmt = conn.createStatement();
 			String sql, sql1, sql2, sql3, sql4, sql5;
 			
-			sql5 = "SELECT * FROM faculty WHERE uniqueid = '" + newM + "'";
+			sql5 = "SELECT * FROM faculty WHERE uniqueid = '" + pageUID + "'";
 			ResultSet rs5 = stmt.executeQuery(sql5);		
 			String uniqueIdCheck = "";
 			while(rs5.next()) {
@@ -200,7 +203,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 				containsUser = true;
 			
 			if(containsUser) {
-				sql = "SELECT * FROM faculty WHERE uniqueid = '" + newM + "'";
+				sql = "SELECT * FROM faculty WHERE uniqueid = '" + pageUID + "'";
 				ResultSet rs = stmt.executeQuery(sql);
 				while (rs.next()) {
 					uniqueId += rs.getString("uniqueid");
@@ -215,7 +218,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 				}
 				rs.close();
 			
-				sql1 = "SELECT * FROM bio WHERE uid = '" + newM + "'";
+				sql1 = "SELECT * FROM bio WHERE uid = '" + pageUID + "'";
 				ResultSet rs1 = stmt.executeQuery(sql1);
 				while(rs1.next()) {
 					uniqueId += rs1.getString("uid");
@@ -226,7 +229,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 				}
 				rs1.close();
 			
-				sql2 = "SELECT * FROM funding WHERE uid = '" + newM + "'";
+				sql2 = "SELECT * FROM funding WHERE uid = '" + pageUID + "'";
 				ResultSet rs2 = stmt.executeQuery(sql2);
 				while(rs2.next()) {
 					uniqueId += rs2.getString("uid");
@@ -236,7 +239,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 				}
 				rs2.close();
 			
-				sql3 = "SELECT * FROM links WHERE uid = '" + newM + "'";
+				sql3 = "SELECT * FROM links WHERE uid = '" + pageUID + "'";
 				ResultSet rs3 = stmt.executeQuery(sql3);
 				while(rs3.next()) {
 					uniqueId += rs3.getString("uid");
@@ -249,7 +252,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 				}
 				rs3.close();
 			
-				sql4 = "SELECT * FROM employment WHERE uid = '" + newM + "'";
+				sql4 = "SELECT * FROM employment WHERE uid = '" + pageUID + "'";
 				ResultSet rs4 = stmt.executeQuery(sql4);
 				while(rs4.next()) {
 					uniqueId += rs4.getString("uid");
@@ -353,7 +356,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			List form = formDiv.addList("form", List.TYPE_FORM);
 
 			Text fname = getText(form, "name", F_name, 50);		
-			Text fPictureURL = getTExt(form, "Picture URL", F_picurl, 100);			
+			Text fPictureURL = getText(form, "Picture URL", F_picurl, 100);			
 			Text fJobTitle = getText(form, "job title", F_jobTitle, 100);
 			Text fResearch = getText(form, "research", F_research, 100);
 			Text fAddress = getText(form,"address", F_address, 50);
@@ -390,29 +393,29 @@ public class Profiles extends AbstractDSpaceTransformer {
 			//parse get variables
 			//currently adds them to to the bottom of page
 			
-		String 	formname = request.getParameter("name"), 
-			    formPicURL = request.getParameter("Picture URL"),
-			    formJobTitle = request.getParameter("job title"),
-			    formResearch = request.getParameter("research"),
-				formAddr = request.getParameter("address"),
-				formPhone = request.getParameter("phone"),
-				formEmail = request.getParameter("email"),
-				formWebsite = request.getParameter("website"),
-				formDeg = request.getParameter("degree"),
-				formEarned = request.getParameter("earned from"),
-				formAttend = request.getParameter("dates attended"),
-				formOrg = request.getParameter("organization"),
-				formOrgJobTitle = request.getParameter("forg job title"),
-				formWorked = request.getParameter("date worked"),
-				formGrantTitle = request.getParameter("grant title"),
-				formGrantLen = request.getParameter("grant length"),
-				formGrantNum = request.getParameter("grant number"),
-				formOrcid = request.getParameter("orcid"),
-				formAcadem = request.getParameter("academia"),
-				formGP = request.getParameter("google plus"),
-				formLink = request.getParameter("linkedin"),
-				formResGate = request.getParameter("research gate"),
-				formTwitter = request.getParameter("twitter");
+			String 	formname = request.getParameter("name"), 
+			formPicURL = request.getParameter("Picture URL"),
+			formJobTitle = request.getParameter("job title"),
+			formResearch = request.getParameter("research"),
+			formAddr = request.getParameter("address"),
+			formPhone = request.getParameter("phone"),
+			formEmail = request.getParameter("email"),
+			formWebsite = request.getParameter("website"),
+			formDeg = request.getParameter("degree"),
+			formEarned = request.getParameter("earned from"),
+			formAttend = request.getParameter("dates attended"),
+			formOrg = request.getParameter("organization"),
+			formOrgJobTitle = request.getParameter("forg job title"),
+			formWorked = request.getParameter("date worked"),
+			formGrantTitle = request.getParameter("grant title"),
+			formGrantLen = request.getParameter("grant length"),
+			formGrantNum = request.getParameter("grant number"),
+			formOrcid = request.getParameter("orcid"),
+			formAcadem = request.getParameter("academia"),
+			formGP = request.getParameter("google plus"),
+			formLink = request.getParameter("linkedin"),
+			formResGate = request.getParameter("research gate"),
+			formTwitter = request.getParameter("twitter");
 	
 			String isSent = request.getParameter("isSent");
 
@@ -428,31 +431,36 @@ public class Profiles extends AbstractDSpaceTransformer {
 					String insrtFac = "INSERT INTO faculty " + 
 					"(uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) " + 
 					" VALUES" + 
-					" ('" + newM + "', '" + formname + "', '" + formPicURL + "', '" + 
+					" ('" + pageUID + "', '" + formname + "', '" + formPicURL + "', '" + 
 					formJobTitle + "', '" + formResearch + "', '" + formAddr + "', '" + 
 					formPhone + "', '" + formEmail + "', '" + formWebsite + "');";
 						
 					String insrtEmploy = "INSERT INTO employment"
 						+ "(uid, organization, jobtitle, daterange)"
 						+ " VALUES"
-						+ " ('" + newM + "', '" + formOrg + "', '" + formOrgJobTitle + "', '" + formWorked + "');"; 
+						+ " ('" + pageUID + "', '" + formOrg + "', '" + formOrgJobTitle + "', '" + formWorked + "');"; 
 						
 					String insrtBio = "INSERT INTO bio"
 						+ "(uid, school, degree, dateearned)"
 						+ " VALUES"
-						+ " ('" + newM + "', '" + formEarned + "', '" + formDeg + "', '" + formAttend + "');";
+						+ " ('" + pageUID + "', '" + formEarned + "', '" + formDeg + "', '" + formAttend + "');";
 						
 					String insrtFund = "INSERT INTO funding" + 
 						"(uid, granttitle, grantlength, grantnumber)" + 
-						" VALUES" + " ('" + newM + "', '" + formGrantTitle + 
+						" VALUES" + " ('" + pageUID + "', '" + formGrantTitle + 
 						"', '" + formGrantLen + "', '" + formGrantNum + "');";
 						
 					String insrtLink = "INSERT INTO links"
 						+ "(uid, orcid, academia, googleplus, linkedin, researchgate, twitter)"
 						+ " VALUES"
-						+ " ('" + newM + "', '" + formOrcid + "', '" + formAcadem 
+						+ " ('" + pageUID + "', '" + formOrcid + "', '" + formAcadem 
 						+ "', '" + formGP + "', '" + formLink 
 						+ "', '" + formResGate + "', '" + formTwitter + "');";
+					stmt.executeUpdate(insrtFac);
+					stmt.executeUpdate(insrtEmploy);
+					stmt.executeUpdate(insrtBio);
+					stmt.executeUpdate(insrtFund);
+					stmt.executeUpdate(insrtLink);
 				} catch (SQLException se) {
 					
 				}
