@@ -174,16 +174,9 @@ public class Profiles extends AbstractDSpaceTransformer {
 	 * creates Profile/Form page
 	 */
 
-	public void addBody(Body body) throws SAXException, WingException {
-
-		//parses the request to obtain user information
-		Request request = ObjectModelHelper.getRequest(objectModel);
-		String req = request.getPathInfo();
-		String[] tok = req.split("/");
-		String pageUID = tok[2];
-		boolean containsUser = false;;
-
-		//database connection
+	public boolean checkDB(String pageUID)
+	{
+		boolean containsUser = false;
 		try {
 			Connection conn = null;
 			
@@ -264,16 +257,31 @@ public class Profiles extends AbstractDSpaceTransformer {
 			
 				stmt.close();
 				conn.close();
+				return containsUser;
 			}
-			} catch (SQLException se) {
-				
-			}
+		} catch (SQLException se) {
+			return false;		
+		}
 		
+	}
+
+	public void addBody(Body body) throws SAXException, WingException {
+
+		//parses the request to obtain user information
+		Request request = ObjectModelHelper.getRequest(objectModel);
+		String req = request.getPathInfo();
+		String[] tok = req.split("/");
+		String pageUID = tok[2];
+
+		//database connection
+	
 		Division division = body.addDivision("profile", "primary");
 		division.setHead(name);
 
 		// the divisions for the page
 		Division page = division.addDivision("page");
+
+		boolean containsUser = checkDB(pageUID);
 
 		//if user is in database, build profile
 		if (containsUser) {
