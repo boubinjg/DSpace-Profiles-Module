@@ -67,9 +67,9 @@ public class Profiles extends AbstractDSpaceTransformer {
 	//private form variables
 	private static final Message F_head =
         	message("Create Your Profile");
-    	private static final Message F_para1 =
+    private static final Message F_para1 =
         	message("Test2");
-    	private static final Message F_jobTitle =
+    private static final Message F_jobTitle =
         	message("Job Title");
 	private static final Message F_name =
 	        message("Name");
@@ -199,70 +199,69 @@ public class Profiles extends AbstractDSpaceTransformer {
 				sql = "SELECT * FROM faculty WHERE uniqueid = '" + pageUID + "'";
 				ResultSet rs = stmt.executeQuery(sql);
 				while (rs.next()) {
-					uniqueId += rs.getString("uniqueid");
-					name += rs.getString("name");
+					uniqueId = rs.getString("uniqueid");
+					name = rs.getString("name");
 					pictureURL = rs.getString("pictureurl");
-					jobTitle += rs.getString("jobtitle");
-					researchArea += rs.getString("research");
-					address += rs.getString("address");
-					phone += rs.getString("phone");
-					email += rs.getString("email");
-					website += rs.getString("website");
+					jobTitle = rs.getString("jobtitle");
+					researchArea = "Research: " + rs.getString("research");
+					address = "Address: "+rs.getString("address");
+					phone = "Phone: "+rs.getString("phone");
+					email = "Email: "+rs.getString("email");
+					website = "Website: "+rs.getString("website");
 				}
 				rs.close();
 			
 				sql1 = "SELECT * FROM bio WHERE uid = '" + pageUID + "'";
 				ResultSet rs1 = stmt.executeQuery(sql1);
 				while(rs1.next()) {
-					uniqueId += rs1.getString("uid");
-					school += rs1.getString("school");
-					degreeAndAttended += rs1.getString("degree");
-					degreeAndAttended += ", ";
-					degreeAndAttended += rs1.getString("dateEarned");
+					uniqueId = rs1.getString("uid");
+					school = rs1.getString("school");
+					degreeAndAttended = rs1.getString("degree");
+					degreeAndAttended = ", ";
+					degreeAndAttended = rs1.getString("dateEarned");
 				}
 				rs1.close();
 			
 				sql2 = "SELECT * FROM funding WHERE uid = '" + pageUID + "'";
 				ResultSet rs2 = stmt.executeQuery(sql2);
 				while(rs2.next()) {
-					uniqueId += rs2.getString("uid");
-					grantTitle += rs2.getString("granttitle");
-					grantLength += rs2.getString("grantlength");
-					grantNumber += rs2.getString("grantnumber");
+					uniqueId = rs2.getString("uid");
+					grantTitle = "Grant Title: "+rs2.getString("granttitle");
+					grantLength = "Grant Length: "+rs2.getString("grantlength");
+					grantNumber = "Grant Number: "+rs2.getString("grantnumber");
 				}
 				rs2.close();
 			
 				sql3 = "SELECT * FROM links WHERE uid = '" + pageUID + "'";
 				ResultSet rs3 = stmt.executeQuery(sql3);
 				while(rs3.next()) {
-					uniqueId += rs3.getString("uid");
-					orcid += rs3.getString("orcid");
-					academia += rs3.getString("academia");
-					googlePlus += rs3.getString("googleplus");
-					linkedin += rs3.getString("linkedin");
-					researchGate += rs3.getString("researchgate");
-					twitter += rs3.getString("twitter");
+					uniqueId = rs3.getString("uid");
+					orcid = rs3.getString("orcid");
+					academia = rs3.getString("academia");
+					googlePlus = rs3.getString("googleplus");
+					linkedin = rs3.getString("linkedin");
+					researchGate = rs3.getString("researchgate");
+					twitter = rs3.getString("twitter");
 				}
 				rs3.close();
 			
 				sql4 = "SELECT * FROM employment WHERE uid = '" + pageUID + "'";
 				ResultSet rs4 = stmt.executeQuery(sql4);
 				while(rs4.next()) {
-					uniqueId += rs4.getString("uid");
-					organization += rs4.getString("organization");
-					orgJobTitle += rs4.getString("jobtitle");
-					dateRange += rs4.getString("daterange");
+					uniqueId = rs4.getString("uid");
+					organization = rs4.getString("organization");
+					orgJobTitle = rs4.getString("jobtitle");
+					dateRange = rs4.getString("daterange");
 				}
 				rs4.close();
 			
 				stmt.close();
 				conn.close();
-				return containsUser;
 			}
 		} catch (SQLException se) {
 			return false;		
 		}
-		
+		return containsUser;
 	}
 
 	public void addBody(Body body) throws SAXException, WingException {
@@ -286,24 +285,44 @@ public class Profiles extends AbstractDSpaceTransformer {
 		//if user is in database, build profile
 		if (containsUser) {
 			
-			Division infoBar = division.addDivision("infoBar");
+			Division infoBar = page.addDivision("infoBar");
 			
 			Division picture = infoBar.addDivision("picture");
 			picture.addParaFigure("", "", pictureURL, "", "");
 
-			Division pinfo = page.addDivision("personalInformation");
-			Division info1 = pinfo.addDivision("info1");
-			info1.addPara(jobTitle);
-			info1.addPara(researchArea);
-
-			Division info2 = pinfo.addDivision("info2");
-			info2.addPara(address);
-			info2.addPara(phone);
-			info2.addPara(email);
-			info2.addPara(website);
-
-			// pictures
+			Division infoWithName = infoBar.addDivision("infoWithName");
 			
+			Division nameHeader = infoWithName.addDivision("nameHeader");
+			nameHeader.addPara(name);
+			
+			Division personalInfo = infoWithName.addDivision("personalInfo");
+			
+			Division infoLeftContainer = personalInfo.addDivision("infoLeftContainer");
+			infoLeftContainer.addPara(jobTitle);
+			infoLeftContainer.addPara(researchArea);
+
+			Division infoRightContainer = personalInfo.addDivision("infoRightContainer");
+			infoRightContainer.addPara(address);
+			infoRightContainer.addPara(phone);
+			infoRightContainer.addPara(email);
+			infoRightContainer.addPara(website);
+			
+			Division links = infoRightContainer.addDivision("links");
+			// orcid/
+			links.addParaFigure("", "", orcidLoc, orcid, "");
+			// adacemia.edu
+			links.addParaFigure("", "", academiaLoc, academia, "");
+			// google+
+			links.addParaFigure("", "", googlePlusLoc, googlePlus, "");
+			// linkedin
+			links.addParaFigure("", "", linkedinLoc, linkedin, "");
+			// researchgate
+			links.addParaFigure("", "", researchGateLoc, researchGate, "");
+			// twitter
+			links.addParaFigure("", "", twitterLoc, twitter, "");
+			
+			
+			// Biography part of the profile module
 			Division bios = page.addDivision("bios");
 			
 			Division academicContainer = bios.addDivision("academicContainer");
@@ -331,21 +350,6 @@ public class Profiles extends AbstractDSpaceTransformer {
 			fundingContent.addPara(grantTitle);
 			fundingContent.addPara(grantLength);
 			fundingContent.addPara(grantNumber);
-
-			Division links = page.addDivision("links");
-			// orcid/
-			links.addParaFigure("", "", orcidLoc, orcid, "");
-			// adacemia.edu
-			links.addParaFigure("", "", academiaLoc, academia, "");
-			// google+
-			links.addParaFigure("", "", googlePlusLoc, googlePlus, "");
-			// linkedin
-			links.addParaFigure("", "", linkedinLoc, linkedin, "");
-			// researchgate
-			links.addParaFigure("", "", researchGateLoc, researchGate, "");
-			// twitter
-			links.addParaFigure("", "", twitterLoc, twitter, "");
-
 		}
 
 		//if user is not in database, build form
