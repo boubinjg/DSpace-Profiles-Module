@@ -145,7 +145,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 	private String grantTitle = "Grant Title: ", grantLength = "Grant Length: ", grantNumber = "Grant Number: ";
 	private String orcid = "", academia = "", googlePlus = "", linkedin = "", researchGate = "", twitter = "";
 	private String organization = "", orgJobTitle = "", dateRange = "";
-		
+	private Request request;
 	/**
 	 * Add a page title and trail links.
 	 */	
@@ -264,10 +264,224 @@ public class Profiles extends AbstractDSpaceTransformer {
 		return containsUser;
 	}
 
+	public void createProfile(Division page) throws WingException
+	{
+		Division infoBar = page.addDivision("infoBar");
+		
+		Division picture = infoBar.addDivision("picture");
+		picture.addParaFigure("", "", pictureURL, "", "");
+
+		Division infoWithName = infoBar.addDivision("infoWithName");
+		
+		Division nameHeader = infoWithName.addDivision("nameHeader");
+		nameHeader.addPara(name);
+		
+		Division personalInfo = infoWithName.addDivision("personalInfo");
+		
+		Division infoLeftContainer = personalInfo.addDivision("infoLeftContainer");
+		infoLeftContainer.addPara(jobTitle);
+		infoLeftContainer.addPara(researchArea);
+
+		Division infoRightContainer = personalInfo.addDivision("infoRightContainer");
+		infoRightContainer.addPara(address);
+		infoRightContainer.addPara(phone);
+		infoRightContainer.addPara(email);
+		infoRightContainer.addPara(website);
+		
+		Division links = infoRightContainer.addDivision("links");
+		// orcid/
+		links.addParaFigure("", "", orcidLoc, orcid, "");
+		// adacemia.edu
+		links.addParaFigure("", "", academiaLoc, academia, "");
+		// google+
+		links.addParaFigure("", "", googlePlusLoc, googlePlus, "");
+		// linkedin
+		links.addParaFigure("", "", linkedinLoc, linkedin, "");
+		// researchgate
+		links.addParaFigure("", "", researchGateLoc, researchGate, "");
+		// twitter
+		links.addParaFigure("", "", twitterLoc, twitter, "");
+		
+		
+		// Biography part of the profile module
+		Division bios = page.addDivision("bios");
+		
+		Division academicContainer = bios.addDivision("academicContainer");
+		Division employmentContainer = bios.addDivision("employmentContainer");
+		Division grantsContainer = bios.addDivision("grantsContainer");
+		
+		// Set the headers of the bio containers
+		Division academicHeader = academicContainer.addDivision("academicHeader");
+		academicHeader.addPara("Education");
+		Division employmentHeader = employmentContainer.addDivision("employmentHeader");
+		employmentHeader.addPara("Employment");
+		Division grantsHeader = grantsContainer.addDivision("grantsHeader");
+		grantsHeader.addPara("Funding");
+		
+		Division educationContent = academicContainer.addDivision("educationContent");
+		educationContent.addPara(school);
+		educationContent.addPara(degreeAndAttended);
+		
+		Division employmentContent = employmentContainer.addDivision("employmentContent");
+		employmentContent.addPara(organization);
+		employmentContent.addPara(orgJobTitle);
+		employmentContent.addPara(dateRange);
+		
+		Division fundingContent = grantsContainer.addDivision("fundingContent");
+		fundingContent.addPara(grantTitle);
+		fundingContent.addPara(grantLength);
+		fundingContent.addPara(grantNumber);
+	}
+
+	public void createForm(Division page) throws WingException
+	{
+		// Build the item viewer division.
+		Division formDiv = page.addInteractiveDivision("form", request.getRequestURI(), Division.METHOD_POST, "primary");
+		formDiv.setHead(F_head);
+
+		formDiv.addPara("Faculty Information");
+
+		List form = formDiv.addList("form", List.TYPE_FORM);
+
+		Text fname = getText(form, "name", F_name, 50);		
+		Text fPictureURL = getText(form, "Picture URL", F_picurl, 100);			
+		Text fJobTitle = getText(form, "job title", F_jobTitle, 100);
+		Text fResearch = getText(form, "research", F_research, 100);
+		Text fAddress = getText(form,"address", F_address, 50);
+		Text fPhone = getText(form, "phone", F_phone, 12);
+		Text fEmail = getText(form, "email", F_email, 50);
+		Text fWebsite = getText(form, "website", F_website, 100);
+		Text fDegree = getText(form, "degree", F_degree, 100);
+		Text fEarnedFrom = getText(form, "earned from", F_earnedFrom, 100);
+		Text fDatesAttended = getText(form, "dates attended", F_datesAttended, 50);
+		Text fOrganization = getText(form, "organization", F_organization, 100);
+		Text fOrgJobTitle = getText(form, "forg job title", F_orgJobTitle, 100);
+		Text fdateWorked = getText(form, "date worked", F_orgJobTitle, 50);
+		Text fGrantTitle = getText(form, "grant title", F_grantTitle, 100);
+		Text fGrantLength = getText(form, "grant length", F_grantLength, 50);		
+		Text fGrantNumber = getText(form, "grant number", F_grantNumber, 50);
+		Text fOrcidURL = getText(form, "orcid", F_orcidURL,100);
+		Text fAcademiaURL = getText(form, "academia", F_academiaURL, 100);
+		Text fGooglePlusURL = getText(form, "google plus", F_googleplusURL, 100);
+		Text fLinkedinURL = getText(form, "linkedin",F_linkedinURL, 100);
+		Text fResearchGateURL = getText(form, "research gate", F_researchgateURL, 100);
+		Text fTwitterURL = getText(form, "twitter", F_twitterURL, 100);			
+
+		form.addItem().addHidden("isSent").setValue("true");
+		form.addItem().addButton("submit").setValue("Submit");
+
+		Division testPost = page.addDivision("testGet");
+		String s = "Not Posted";
+		try {
+			s = request.getParameter("param1");
+		} catch(Exception e) {
+				s = "error";
+		}
+	}
+	public void checkPost()
+	{
+		String 	formname = request.getParameter("name"), 
+		formPicURL = request.getParameter("Picture URL"),
+		formJobTitle = request.getParameter("job title"),
+		formResearch = request.getParameter("research"),
+		formAddr = request.getParameter("address"),
+		formPhone = request.getParameter("phone"),
+		formEmail = request.getParameter("email"),
+		formWebsite = request.getParameter("website"),
+		formDeg = request.getParameter("degree"),
+		formEarned = request.getParameter("earned from"),
+		formAttend = request.getParameter("dates attended"),
+		formOrg = request.getParameter("organization"),
+		formOrgJobTitle = request.getParameter("forg job title"),
+		formWorked = request.getParameter("date worked"),
+		formGrantTitle = request.getParameter("grant title"),
+		formGrantLen = request.getParameter("grant length"),
+		formGrantNum = request.getParameter("grant number"),
+		formOrcid = request.getParameter("orcid"),
+		formAcadem = request.getParameter("academia"),
+		formGP = request.getParameter("google plus"),
+		formLink = request.getParameter("linkedin"),
+		formResGate = request.getParameter("research gate"),
+		formTwitter = request.getParameter("twitter");
+
+		String isSent = request.getParameter("isSent");
+
+		if (isSent != null && isSent.equals("true")) {
+			try {
+				Connection conn = null;
+				
+				Statement stmt = null;
+				
+				
+				conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
+				stmt = conn.createStatement();
+				
+				PreparedStatement prepStmt = conn.prepareStatement("INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (uniqueid=?, name=?, pictureurl=?, jobtitle=?, research=?, address=?, phone=?, email=?, website=?");
+				prepStmt.setString(1, pageUID);
+				prepStmt.setString(2, formname);
+				prepStmt.setString(3, formPicURL);
+				prepStmt.setString(4, formJobTitle);
+				prepStmt.setString(5, formResearch);
+				prepStmt.setString(6, formAddr);
+				prepStmt.setString(7, formPhone);
+				prepStmt.setString(8, formEmail);
+				prepStmt.setString(9, formWebsite);
+				
+				prepStmt.executeUpdate();
+				prepStmt.executeUpdate();
+				prepStmt.executeUpdate();
+				prepStmt.executeUpdate();
+				prepStmt.executeUpdate();
+				
+				
+				
+				/* Old vulnerable code
+				String insrtFac = "INSERT INTO faculty " + 
+				"(uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) " + 
+				" VALUES" + 
+				" ('" + pageUID + "', '" + formname + "', '" + formPicURL + "', '" + 
+				formJobTitle + "', '" + formResearch + "', '" + formAddr + "', '" + 
+				formPhone + "', '" + formEmail + "', '" + formWebsite + "');";
+				*/
+					
+				String insrtEmploy = "INSERT INTO employment"
+					+ "(uid, organization, jobtitle, daterange)"
+					+ " VALUES"
+					+ " ('" + pageUID + "', '" + formOrg + "', '" + formOrgJobTitle + "', '" + formWorked + "');"; 
+					
+				String insrtBio = "INSERT INTO bio"
+					+ "(uid, school, degree, dateearned)"
+					+ " VALUES"
+					+ " ('" + pageUID + "', '" + formEarned + "', '" + formDeg + "', '" + formAttend + "');";
+					
+				String insrtFund = "INSERT INTO funding" + 
+					"(uid, granttitle, grantlength, grantnumber)" + 
+					" VALUES" + " ('" + pageUID + "', '" + formGrantTitle + 
+					"', '" + formGrantLen + "', '" + formGrantNum + "');";
+					
+				String insrtLink = "INSERT INTO links"
+					+ "(uid, orcid, academia, googleplus, linkedin, researchgate, twitter)"
+					+ " VALUES"
+					+ " ('" + pageUID + "', '" + formOrcid + "', '" + formAcadem 
+					+ "', '" + formGP + "', '" + formLink 
+					+ "', '" + formResGate + "', '" + formTwitter + "');";
+				
+				
+				//stmt.executeUpdate(insrtFac);
+				stmt.executeUpdate(insrtEmploy);
+				stmt.executeUpdate(insrtBio);
+				stmt.executeUpdate(insrtFund);
+				stmt.executeUpdate(insrtLink);	
+					
+			} catch (SQLException se) {
+					
+			}
+		}
+	}
 	public void addBody(Body body) throws SAXException, WingException {
 
 		//parses the request to obtain user information
-		Request request = ObjectModelHelper.getRequest(objectModel);
+		request = ObjectModelHelper.getRequest(objectModel);
 		String req = request.getPathInfo();
 		String[] tok = req.split("/");
 		String pageUID = tok[2];
@@ -280,225 +494,18 @@ public class Profiles extends AbstractDSpaceTransformer {
 		// the divisions for the page
 		Division page = division.addDivision("page");
 
+		//check to see if post request was received:
+		checkPost();
+
 		boolean containsUser = checkDB(pageUID);
 
 		//if user is in database, build profile
-		if (containsUser) {
-			
-			Division infoBar = page.addDivision("infoBar");
-			
-			Division picture = infoBar.addDivision("picture");
-			picture.addParaFigure("", "", pictureURL, "", "");
-
-			Division infoWithName = infoBar.addDivision("infoWithName");
-			
-			Division nameHeader = infoWithName.addDivision("nameHeader");
-			nameHeader.addPara(name);
-			
-			Division personalInfo = infoWithName.addDivision("personalInfo");
-			
-			Division infoLeftContainer = personalInfo.addDivision("infoLeftContainer");
-			infoLeftContainer.addPara(jobTitle);
-			infoLeftContainer.addPara(researchArea);
-
-			Division infoRightContainer = personalInfo.addDivision("infoRightContainer");
-			infoRightContainer.addPara(address);
-			infoRightContainer.addPara(phone);
-			infoRightContainer.addPara(email);
-			infoRightContainer.addPara(website);
-			
-			Division links = infoRightContainer.addDivision("links");
-			// orcid/
-			links.addParaFigure("", "", orcidLoc, orcid, "");
-			// adacemia.edu
-			links.addParaFigure("", "", academiaLoc, academia, "");
-			// google+
-			links.addParaFigure("", "", googlePlusLoc, googlePlus, "");
-			// linkedin
-			links.addParaFigure("", "", linkedinLoc, linkedin, "");
-			// researchgate
-			links.addParaFigure("", "", researchGateLoc, researchGate, "");
-			// twitter
-			links.addParaFigure("", "", twitterLoc, twitter, "");
-			
-			
-			// Biography part of the profile module
-			Division bios = page.addDivision("bios");
-			
-			Division academicContainer = bios.addDivision("academicContainer");
-			Division employmentContainer = bios.addDivision("employmentContainer");
-			Division grantsContainer = bios.addDivision("grantsContainer");
-			
-			// Set the headers of the bio containers
-			Division academicHeader = academicContainer.addDivision("academicHeader");
-			academicHeader.addPara("Education");
-			Division employmentHeader = employmentContainer.addDivision("employmentHeader");
-			employmentHeader.addPara("Employment");
-			Division grantsHeader = grantsContainer.addDivision("grantsHeader");
-			grantsHeader.addPara("Funding");
-			
-			Division educationContent = academicContainer.addDivision("educationContent");
-			educationContent.addPara(school);
-			educationContent.addPara(degreeAndAttended);
-			
-			Division employmentContent = employmentContainer.addDivision("employmentContent");
-			employmentContent.addPara(organization);
-			employmentContent.addPara(orgJobTitle);
-			employmentContent.addPara(dateRange);
-			
-			Division fundingContent = grantsContainer.addDivision("fundingContent");
-			fundingContent.addPara(grantTitle);
-			fundingContent.addPara(grantLength);
-			fundingContent.addPara(grantNumber);
-		}
+		if (containsUser) 
+			createProfile(page);
 
 		//if user is not in database, build form
-		else if (!containsUser) {
-
-			// Build the item viewer division.
-			Division formDiv = page.addInteractiveDivision("form", request.getRequestURI(), Division.METHOD_POST, "primary");
-			formDiv.setHead(F_head);
-
-			formDiv.addPara("Faculty Information");
-
-			List form = formDiv.addList("form", List.TYPE_FORM);
-
-			Text fname = getText(form, "name", F_name, 50);		
-			Text fPictureURL = getText(form, "Picture URL", F_picurl, 100);			
-			Text fJobTitle = getText(form, "job title", F_jobTitle, 100);
-			Text fResearch = getText(form, "research", F_research, 100);
-			Text fAddress = getText(form,"address", F_address, 50);
-			Text fPhone = getText(form, "phone", F_phone, 12);
-			Text fEmail = getText(form, "email", F_email, 50);
-			Text fWebsite = getText(form, "website", F_website, 100);
-			Text fDegree = getText(form, "degree", F_degree, 100);
-			Text fEarnedFrom = getText(form, "earned from", F_earnedFrom, 100);
-			Text fDatesAttended = getText(form, "dates attended", F_datesAttended, 50);
-			Text fOrganization = getText(form, "organization", F_organization, 100);
-			Text fOrgJobTitle = getText(form, "forg job title", F_orgJobTitle, 100);
-			Text fdateWorked = getText(form, "date worked", F_orgJobTitle, 50);
-			Text fGrantTitle = getText(form, "grant title", F_grantTitle, 100);
-			Text fGrantLength = getText(form, "grant length", F_grantLength, 50);		
-			Text fGrantNumber = getText(form, "grant number", F_grantNumber, 50);
-			Text fOrcidURL = getText(form, "orcid", F_orcidURL,100);
-			Text fAcademiaURL = getText(form, "academia", F_academiaURL, 100);
-			Text fGooglePlusURL = getText(form, "google plus", F_googleplusURL, 100);
-			Text fLinkedinURL = getText(form, "linkedin",F_linkedinURL, 100);
-			Text fResearchGateURL = getText(form, "research gate", F_researchgateURL, 100);
-			Text fTwitterURL = getText(form, "twitter", F_twitterURL, 100);			
-
-			form.addItem().addHidden("isSent").setValue("true");
-			form.addItem().addButton("submit").setValue("Submit");
-
-			Division testPost = page.addDivision("testGet");
-			String s = "Not Posted";
-			try {
-				s = request.getParameter("param1");
-			} catch(Exception e) {
-				s = "error";
-			}
-			
-			//parse get variables
-			//currently adds them to to the bottom of page
-			
-			String 	formname = request.getParameter("name"), 
-			formPicURL = request.getParameter("Picture URL"),
-			formJobTitle = request.getParameter("job title"),
-			formResearch = request.getParameter("research"),
-			formAddr = request.getParameter("address"),
-			formPhone = request.getParameter("phone"),
-			formEmail = request.getParameter("email"),
-			formWebsite = request.getParameter("website"),
-			formDeg = request.getParameter("degree"),
-			formEarned = request.getParameter("earned from"),
-			formAttend = request.getParameter("dates attended"),
-			formOrg = request.getParameter("organization"),
-			formOrgJobTitle = request.getParameter("forg job title"),
-			formWorked = request.getParameter("date worked"),
-			formGrantTitle = request.getParameter("grant title"),
-			formGrantLen = request.getParameter("grant length"),
-			formGrantNum = request.getParameter("grant number"),
-			formOrcid = request.getParameter("orcid"),
-			formAcadem = request.getParameter("academia"),
-			formGP = request.getParameter("google plus"),
-			formLink = request.getParameter("linkedin"),
-			formResGate = request.getParameter("research gate"),
-			formTwitter = request.getParameter("twitter");
-	
-			String isSent = request.getParameter("isSent");
-
-			if (isSent != null && isSent.equals("true")) {
-				try {
-					Connection conn = null;
-					
-					Statement stmt = null;
-					
-					
-					conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
-					stmt = conn.createStatement();
-					
-					PreparedStatement prepStmt = conn.prepareStatement("INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (uniqueid=?, name=?, pictureurl=?, jobtitle=?, research=?, address=?, phone=?, email=?, website=?");
-					prepStmt.setString(1, pageUID);
-					prepStmt.setString(2, formname);
-					prepStmt.setString(3, formPicURL);
-					prepStmt.setString(4, formJobTitle);
-					prepStmt.setString(5, formResearch);
-					prepStmt.setString(6, formAddr);
-					prepStmt.setString(7, formPhone);
-					prepStmt.setString(8, formEmail);
-					prepStmt.setString(9, formWebsite);
-					
-					prepStmt.executeUpdate();
-					prepStmt.executeUpdate();
-					prepStmt.executeUpdate();
-					prepStmt.executeUpdate();
-					prepStmt.executeUpdate();
-					
-					
-					
-					/* Old vulnerable code
-					String insrtFac = "INSERT INTO faculty " + 
-					"(uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) " + 
-					" VALUES" + 
-					" ('" + pageUID + "', '" + formname + "', '" + formPicURL + "', '" + 
-					formJobTitle + "', '" + formResearch + "', '" + formAddr + "', '" + 
-					formPhone + "', '" + formEmail + "', '" + formWebsite + "');";
-					*/
-						
-					String insrtEmploy = "INSERT INTO employment"
-						+ "(uid, organization, jobtitle, daterange)"
-						+ " VALUES"
-						+ " ('" + pageUID + "', '" + formOrg + "', '" + formOrgJobTitle + "', '" + formWorked + "');"; 
-						
-					String insrtBio = "INSERT INTO bio"
-						+ "(uid, school, degree, dateearned)"
-						+ " VALUES"
-						+ " ('" + pageUID + "', '" + formEarned + "', '" + formDeg + "', '" + formAttend + "');";
-						
-					String insrtFund = "INSERT INTO funding" + 
-						"(uid, granttitle, grantlength, grantnumber)" + 
-						" VALUES" + " ('" + pageUID + "', '" + formGrantTitle + 
-						"', '" + formGrantLen + "', '" + formGrantNum + "');";
-						
-					String insrtLink = "INSERT INTO links"
-						+ "(uid, orcid, academia, googleplus, linkedin, researchgate, twitter)"
-						+ " VALUES"
-						+ " ('" + pageUID + "', '" + formOrcid + "', '" + formAcadem 
-						+ "', '" + formGP + "', '" + formLink 
-						+ "', '" + formResGate + "', '" + formTwitter + "');";
-					
-					
-					//stmt.executeUpdate(insrtFac);
-					stmt.executeUpdate(insrtEmploy);
-					stmt.executeUpdate(insrtBio);
-					stmt.executeUpdate(insrtFund);
-					stmt.executeUpdate(insrtLink);
-					
-					
-				} catch (SQLException se) {
-					
-				}
-			}  
-		}
+		else {
+			createForm(page);
+		}	
 	}
 }
