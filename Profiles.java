@@ -432,16 +432,38 @@ public class Profiles extends AbstractDSpaceTransformer {
 					Connection conn = null;
 					
 					Statement stmt = null;
-
+					
+					
 					conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
 					stmt = conn.createStatement();
 					
+					PreparedStatement prepStmt = conn.prepareStatement("INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (uniqueid=?, name=?, pictureurl=?, jobtitle=?, research=?, address=?, phone=?, email=?, website=?");
+					prepStmt.setString(1, pageUID);
+					prepStmt.setString(2, formname);
+					prepStmt.setString(3, formPicURL);
+					prepStmt.setString(4, formJobTitle);
+					prepStmt.setString(5, formResearch);
+					prepStmt.setString(6, formAddr);
+					prepStmt.setString(7, formPhone);
+					prepStmt.setString(8, formEmail);
+					prepStmt.setString(9, formWebsite);
+					
+					prepStmt.executeUpdate();
+					prepStmt.executeUpdate();
+					prepStmt.executeUpdate();
+					prepStmt.executeUpdate();
+					prepStmt.executeUpdate();
+					
+					
+					
+					/* Old vulnerable code
 					String insrtFac = "INSERT INTO faculty " + 
 					"(uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) " + 
 					" VALUES" + 
 					" ('" + pageUID + "', '" + formname + "', '" + formPicURL + "', '" + 
 					formJobTitle + "', '" + formResearch + "', '" + formAddr + "', '" + 
 					formPhone + "', '" + formEmail + "', '" + formWebsite + "');";
+					*/
 						
 					String insrtEmploy = "INSERT INTO employment"
 						+ "(uid, organization, jobtitle, daterange)"
@@ -464,11 +486,15 @@ public class Profiles extends AbstractDSpaceTransformer {
 						+ " ('" + pageUID + "', '" + formOrcid + "', '" + formAcadem 
 						+ "', '" + formGP + "', '" + formLink 
 						+ "', '" + formResGate + "', '" + formTwitter + "');";
-					stmt.executeUpdate(insrtFac);
+					
+					
+					//stmt.executeUpdate(insrtFac);
 					stmt.executeUpdate(insrtEmploy);
 					stmt.executeUpdate(insrtBio);
 					stmt.executeUpdate(insrtFund);
 					stmt.executeUpdate(insrtLink);
+					
+					
 				} catch (SQLException se) {
 					
 				}
