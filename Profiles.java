@@ -67,9 +67,9 @@ public class Profiles extends AbstractDSpaceTransformer {
 	//private form variables
 	private static final Message F_head =
         	message("Create Your Profile");
-    	private static final Message F_para1 =
+    private static final Message F_para1 =
         	message("Test2");
-    	private static final Message F_jobTitle =
+    private static final Message F_jobTitle =
         	message("Job Title");
 	private static final Message F_name =
 	        message("Name");
@@ -266,8 +266,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 				
 			}
 		
-		Division division = body.addDivision("profile", "primary");
-		division.setHead(name);
+		Division division = body.addDivision("profile", "primary"); // Do we need this?
 
 		// the divisions for the page
 		Division page = division.addDivision("page");
@@ -275,24 +274,44 @@ public class Profiles extends AbstractDSpaceTransformer {
 		//if user is in database, build profile
 		if (containsUser) {
 			
-			Division infoBar = division.addDivision("infoBar");
+			Division infoBar = page.addDivision("infoBar");
 			
 			Division picture = infoBar.addDivision("picture");
 			picture.addParaFigure("", "", pictureURL, "", "");
 
-			Division pinfo = page.addDivision("personalInformation");
-			Division info1 = pinfo.addDivision("info1");
-			info1.addPara(jobTitle);
-			info1.addPara(researchArea);
-
-			Division info2 = pinfo.addDivision("info2");
-			info2.addPara(address);
-			info2.addPara(phone);
-			info2.addPara(email);
-			info2.addPara(website);
-
-			// pictures
+			Division infoWithName = infoBar.addDivision("infoWithName");
 			
+			Division nameHeader = infoWithName.addDivision("nameHeader");
+			nameHeader.addPara(name);
+			
+			Division personalInfo = infoWithName.addDivision("personalInfo");
+			
+			Division infoLeftContainer = personalInfo.addDivision("infoLeftContainer");
+			infoLeftContainer.addPara(jobTitle);
+			infoLeftContainer.addPara(researchArea);
+
+			Division infoRightContainer = personalInfo.addDivision("infoRightContainer");
+			infoRightContainer.addPara(address);
+			infoRightContainer.addPara(phone);
+			infoRightContainer.addPara(email);
+			infoRightContainer.addPara(website);
+			
+			Division links = infoRightContainer.addDivision("links");
+			// orcid/
+			links.addParaFigure("", "", orcidLoc, orcid, "");
+			// adacemia.edu
+			links.addParaFigure("", "", academiaLoc, academia, "");
+			// google+
+			links.addParaFigure("", "", googlePlusLoc, googlePlus, "");
+			// linkedin
+			links.addParaFigure("", "", linkedinLoc, linkedin, "");
+			// researchgate
+			links.addParaFigure("", "", researchGateLoc, researchGate, "");
+			// twitter
+			links.addParaFigure("", "", twitterLoc, twitter, "");
+			
+			
+			// Biography part of the profile module
 			Division bios = page.addDivision("bios");
 			
 			Division academicContainer = bios.addDivision("academicContainer");
@@ -320,21 +339,6 @@ public class Profiles extends AbstractDSpaceTransformer {
 			fundingContent.addPara(grantTitle);
 			fundingContent.addPara(grantLength);
 			fundingContent.addPara(grantNumber);
-
-			Division links = page.addDivision("links");
-			// orcid/
-			links.addParaFigure("", "", orcidLoc, orcid, "");
-			// adacemia.edu
-			links.addParaFigure("", "", academiaLoc, academia, "");
-			// google+
-			links.addParaFigure("", "", googlePlusLoc, googlePlus, "");
-			// linkedin
-			links.addParaFigure("", "", linkedinLoc, linkedin, "");
-			// researchgate
-			links.addParaFigure("", "", researchGateLoc, researchGate, "");
-			// twitter
-			links.addParaFigure("", "", twitterLoc, twitter, "");
-
 		}
 
 		//if user is not in database, build form
