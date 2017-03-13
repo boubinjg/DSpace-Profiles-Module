@@ -378,7 +378,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 				s = "error";
 		}
 	}
-	public void checkPost()
+	public void checkPost(String pageUID)
 	{
 		String 	formname = request.getParameter("name"), 
 		formPicURL = request.getParameter("Picture URL"),
@@ -405,18 +405,17 @@ public class Profiles extends AbstractDSpaceTransformer {
 		formTwitter = request.getParameter("twitter");
 
 		String isSent = request.getParameter("isSent");
-
+		
 		if (isSent != null && isSent.equals("true")) {
 			try {
 				Connection conn = null;
 				
 				Statement stmt = null;
 				
-				
 				conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
 				stmt = conn.createStatement();
 				
-				PreparedStatement prepStmt = conn.prepareStatement("INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (uniqueid=?, name=?, pictureurl=?, jobtitle=?, research=?, address=?, phone=?, email=?, website=?");
+				/*PreparedStatement prepStmt = conn.prepareStatement("INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (uniqueid=?, name=?, pictureurl=?, jobtitle=?, research=?, address=?, phone=?, email=?, website=?");
 				prepStmt.setString(1, pageUID);
 				prepStmt.setString(2, formname);
 				prepStmt.setString(3, formPicURL);
@@ -431,18 +430,16 @@ public class Profiles extends AbstractDSpaceTransformer {
 				prepStmt.executeUpdate();
 				prepStmt.executeUpdate();
 				prepStmt.executeUpdate();
-				prepStmt.executeUpdate();
+				prepStmt.executeUpdate();*/
 				
-				
-				
-				/* Old vulnerable code
+				//Old vulnerable code
 				String insrtFac = "INSERT INTO faculty " + 
 				"(uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) " + 
 				" VALUES" + 
 				" ('" + pageUID + "', '" + formname + "', '" + formPicURL + "', '" + 
 				formJobTitle + "', '" + formResearch + "', '" + formAddr + "', '" + 
 				formPhone + "', '" + formEmail + "', '" + formWebsite + "');";
-				*/
+				
 					
 				String insrtEmploy = "INSERT INTO employment"
 					+ "(uid, organization, jobtitle, daterange)"
@@ -467,7 +464,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 					+ "', '" + formResGate + "', '" + formTwitter + "');";
 				
 				
-				//stmt.executeUpdate(insrtFac);
+				stmt.executeUpdate(insrtFac);
 				stmt.executeUpdate(insrtEmploy);
 				stmt.executeUpdate(insrtBio);
 				stmt.executeUpdate(insrtFund);
@@ -489,23 +486,21 @@ public class Profiles extends AbstractDSpaceTransformer {
 		//database connection
 	
 		Division division = body.addDivision("profile", "primary");
-		division.setHead(name);
+		division.setHead(pageUID);
 
 		// the divisions for the page
 		Division page = division.addDivision("page");
 
 		//check to see if post request was received:
-		checkPost();
+		checkPost(pageUID);
 
 		boolean containsUser = checkDB(pageUID);
 
 		//if user is in database, build profile
 		if (containsUser) 
 			createProfile(page);
-
 		//if user is not in database, build form
-		else {
-			createForm(page);
-		}	
+		else 
+			createForm(page);	
 	}
 }
