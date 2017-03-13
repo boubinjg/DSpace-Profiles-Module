@@ -486,7 +486,6 @@ public class Profiles extends AbstractDSpaceTransformer {
 		//database connection
 	
 		Division division = body.addDivision("profile", "primary");
-		division.setHead(pageUID);
 
 		// the divisions for the page
 		Division page = division.addDivision("page");
@@ -496,9 +495,10 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 		boolean containsUser = checkDB(pageUID);
 
-		//if user is in database, build profile
-		if (containsUser) 
+		//if user is in database, build profilea
+		if (containsUser) {
 			createProfile(page);
+		}
 		//if user is not in database, build form
 		else 
 			createForm(page);	
