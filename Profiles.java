@@ -355,13 +355,14 @@ public class Profiles extends AbstractDSpaceTransformer {
 		Text fPictureURL = getText(leftFacForm, "Picture URL", F_picurl, 100);			
 
 		Division rightFacultyInfo = facultyInfo.addDivision("rightFacultyInfo");
-		List rightFacForm = rightFacultyForm.addList("rightFacForm", List.TYPE_FORM);
+		List rightFacForm = rightFacultyInfo.addList("rightFacForm", List.TYPE_FORM);
 		Text fAddress = getText(rightFacForm,"address", F_address, 50);
 		Text fPhone = getText(rightFacForm, "phone", F_phone, 12);
 		Text fEmail = getText(rightFacForm, "email", F_email, 50);
 		Text fWebsite = getText(rightFacForm, "website", F_website, 100);
 		
-		
+		Division Form = page.addDivision("form");
+		List form = Form.addList("form", List.TYPE_FORM);
 		Text fDegree = getText(form, "degree", F_degree, 100);
 		Text fEarnedFrom = getText(form, "earned from", F_earnedFrom, 100);
 		Text fDatesAttended = getText(form, "dates attended", F_datesAttended, 50);
@@ -494,8 +495,14 @@ public class Profiles extends AbstractDSpaceTransformer {
 		String[] tok = req.split("/");
 		String pageUID = tok[2];
 
-		//database connection
-	
+		//create eperson
+		EPerson loggedin = context.getCurrentUser();
+		String eperson = null;
+		if(loggedin != null)
+			eperson = loggedin.getNetid();
+		else
+			eperson = "Not Logged In";
+
 		Division division = body.addDivision("profile", "primary");
 
 		// the divisions for the page
@@ -512,15 +519,14 @@ public class Profiles extends AbstractDSpaceTransformer {
 		}
 		//if user is not in database, build form
 		else 
-			createForm(page);
+		{
+			if(netid.equals(pageUID))
+				createForm(page);
+			else
+				page.addPara("Page for UID "+pageUID+" not yet created\n"+
+					     "Currently logged in as "+eperson);
+		}
 		
 		//eperson test
-		EPerson logedin = context.getCurrentUser();
-		String eperson = null;
-		if(loggedin != null)
-			eperson = loggedin.getEmail();
-		else
-			eperson = "NOT LOGGED IN";
-		body.addPara("EPERSON: " + eperson);
-	}
+		}
 }
