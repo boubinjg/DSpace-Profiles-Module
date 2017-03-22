@@ -13,7 +13,8 @@
  */
 
 package org.dspace.app.xmlui.aspect.artifactbrowser;
-
+//imports for eperson
+import org.dspace.eperson.EPerson;
 //imports for context path
 import java.sql.*;
 import org.apache.cocoon.environment.ObjectModelHelper;
@@ -67,9 +68,9 @@ public class Profiles extends AbstractDSpaceTransformer {
 	//private form variables
 	private static final Message F_head =
         	message("Create Your Profile");
-    private static final Message F_para1 =
+        private static final Message F_para1 =
         	message("Test2");
-    private static final Message F_jobTitle =
+        private static final Message F_jobTitle =
         	message("Job Title");
 	private static final Message F_name =
 	        message("Name");
@@ -501,6 +502,15 @@ public class Profiles extends AbstractDSpaceTransformer {
 		}
 		//if user is not in database, build form
 		else 
-			createForm(page);	
+			createForm(page);
+		
+		//eperson test
+		EPerson logedin = context.getCurrentUser();
+		String eperson = null;
+		if(loggedin != null)
+			eperson = loggedin.getEmail();
+		else
+			eperson = "NOT LOGGED IN";
+		body.addPara("EPERSON: " + eperson);
 	}
 }
