@@ -1,0 +1,8 @@
+Create 4 profiles java files
+Step 1:
+map each file in [dspace-src]/dspace-xmlui/src/main/resources/aspects/BrowseArtifacts/sitemap.xmap
+
+add a transformer for each page
+add pattern for each page in the pipeline
+
+
