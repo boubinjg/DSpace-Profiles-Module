@@ -338,31 +338,21 @@ public class Profiles extends AbstractDSpaceTransformer {
 	{	
 		Division formHeader = page.addDivision("formHeader");
 		formHeader.addPara(F_head);
-		
-		Division facultyInfoHeader = page.addDivision("facultyInfoHeader");
-		
-		Division facultyHeader = facultyInfoHeader.addDivision("facultyHeader");
-		facultyHeader.addPara("Faculty Information");
-		
 		// Build the item viewer division.
-		Division facultyInfo = facultyInfoHeader.addInteractiveDivision("form", request.getRequestURI(), Division.METHOD_POST, "primary");
+		Division formDiv = page.addInteractiveDivision("form", request.getRequestURI(), Division.METHOD_POST, "primary");
 
-		Division leftFacultyInfo = facultyInfo.addDivision("leftFacultyInfo");
-		List leftFacForm = leftFacultyInfo.addList("leftFacForm", List.TYPE_FORM);
-		Text fname = getText(leftFacForm, "name", F_name, 50);		
-		Text fJobTitle = getText(leftFacForm, "job title", F_jobTitle, 100);
-		Text fResearch = getText(leftFacForm, "research", F_research, 100);
-		Text fPictureURL = getText(leftFacForm, "Picture URL", F_picurl, 100);			
+		formDiv.addPara("Faculty Information");
 
-		Division rightFacultyInfo = facultyInfo.addDivision("rightFacultyInfo");
-		List rightFacForm = rightFacultyInfo.addList("rightFacForm", List.TYPE_FORM);
-		Text fAddress = getText(rightFacForm,"address", F_address, 50);
-		Text fPhone = getText(rightFacForm, "phone", F_phone, 12);
-		Text fEmail = getText(rightFacForm, "email", F_email, 50);
-		Text fWebsite = getText(rightFacForm, "website", F_website, 100);
-		
-		Division Form = page.addDivision("form");
-		List form = Form.addList("form", List.TYPE_FORM);
+		List form = formDiv.addList("form", List.TYPE_FORM);
+
+		Text fname = getText(form, "name", F_name, 50);		
+		Text fPictureURL = getText(form, "Picture URL", F_picurl, 100);			
+		Text fJobTitle = getText(form, "job title", F_jobTitle, 100);
+		Text fResearch = getText(form, "research", F_research, 100);
+		Text fAddress = getText(form,"address", F_address, 50);
+		Text fPhone = getText(form, "phone", F_phone, 12);
+		Text fEmail = getText(form, "email", F_email, 50);
+		Text fWebsite = getText(form, "website", F_website, 100);
 		Text fDegree = getText(form, "degree", F_degree, 100);
 		Text fEarnedFrom = getText(form, "earned from", F_earnedFrom, 100);
 		Text fDatesAttended = getText(form, "dates attended", F_datesAttended, 50);
