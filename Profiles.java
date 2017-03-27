@@ -520,13 +520,11 @@ public class Profiles extends AbstractDSpaceTransformer {
 		//if user is not in database, build form
 		else 
 		{
-			if(netid.equals(pageUID))
+			if(eperson.equals(pageUID))
 				createForm(page);
 			else
 				page.addPara("Page for UID "+pageUID+" not yet created\n"+
 					     "Currently logged in as "+eperson);
-		}
-		
-		//eperson test
-		}
+		}	
+	}
 }

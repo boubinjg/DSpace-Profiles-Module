@@ -1,0 +1,7 @@
+Create profile homepage
+-let people create their profile if they are logged in
+-if it already exists, let them edit their profile
+-directory of all created profiles
+
+Create install script
+Finalize documentation for the next group
