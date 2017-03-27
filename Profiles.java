@@ -310,6 +310,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		Division academicContainer = bios.addDivision("academicContainer");
 		Division employmentContainer = bios.addDivision("employmentContainer");
 		Division grantsContainer = bios.addDivision("grantsContainer");
+		Division publicationsContainer = bios.addDivision("publicationsContainer");
 		
 		// Set the headers of the bio containers
 		Division academicHeader = academicContainer.addDivision("academicHeader");
@@ -318,6 +319,8 @@ public class Profiles extends AbstractDSpaceTransformer {
 		employmentHeader.addPara("Employment");
 		Division grantsHeader = grantsContainer.addDivision("grantsHeader");
 		grantsHeader.addPara("Funding");
+		Division publicationsHeader = publicationsContainer.addDivision("publicationsHeader");
+		publicationsHeader.addPara("Publications");
 		
 		Division educationContent = academicContainer.addDivision("educationContent");
 		educationContent.addPara(school);
@@ -332,6 +335,8 @@ public class Profiles extends AbstractDSpaceTransformer {
 		fundingContent.addPara(grantTitle);
 		fundingContent.addPara(grantLength);
 		fundingContent.addPara(grantNumber);
+		
+		Division publicationsContent = publicationsContainer.addDivision("publicationsContent");
 	}
 
 	public void createForm(Division page) throws WingException
