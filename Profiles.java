@@ -425,11 +425,17 @@ public class Profiles extends AbstractDSpaceTransformer {
 					
 					Statement stmt = null;
 					
+					PreparedStatement prepStmt = null;
+					
 					
 					conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
 					stmt = conn.createStatement();
 					
-					PreparedStatement prepStmt = conn.prepareStatement("INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (uniqueid=?, name=?, pictureurl=?, jobtitle=?, research=?, address=?, phone=?, email=?, website=?");
+					
+					
+					String SQL = "INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					prepStmt = conn.prepareStatement(SQL);
+					
 					prepStmt.setString(1, pageUID);
 					prepStmt.setString(2, formname);
 					prepStmt.setString(3, formPicURL);
@@ -441,12 +447,6 @@ public class Profiles extends AbstractDSpaceTransformer {
 					prepStmt.setString(9, formWebsite);
 					
 					prepStmt.executeUpdate();
-					prepStmt.executeUpdate();
-					prepStmt.executeUpdate();
-					prepStmt.executeUpdate();
-					prepStmt.executeUpdate();
-					
-					
 					
 					/* Old vulnerable code
 					String insrtFac = "INSERT INTO faculty " + 
