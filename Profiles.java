@@ -423,6 +423,9 @@ public class Profiles extends AbstractDSpaceTransformer {
 					String SQL = "INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 					prepStmt = conn.prepareStatement(SQL);
 					
+					// Set auto-commit to false
+					conn.setAutoCommit(false);
+					
 					prepStmt.setString(1, pageUID);
 					prepStmt.setString(2, formname);
 					prepStmt.setString(3, formPicURL);
@@ -432,8 +435,16 @@ public class Profiles extends AbstractDSpaceTransformer {
 					prepStmt.setString(7, formPhone);
 					prepStmt.setString(8, formEmail);
 					prepStmt.setString(9, formWebsite);
+					prepStmt.addBatch();
 					
-					prepStmt.executeUpdate();
+					// Create an int[] to hold returned values
+					int[] count = prepStmt.executeBatch();
+					
+					 //Explicitly commit statements to apply changes
+					conn.commit();
+					
+					//prepStmt.executeUpdate();
+					
 				
 				//Old vulnerable code
 				/*
