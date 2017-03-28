@@ -337,6 +337,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		fundingContent.addPara(grantNumber);
 		
 		Division publicationsContent = publicationsContainer.addDivision("publicationsContent");
+		publicationsContent.addPara("publications");
 	}
 
 	public void createForm(Division page) throws WingException
