@@ -405,6 +405,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		formLink = request.getParameter("linkedin"),
 		formResGate = request.getParameter("research gate"),
 		formTwitter = request.getParameter("twitter");
+		String isSent = request.getParameter("isSent");
 
 			if (isSent != null && isSent.equals("true")) {
 				try {
@@ -479,7 +480,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 					+ "', '" + formResGate + "', '" + formTwitter + "');";
 				
 				
-				stmt.executeUpdate(insrtFac);
+				//stmt.executeUpdate(insrtFac);
 				stmt.executeUpdate(insrtEmploy);
 				stmt.executeUpdate(insrtBio);
 				stmt.executeUpdate(insrtFund);

@@ -52,7 +52,7 @@ public class ProfilesEdit extends AbstractDSpaceTransformer
     public static final Message T_para =
         message("xmlui.ArtifactBrowser.AboutPage.para");
  
-    private static Logger log = Logger.getLogger(AboutPage.class);
+    private static Logger log = Logger.getLogger(ProfilesEdit.class);
  
         /**
         * Add a page title and trail links.
