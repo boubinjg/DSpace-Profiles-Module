@@ -1,7 +1,44 @@
 Create profile homepage
+
 -let people create their profile if they are logged in
 -if it already exists, let them edit their profile
 -directory of all created profiles
 
 Create install script
 Finalize documentation for the next group
+
+
+profileManager:
+	create:
+	if the person isn't logged in
+		show a generic message
+	
+	If the person is logged in:
+		if they do have a profile:
+			Link to edit
+
+		if they don't have a profile:
+		Do form stuff
+		when form is submitted, redirect to profile
+	
+	Profile edit:
+		if they aren't logged in
+			redirect to login
+		If they don't have a profile
+			link to create
+		if they do have a profile
+			load the form, but with all boxes filled with current information
+			allow for the same functionality as create, but with full input boxes
+
+ProfilesHome:
+
+generic message
+If person is logged in:
+	if person has profile:
+		link to profile edit
+	else
+		link to profile create
+
+list of people
+
+
