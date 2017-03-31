@@ -42,6 +42,7 @@ import org.dspace.app.xmlui.wing.element.Body;
 import org.dspace.app.xmlui.wing.element.Division;
 import org.dspace.app.xmlui.wing.element.PageMeta;
 import org.dspace.app.xmlui.wing.element.Figure;
+import org.dspace.app.xmlui.wing.element.Para;
 import org.xml.sax.SAXException;
 import java.io.IOException;
 import java.io.Serializable;
@@ -122,6 +123,9 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 message("Twitter URL");
         private static final Message T_submit =
                 message("xmlui.ArtifactBrowser.ItemRequestForm.submit");
+	private static final Message T_link = 
+		message("Click Here To See Your Profile");
+
         //end formvariables
 
         //breadcrumb information
@@ -176,8 +180,9 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 return t;
         }
 
-	public void checkPost(String pageUID)
-        {
+	public boolean checkPost(String pageUID)
+        {	
+		boolean post = false;
                 String  formname = request.getParameter("name"),
                 formPicURL = request.getParameter("Picture URL"),
                 formJobTitle = request.getParameter("job title"),
@@ -204,6 +209,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 String isSent = request.getParameter("isSent");
 
                         if (isSent != null && isSent.equals("true")) {
+				post = true;
                                 try {
                                         Connection conn = null;
 
@@ -283,15 +289,17 @@ prepStmt.setString(4, formJobTitle);
 				stmt.executeUpdate(insrtLink);
 
                         } catch (SQLException se) {
-
+				post = false;
                         }
                 }
+		return post;
         }
 	public void createForm(Division page, boolean edit) throws WingException
         {
 	
                 Division formHeader = page.addDivision("formHeader");
-                if(edit)
+                formHeader.addPara(String.valueOf(edit));
+		if(edit)
 			formHeader.addPara(F_head_edit);
 		else
 			formHeader.addPara(F_head_create);
@@ -303,7 +311,7 @@ prepStmt.setString(4, formJobTitle);
 
                 List form = formDiv.addList("form", List.TYPE_FORM);
 		if(edit) {
-			Text fname = getText(form, "name", F_name, 50);
+			Text fname = getText(form, "name", F_name, 50,name);
                		Text fPictureURL = getText(form, "Picture URL", F_picurl, 100, pictureURL);
                 	Text fJobTitle = getText(form, "job title", F_jobTitle, 100, jobTitle);
                 	Text fResearch = getText(form, "research", F_research, 100, researchArea);
@@ -317,17 +325,17 @@ prepStmt.setString(4, formJobTitle);
                 	Text fOrganization = getText(form, "organization", F_organization, 100,organization);
                 	Text fOrgJobTitle = getText(form, "forg job title", F_orgJobTitle, 100,orgJobTitle);
                 	Text fdateWorked = getText(form, "date worked", F_orgJobTitle, 50,dateRange);
-                	Text fGrantTitle = getText(form, "grant title", F_grantTitle, 100,grandTitle);
+                	Text fGrantTitle = getText(form, "grant title", F_grantTitle, 100,grantTitle);
                 	Text fGrantLength = getText(form, "grant length", F_grantLength, 50,grantLength);
                 	Text fGrantNumber = getText(form, "grant number", F_grantNumber, 50,grantNumber);
                 	Text fOrcidURL = getText(form, "orcid", F_orcidURL,100,orcid);
                 	Text fAcademiaURL = getText(form, "academia", F_academiaURL, 100,academia);
-                	Text fGooglePlusURL = getText(form, "google plus", F_googleplusURL, 100,googlePls);
+                	Text fGooglePlusURL = getText(form, "google plus", F_googleplusURL, 100,googlePlus);
                 	Text fLinkedinURL = getText(form, "linkedin",F_linkedinURL, 100,linkedin);
                 	Text fResearchGateURL = getText(form, "research gate", F_researchgateURL, 100,researchGate);
                 	Text fTwitterURL = getText(form, "twitter", F_twitterURL, 100,twitter);
 		} else {
-                	Text fname = getText(form, "name", F_name, 50, "", name);
+                	Text fname = getText(form, "name", F_name, 50, "");
                		Text fPictureURL = getText(form, "Picture URL", F_picurl, 100, "");
                 	Text fJobTitle = getText(form, "job title", F_jobTitle, 100,"");
                 	Text fResearch = getText(form, "research", F_research, 100,"");
@@ -471,21 +479,18 @@ prepStmt.setString(4, formJobTitle);
                 Division page = division.addDivision("page");
 
                 //check to see if post request was received:
-                checkPost(pageUID);
-
-                boolean containsUser = checkDB(pageUID);
-	
-                if (containsUser) {
-                        //redirect to edit
-			page.addPara("edit");
-                }
-                //if user is not in database, build form
-                else
-                {
-                        if(eperson != null)
-                                createForm(page);
-                        else
-                                page.addPara("Not Logged In");
-                }
+		if(checkPost(eperson)) {
+			String link = "/xmlui/profiles/"+eperson;
+			Para profileLink = page.addPara(null, "Profile Link");
+			profileLink.addXref(link).addContent(T_link);
+		}
+                else {
+			boolean containsUser = checkDB(eperson);
+		
+ 	               	if(eperson != null)
+        	        	createForm(page, containsUser);
+                	else
+                      		page.addPara("Not Logged In");
+		}
         }
 }
