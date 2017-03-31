@@ -7,6 +7,12 @@ Create profile homepage
 Create install script
 Finalize documentation for the next group
 
+Profiles:
+	if users page exists
+		load page
+	else
+		"This page cannot be found"
+		Link to profile home
 
 profileManager:
 	create:
@@ -40,5 +46,3 @@ If person is logged in:
 		link to profile create
 
 list of people
-
-

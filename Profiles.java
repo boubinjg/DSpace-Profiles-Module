@@ -47,6 +47,7 @@ import org.dspace.app.xmlui.wing.element.Body;
 import org.dspace.app.xmlui.wing.element.Division;
 import org.dspace.app.xmlui.wing.element.PageMeta;
 import org.dspace.app.xmlui.wing.element.Figure;
+import org.dspace.app.xmlui.wing.element.Para;
 import org.xml.sax.SAXException;
 import java.io.IOException;
 import java.io.Serializable;
@@ -119,6 +120,9 @@ public class Profiles extends AbstractDSpaceTransformer {
 	private static final Message T_submit =
          	message("xmlui.ArtifactBrowser.ItemRequestForm.submit");
 	//end formvariables
+
+	private static final Message T_link = 
+		message("Back to Home Page");
 
 	//breadcrumb information
 	public static final Message T_dspace_home = message("xmlui.general.dspace_home");
@@ -532,9 +536,12 @@ public class Profiles extends AbstractDSpaceTransformer {
 		{
 			if(eperson.equals(pageUID))
 				createForm(page);
-			else
-				page.addPara("Page for UID "+pageUID+" not yet created\n"+
-					     "Currently logged in as "+eperson);
+			else {
+				page.addPara("Page for UID "+pageUID+" not yet created");
+				String link = "/xmlui/";
+				Para homeLink = page.addPara(null, "Home Link");
+				homeLink.addXref(link).addContent(T_link);
+			}
 		}	
 	}
 }

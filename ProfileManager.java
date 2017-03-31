@@ -61,7 +61,7 @@ import org.dspace.authorize.AuthorizeException;
  * @author Peter Dietz
  */
 
-public class ProfilesCreate extends AbstractDSpaceTransformer
+public class ProfileManager extends AbstractDSpaceTransformer
 {
  
 /**
