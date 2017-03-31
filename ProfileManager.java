@@ -68,8 +68,10 @@ public class ProfileManager extends AbstractDSpaceTransformer
  * Internationalization
  * 110523
  */
-   	static final Message F_head =
+   	static final Message F_head_create =
                 message("Create Your Profile");
+	static final Message F_head_edit =
+		message("Edit Your Profile");
         private static final Message F_para1 =
                 message("Test2");
         private static final Message F_jobTitle =
@@ -166,10 +168,10 @@ public class ProfileManager extends AbstractDSpaceTransformer
         * Add some basic contents
         */
 
-	public Text getText(List form, String textTitle, Message textLabel, int size) throws WingException {
+	public Text getText(List form, String textTitle, Message textLabel, int size, String value) throws WingException {
                 Text t = form.addItem().addText(textTitle);
                 t.setLabel(textLabel);
-                t.setValue(parameters.getParameter(textTitle, ""));
+                t.setValue(parameters.getParameter(textTitle, value));
                 t.setSize(0, size);
                 return t;
         }
@@ -285,42 +287,70 @@ prepStmt.setString(4, formJobTitle);
                         }
                 }
         }
-
-	public void createForm(Division page) throws WingException
+	public void createForm(Division page, boolean edit) throws WingException
         {
+	
                 Division formHeader = page.addDivision("formHeader");
-                formHeader.addPara(F_head);
+                if(edit)
+			formHeader.addPara(F_head_edit);
+		else
+			formHeader.addPara(F_head_create);
+
                 // Build the item viewer division.
                 Division formDiv = page.addInteractiveDivision("form", request.getRequestURI(), Division.METHOD_POST, "primary");
 
                 formDiv.addPara("Faculty Information");
 
                 List form = formDiv.addList("form", List.TYPE_FORM);
-
-                Text fname = getText(form, "name", F_name, 50);
-                Text fPictureURL = getText(form, "Picture URL", F_picurl, 100);
-                Text fJobTitle = getText(form, "job title", F_jobTitle, 100);
-                Text fResearch = getText(form, "research", F_research, 100);
-                Text fAddress = getText(form,"address", F_address, 50);
-                Text fPhone = getText(form, "phone", F_phone, 12);
-                Text fEmail = getText(form, "email", F_email, 50);
-                Text fWebsite = getText(form, "website", F_website, 100);
-                Text fDegree = getText(form, "degree", F_degree, 100);
-                Text fEarnedFrom = getText(form, "earned from", F_earnedFrom, 100);
-                Text fDatesAttended = getText(form, "dates attended", F_datesAttended, 50);
-                Text fOrganization = getText(form, "organization", F_organization, 100);
-                Text fOrgJobTitle = getText(form, "forg job title", F_orgJobTitle, 100);
-                Text fdateWorked = getText(form, "date worked", F_orgJobTitle, 50);
-                Text fGrantTitle = getText(form, "grant title", F_grantTitle, 100);
-                Text fGrantLength = getText(form, "grant length", F_grantLength, 50);
-                Text fGrantNumber = getText(form, "grant number", F_grantNumber, 50);
-                Text fOrcidURL = getText(form, "orcid", F_orcidURL,100);
-                Text fAcademiaURL = getText(form, "academia", F_academiaURL, 100);
-                Text fGooglePlusURL = getText(form, "google plus", F_googleplusURL, 100);
-                Text fLinkedinURL = getText(form, "linkedin",F_linkedinURL, 100);
-                Text fResearchGateURL = getText(form, "research gate", F_researchgateURL, 100);
-                Text fTwitterURL = getText(form, "twitter", F_twitterURL, 100);
-
+		if(edit) {
+			Text fname = getText(form, "name", F_name, 50);
+               		Text fPictureURL = getText(form, "Picture URL", F_picurl, 100, pictureURL);
+                	Text fJobTitle = getText(form, "job title", F_jobTitle, 100, jobTitle);
+                	Text fResearch = getText(form, "research", F_research, 100, researchArea);
+               		Text fAddress = getText(form,"address", F_address, 50,address);
+                	Text fPhone = getText(form, "phone", F_phone, 12,phone);
+                	Text fEmail = getText(form, "email", F_email, 50,email);
+                	Text fWebsite = getText(form, "website", F_website, 100,website);
+                	Text fDegree = getText(form, "degree", F_degree, 100,degreeAndAttended);
+                	Text fEarnedFrom = getText(form, "earned from", F_earnedFrom, 100,degreeAndAttended);
+                	Text fDatesAttended = getText(form, "dates attended", F_datesAttended, 50,degreeAndAttended);
+                	Text fOrganization = getText(form, "organization", F_organization, 100,organization);
+                	Text fOrgJobTitle = getText(form, "forg job title", F_orgJobTitle, 100,orgJobTitle);
+                	Text fdateWorked = getText(form, "date worked", F_orgJobTitle, 50,dateRange);
+                	Text fGrantTitle = getText(form, "grant title", F_grantTitle, 100,grandTitle);
+                	Text fGrantLength = getText(form, "grant length", F_grantLength, 50,grantLength);
+                	Text fGrantNumber = getText(form, "grant number", F_grantNumber, 50,grantNumber);
+                	Text fOrcidURL = getText(form, "orcid", F_orcidURL,100,orcid);
+                	Text fAcademiaURL = getText(form, "academia", F_academiaURL, 100,academia);
+                	Text fGooglePlusURL = getText(form, "google plus", F_googleplusURL, 100,googlePls);
+                	Text fLinkedinURL = getText(form, "linkedin",F_linkedinURL, 100,linkedin);
+                	Text fResearchGateURL = getText(form, "research gate", F_researchgateURL, 100,researchGate);
+                	Text fTwitterURL = getText(form, "twitter", F_twitterURL, 100,twitter);
+		} else {
+                	Text fname = getText(form, "name", F_name, 50, "", name);
+               		Text fPictureURL = getText(form, "Picture URL", F_picurl, 100, "");
+                	Text fJobTitle = getText(form, "job title", F_jobTitle, 100,"");
+                	Text fResearch = getText(form, "research", F_research, 100,"");
+               		Text fAddress = getText(form,"address", F_address, 50,"");
+                	Text fPhone = getText(form, "phone", F_phone, 12,"");
+                	Text fEmail = getText(form, "email", F_email, 50,"");
+                	Text fWebsite = getText(form, "website", F_website, 100,"");
+                	Text fDegree = getText(form, "degree", F_degree, 100,"");
+                	Text fEarnedFrom = getText(form, "earned from", F_earnedFrom, 100,"");
+                	Text fDatesAttended = getText(form, "dates attended", F_datesAttended, 50,"");
+                	Text fOrganization = getText(form, "organization", F_organization, 100,"");
+                	Text fOrgJobTitle = getText(form, "forg job title", F_orgJobTitle, 100,"");
+                	Text fdateWorked = getText(form, "date worked", F_orgJobTitle, 50,"");
+                	Text fGrantTitle = getText(form, "grant title", F_grantTitle, 100,"");
+                	Text fGrantLength = getText(form, "grant length", F_grantLength, 50,"");
+                	Text fGrantNumber = getText(form, "grant number", F_grantNumber, 50,"");
+                	Text fOrcidURL = getText(form, "orcid", F_orcidURL,100,"");
+                	Text fAcademiaURL = getText(form, "academia", F_academiaURL, 100,"");
+                	Text fGooglePlusURL = getText(form, "google plus", F_googleplusURL, 100,"");
+                	Text fLinkedinURL = getText(form, "linkedin",F_linkedinURL, 100,"");
+                	Text fResearchGateURL = getText(form, "research gate", F_researchgateURL, 100,"");
+                	Text fTwitterURL = getText(form, "twitter", F_twitterURL, 100,"");
+		}
                 form.addItem().addHidden("isSent").setValue("true");
                 form.addItem().addButton("submit").setValue("Submit");
 

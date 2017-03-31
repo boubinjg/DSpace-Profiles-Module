@@ -21,20 +21,15 @@ profileManager:
 	
 	If the person is logged in:
 		if they do have a profile:
-			Link to edit
-
+		Profile edit:
+			if they do have a profile
+				load the form, but with all boxes filled with current information
+				allow for the same functionality as create, but with full input boxes
+		
 		if they don't have a profile:
 		Do form stuff
 		when form is submitted, redirect to profile
 	
-	Profile edit:
-		if they aren't logged in
-			redirect to login
-		If they don't have a profile
-			link to create
-		if they do have a profile
-			load the form, but with all boxes filled with current information
-			allow for the same functionality as create, but with full input boxes
 
 ProfilesHome:
 
