@@ -5,4 +5,23 @@ map each file in [dspace-src]/dspace-xmlui/src/main/resources/aspects/BrowseArti
 add a transformer for each page
 add pattern for each page in the pipeline
 
+<map:transformer name="Profiles" src="org.dspace.app.xmlui.aspect.artifactbrowser.Profiles"/>
+<map:transformer name="ProfileManager" src="org.dspace.app.xmlui.aspect.artifactbrowser.ProfileManager"/>
+<map:transformer name="ProfilesHome" src="org.dspace.app.xmlui.aspect.artifactbrowser.ProfilesHome"/>
+
+ 	    <map:match pattern="profiles/ProfileManager">
+                <map:transform type="ProfileManager"/>
+                <map:serialize type="xml"/>
+            </map:match>        
+            
+            <map:match pattern="profiles">
+                <map:transform type="ProfilesHome"/>
+                <map:serialize type="xml"/>
+            </map:match>
+        
+
+            <map:match pattern="profiles/*">
+                <map:transform type="Profiles"/>
+                <map:serialize type="xml"/>
+            </map:match>
 

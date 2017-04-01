@@ -57,7 +57,7 @@ import org.apache.excalibur.source.impl.validity.NOPValidity;
 import org.dspace.app.xmlui.utils.UIException;
 import org.dspace.app.xmlui.wing.Message;
 import org.dspace.authorize.AuthorizeException;
-
+import java.util.*;
 /**
  * Profiles pages
  *
@@ -190,42 +190,38 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		}
 		return containsUser;
 	}
-
+	public Hashtable<String, ArrayList<String>> generateHash()
+	{
+		return new Hashtable<String, ArrayList<String>>();
+	}
 	public void addBody(Body body) throws SAXException, WingException {
 
-		//parses the request to obtain user information
 		request = ObjectModelHelper.getRequest(objectModel);
-		String req = request.getPathInfo();
-		String[] tok = req.split("/");
-		String pageUID = tok[2];
-
-		//create eperson
-		EPerson loggedin = context.getCurrentUser();
-		String eperson = null;
-		if(loggedin != null)
-			eperson = loggedin.getNetid();
-		else
-			eperson = "Not Logged In";
-
-		Division division = body.addDivision("profile", "primary");
+		String req = null;
+		String linkLetter = "A";
+		try{
+			req = request.getParameter("letter").toUpperCase();
+			if(req.length() == 1)
+				linkLetter = req;
+		}catch(Exception e) {}
+	
+		Division division = body.addDivision("profileHome", "primary");
 
 		// the divisions for the page
 		Division page = division.addDivision("page");
+		
+		//top text
+		Division text = division.addDivision("test");
+		text.addPara("This is the Scholar Profiles Home Page");
+		text.addPara("Use the links below to navigate to a scholar's profile");
 
-		//check to see if post request was received:
-
-		boolean containsUser = checkDB(pageUID);
-		page.addPara("This is the DSpace Profile Homepage");
-		//if user is in database, build profilea
-		if (containsUser) {
-			page.addPara("link to edit");
-		}
-		//if user is not in database, build form
-		else 
-		{
-			if(eperson.equals(pageUID)){
-				page.addPara("link to page");
-			}
-		}	
+		//thedivision that holds the links
+		Division links = page.addDivision("links");
+		
+		//Hash Table 
+		Hashtable<String, ArrayList<String>> usersByAlpha = new Hashtable<String, ArrayList<String>>();
+		usersByAlpha = generateHash();
+	
+		page.addPara(linkLetter);
 	}
 }

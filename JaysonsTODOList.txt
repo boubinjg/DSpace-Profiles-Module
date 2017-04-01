@@ -5,16 +5,6 @@ Make form (ProfileManager) properly submit:
 change form degree variables so they can be edited
 
 
-
-move the aspect to Eperson because it's more appropriate
-
-change the path to /xmlui/ScholarProfiles/ because to differentiate from dspace
-profile system
-
-
-
-
-
 Large tasks:
 
 Create a profile homepage which indexes all of the profiles in the database
