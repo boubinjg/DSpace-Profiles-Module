@@ -173,6 +173,12 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 	public boolean checkDB(String pageUID)
 	{
+		uniqueId = ""; name = ""; pictureURL = ""; jobTitle = ""; researchArea = "Research: "; 
+		address = "Address: "; phone = "Phone: "; email = "Email: "; website = "Personal Website: ";
+        	school = ""; degreeAndAttended = ""; grantTitle = "Grant Title: "; grantLength = "Grant Length: "; 
+		grantNumber = "Grant Number: "; orcid = ""; academia = ""; googlePlus = ""; linkedin = ""; 
+		researchGate = ""; twitter = ""; organization = ""; orgJobTitle = ""; dateRange = "";
+
 		boolean containsUser = false;
 		try {
 			Connection conn = null;
@@ -344,7 +350,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		String req = request.getPathInfo();
 		String[] tok = req.split("/");
 		String pageUID = tok[2];
-
+	
 		//create eperson
 		EPerson loggedin = context.getCurrentUser();
 		String eperson = null;
@@ -364,7 +370,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		if (containsUser) {
 			createProfile(page);
 			if(eperson.equals(pageUID)) {
-				String link = "/xmlui/profiles/ProfileManager/";
+				String link = "/xmlui/profiles/ProfileManager";
 				Para editLink = page.addPara(null, "Edit Link");
 				editLink.addXref(link).addContent(T_edit_link);
 			}

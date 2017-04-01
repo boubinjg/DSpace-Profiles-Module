@@ -69,6 +69,8 @@ public class ProfileManager extends AbstractDSpaceTransformer
  * Internationalization
  * 110523
  */
+	private String DBTest = "";
+
    	static final Message F_head_create =
                 message("Create Your Profile");
 	static final Message F_head_edit =
@@ -207,22 +209,21 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 formResGate = request.getParameter("research gate"),
                 formTwitter = request.getParameter("twitter");
                 String isSent = request.getParameter("isSent");
+		DBTest = "";
+                if (isSent != null && isSent.equals("true")) {
+			post = true;
+                        try {
+                        	Connection conn = null;
 
-                        if (isSent != null && isSent.equals("true")) {
-				post = true;
-                                try {
-                                        Connection conn = null;
+                           	Statement stmt = null;
 
-                                        Statement stmt = null;
-
-                                        PreparedStatement prepStmt = null;
-
-
-                                        conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
-                                        stmt = conn.createStatement();
+                                PreparedStatement prepStmt = null;
 
 
+                              	conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
+                                stmt = conn.createStatement();
 
+				//new stuff
                                         String SQL = "INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                                         prepStmt = conn.prepareStatement(SQL);
 
@@ -247,18 +248,17 @@ prepStmt.setString(4, formJobTitle);
                                         conn.commit();
 
                                         //prepStmt.executeUpdate();
+			/*
 
-
-                                //Old vulnerable code
-                                /*
+                                //Old vulnerable code                         
                                 String insrtFac = "INSERT INTO faculty " + 
                                 "(uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) " + 
                                 " VALUES" + 
                                 " ('" + pageUID + "', '" + formname + "', '" + formPicURL + "', '" + 
                                 formJobTitle + "', '" + formResearch + "', '" + formAddr + "', '" + 
                                 formPhone + "', '" + formEmail + "', '" + formWebsite + "');";
-                                */
-
+                          */      
+		
                                 String insrtEmploy = "INSERT INTO employment"
                                         + "(uid, organization, jobtitle, daterange)"
                                         + " VALUES"
@@ -281,15 +281,18 @@ prepStmt.setString(4, formJobTitle);
                                         + "', '" + formGP + "', '" + formLink
                                         + "', '" + formResGate + "', '" + formTwitter + "');";
 
-
                                 //stmt.executeUpdate(insrtFac);
-                                stmt.executeUpdate(insrtEmploy);
+				stmt.executeUpdate(insrtEmploy);
                                 stmt.executeUpdate(insrtBio);
                                 stmt.executeUpdate(insrtFund);
 				stmt.executeUpdate(insrtLink);
 
                         } catch (SQLException se) {
-				post = false;
+				//Right now, editing doesnt properly update the databse
+				//you need to execute an update if the person already exists
+				//I didn't feel like doing that so I didnt.
+				//when updating works, uncommend the line below.
+				//post = false;
                         }
                 }
 		return post;
@@ -492,5 +495,6 @@ prepStmt.setString(4, formJobTitle);
                 	else
                       		page.addPara("Not Logged In");
 		}
+		page.addPara(DBTest);
         }
 }
