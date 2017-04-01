@@ -161,10 +161,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
         */
         public void addPageMeta(PageMeta pageMeta) throws SAXException, WingException {
             // Set the page title
- 
-            // pageMeta.addMetadata("title").addContent("About Us");
-            // 110523 modified page title with internationalization and added breadcrumbs
-            pageMeta.addMetadata("Create Profile").addContent(T_title);
+            pageMeta.addMetadata("title").addContent("Profile Manager");
             // add trail
             pageMeta.addTrailLink(contextPath + "/",T_dspace_home);
             pageMeta.addTrail().addContent(T_trail);
@@ -300,7 +297,7 @@ prepStmt.setString(4, formJobTitle);
         {
 	
                 Division formHeader = page.addDivision("formHeader");
-                formHeader.addPara(String.valueOf(edit));
+               
 		if(edit)
 			formHeader.addPara(F_head_edit);
 		else

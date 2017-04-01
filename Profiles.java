@@ -161,7 +161,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		// Set the page title
 
 		// breadcrumbs
-		pageMeta.addMetadata("Title").addContent(T_title);
+		pageMeta.addMetadata("title").addContent("Scholar Profiles");
 		// add trail
 		pageMeta.addTrailLink(contextPath + "/", T_dspace_home);
 		pageMeta.addTrail().addContent(T_trail);

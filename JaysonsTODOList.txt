@@ -2,32 +2,29 @@ Make form (ProfileManager) properly submit:
 	make database submit everything for creation, currently only prepared statements work
 	make database update things on the form, again using prep-statements 
 
-//get rid of trashy test strings in the webapp
-//(form, possibly profile)
+change form degree variables so they can be edited
 
-//make pictures links relative paths
+
 
 move the aspect to Eperson because it's more appropriate
 
-change the path to /xmlui/ScholarlyProfiles/ because to differentiate from dspace
+change the path to /xmlui/ScholarProfiles/ because to differentiate from dspace
 profile system
 
-change LDAP authentication to only allow professors to make profiles.
-(test with brinkman)
 
-Make page headers say something besides "Untitled"
 
-//Make profile not found say a generic message (remove uid stuff)
 
-change form degree variables so they can be edited
 
 Large tasks:
 
 Create a profile homepage which indexes all of the profiles in the database
 
-create an install script (maybe one that uses ANT) (may not be possible)
+create an install script/instructions (maybe one that uses ANT) (may not be possible)
 
 Create documentation for Next group
+
+change LDAP authentication to only allow professors to make profiles.
+(test with brinkman)
 
 
 //User Views:
