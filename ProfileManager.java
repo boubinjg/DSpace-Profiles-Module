@@ -209,7 +209,6 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 formResGate = request.getParameter("research gate"),
                 formTwitter = request.getParameter("twitter");
                 String isSent = request.getParameter("isSent");
-		DBTest = "";
                 if (isSent != null && isSent.equals("true")) {
 			post = true;
                         try {
@@ -365,7 +364,6 @@ prepStmt.setString(4, formJobTitle);
                 form.addItem().addHidden("isSent").setValue("true");
                 form.addItem().addButton("submit").setValue("Submit");
 
-                Division testPost = page.addDivision("testGet");
                 String s = "Not Posted";
                 try {
                         s = request.getParameter("param1");
@@ -493,8 +491,7 @@ prepStmt.setString(4, formJobTitle);
  	               	if(eperson != null)
         	        	createForm(page, containsUser);
                 	else
-                      		page.addPara("Not Logged In");
+                      		page.addPara("Please Log In To Create And Edit Your Profile");
 		}
-		page.addPara(DBTest);
         }
 }

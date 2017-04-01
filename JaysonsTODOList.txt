@@ -2,10 +2,10 @@ Make form (ProfileManager) properly submit:
 	make database submit everything for creation, currently only prepared statements work
 	make database update things on the form, again using prep-statements 
 
-get rid of trashy test strings in the webapp
-(form, possibly profile)
+//get rid of trashy test strings in the webapp
+//(form, possibly profile)
 
-make pictures links relative paths
+//make pictures links relative paths
 
 move the aspect to Eperson because it's more appropriate
 
@@ -17,6 +17,9 @@ change LDAP authentication to only allow professors to make profiles.
 
 Make page headers say something besides "Untitled"
 
+//Make profile not found say a generic message (remove uid stuff)
+
+change form degree variables so they can be edited
 
 Large tasks:
 

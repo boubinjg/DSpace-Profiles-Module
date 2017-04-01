@@ -136,11 +136,11 @@ public class Profiles extends AbstractDSpaceTransformer {
 	public static final String databasePassword = "capstone";
 	//image location information
 	public static final String orcidLoc = "/xmlui/themes/Mirage/images/orcid-logo.png";
-	public static final String academiaLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/academia-logo.png";
-	public static final String googlePlusLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/google-plus-logo.png";
-	public static final String linkedinLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/linkedin-logo.png";
-	public static final String researchGateLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/researchgate-logo.png";
-	public static final String twitterLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/twitter-logo.png";
+	public static final String academiaLoc = "/xmlui/themes/Mirage/images/academia-logo.png";
+	public static final String googlePlusLoc = "/xmlui/themes/Mirage/images/google-plus-logo.png";
+	public static final String linkedinLoc = "/xmlui/themes/Mirage/images/linkedin-logo.png";
+	public static final String researchGateLoc = "/xmlui/themes/Mirage/images/researchgate-logo.png";
+	public static final String twitterLoc = "/xmlui/themes/Mirage/images/twitter-logo.png";
 
 	private static Logger log = Logger.getLogger(Profiles.class);
 
@@ -375,7 +375,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 				editLink.addXref(link).addContent(T_edit_link);
 			}
 		} else {
-			page.addPara("Page for UID "+pageUID+" not yet created");
+			page.addPara("This Profile Does Not Exist");
 			String link = "/xmlui/";
 			Para homeLink = page.addPara(null, "Home Link");
 			homeLink.addXref(link).addContent(T_link);
