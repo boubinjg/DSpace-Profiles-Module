@@ -47,6 +47,7 @@ import org.dspace.app.xmlui.wing.element.Body;
 import org.dspace.app.xmlui.wing.element.Division;
 import org.dspace.app.xmlui.wing.element.PageMeta;
 import org.dspace.app.xmlui.wing.element.Figure;
+import org.dspace.app.xmlui.wing.element.Para;
 import org.xml.sax.SAXException;
 import java.io.IOException;
 import java.io.Serializable;
@@ -243,7 +244,7 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		Division page = division.addDivision("page");
 		
 		//top text
-		Division text = division.addDivision("test");
+		Division text = page.addDivision("test");
 		text.addPara("This is the Scholar Profiles Home Page");
 		text.addPara("Use the links below to navigate to a scholar's profile");
 
@@ -260,6 +261,13 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		for(LinkData usr : users) {
 			Para scholarLink = scholarList.addPara(null, "page link");
 			scholarLink.addXref(link + usr.uid).addContent(usr.name);
+		}
+
+		Division editLink = page.addDivision("editlink");
+		EPerson loggedin = context.getCurrentUser();
+		if(loggedin != null) {
+			Para edit = editLink.addPara(null, "edit link");
+			edit.addXref("/xmlui/scholarprofiles/profilemanager").addContent("Edit or Create Profile");
 		}
 	}
 }

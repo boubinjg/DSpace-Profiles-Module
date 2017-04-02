@@ -4,10 +4,16 @@ Make form (ProfileManager) properly submit:
 
 change form degree variables so they can be edited
 
+add first/last names to database and form to replace the name field
 
-Large tasks:
+add dummy accounts to database
 
-Create a profile homepage which indexes all of the profiles in the database
+add getlinks/css to scholarProfiles homepage
+
+
+
+
+After capstone presentations tasks:
 
 create an install script/instructions (maybe one that uses ANT) (may not be possible)
 
@@ -15,6 +21,7 @@ Create documentation for Next group
 
 change LDAP authentication to only allow professors to make profiles.
 (test with brinkman)
+(dspace can't do this alone so it may have to be Miami specific)
 
 
 //User Views:

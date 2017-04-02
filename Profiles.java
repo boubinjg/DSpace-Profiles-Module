@@ -376,7 +376,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			}
 		} else {
 			page.addPara("This Profile Does Not Exist");
-			String link = "/xmlui/";
+			String link = "/xmlui/scholarprofiles";
 			Para homeLink = page.addPara(null, "Home Link");
 			homeLink.addXref(link).addContent(T_link);
 		}	
