@@ -94,7 +94,7 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		// Set the page title
 
 		// breadcrumbs
-		pageMeta.addMetadata("Title").addContent(T_title);
+		pageMeta.addMetadata("title").addContent("Scholar Profiles Homepage");
 		// add trail
 		pageMeta.addTrailLink(contextPath + "/", T_dspace_home);
 		pageMeta.addTrail().addContent(T_trail);
@@ -190,9 +190,41 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		}
 		return containsUser;
 	}
-	public Hashtable<String, ArrayList<String>> generateHash()
+	public class LinkData{
+		public String uid, name;
+		public LinkData(String u, String n) {
+			uid = u;
+			name = n;
+		}
+	}
+	public ArrayList<LinkData> generateTable(String linkLetter)
 	{
-		return new Hashtable<String, ArrayList<String>>();
+		
+		ArrayList<LinkData> ret = new ArrayList<LinkData>();
+		
+		try{
+			Connection conn = null;
+			Statement stmt = null;
+			
+			conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
+			stmt = conn.createStatement();
+			
+			String sql = "SELECT uniqueid, name FROM faculty";
+			ResultSet rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				//put things into arrayList by uniqueid
+				String uid = rs.getString("uniqueid");
+				if(uid.toUpperCase().substring(0,1).equals(linkLetter)) {
+					LinkData l = new LinkData(uid, rs.getString("name"));
+					ret.add(l);
+				}
+			}
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			ret = new ArrayList<LinkData>();
+		}
+		return ret;
 	}
 	public void addBody(Body body) throws SAXException, WingException {
 
@@ -219,9 +251,15 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		Division links = page.addDivision("links");
 		
 		//Hash Table 
-		Hashtable<String, ArrayList<String>> usersByAlpha = new Hashtable<String, ArrayList<String>>();
-		usersByAlpha = generateHash();
+		ArrayList<LinkData> users = new ArrayList<LinkData>();
+		users = generateTable(linkLetter);
 	
-		page.addPara(linkLetter);
+		Division scholarList = page.addDivision("scholarList");
+		//add links to page
+		String link = "/xmlui/scholarprofiles/";
+		for(LinkData usr : users) {
+			Para scholarLink = scholarList.addPara(null, "page link");
+			scholarLink.addXref(link + usr.uid).addContent(usr.name);
+		}
 	}
 }
