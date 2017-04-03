@@ -338,9 +338,6 @@ public class Profiles extends AbstractDSpaceTransformer {
 		fundingContent.addPara(grantLength);
 		fundingContent.addPara(grantNumber);
 		
-		Division publicationsContent = publicationsContainer.addDivision("publicationsContent");
-		publicationsContent.addPara("publications");
-	}
 
 
 	public void addBody(Body body) throws SAXException, WingException {
