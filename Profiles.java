@@ -321,8 +321,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		employmentHeader.addPara("Employment");
 		Division grantsHeader = grantsContainer.addDivision("grantsHeader");
 		grantsHeader.addPara("Funding");
-		Division publicationsHeader = publicationsContainer.addDivision("publicationsHeader");
-		publicationsHeader.addPara("Publications");
+		
 		
 		Division educationContent = academicContainer.addDivision("educationContent");
 		educationContent.addPara(school);
@@ -338,8 +337,13 @@ public class Profiles extends AbstractDSpaceTransformer {
 		fundingContent.addPara(grantLength);
 		fundingContent.addPara(grantNumber);
 		
+<<<<<<< HEAD
 
 	}
+=======
+                Division homePageLink = page.addDivision("homePageLink");
+
+>>>>>>> d6faac52c08f91bb5790f6f7973a4567ee1d8698
 	public void addBody(Body body) throws SAXException, WingException {
 
 		//parses the request to obtain user information
