@@ -274,7 +274,5 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 			Para scholarLink = scholarList.addPara(null, "page link");
 			scholarLink.addXref(link + usr.uid).addContent(usr.name);
 		}
-
-
 	}
 }
