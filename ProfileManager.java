@@ -220,32 +220,78 @@ public class ProfileManager extends AbstractDSpaceTransformer
                                 stmt = conn.createStatement();
 
 				//new stuff
-                                        String SQL = "INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                                        prepStmt = conn.prepareStatement(SQL);
+                                String SQL = "INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				prepStmt = conn.prepareStatement(SQL);
 
-                                        // Set auto-commit to false
-                                        conn.setAutoCommit(false);
+				// Set auto-commit to false
+				conn.setAutoCommit(false);
 
-                                        prepStmt.setString(1, pageUID);
-                                        prepStmt.setString(2, formname);
-                                        prepStmt.setString(3, formPicURL);
-prepStmt.setString(4, formJobTitle);
-                                        prepStmt.setString(5, formResearch);
-                                        prepStmt.setString(6, formAddr);
-                                        prepStmt.setString(7, formPhone);
-                                        prepStmt.setString(8, formEmail);
-                                        prepStmt.setString(9, formWebsite);
-                                        prepStmt.addBatch();
+				prepStmt.setString(1, pageUID);
+				prepStmt.setString(2, formname);
+				prepStmt.setString(3, formPicURL);
+				prepStmt.setString(4, formJobTitle);
+				prepStmt.setString(5, formResearch);
+				prepStmt.setString(6, formAddr);
+				prepStmt.setString(7, formPhone);
+				prepStmt.setString(8, formEmail);
+				prepStmt.setString(9, formWebsite);
+				prepStmt.addBatch();
 
-                                        // Create an int[] to hold returned values
-                                        int[] count = prepStmt.executeBatch();
+			        // Create an int[] to hold returned values
+                                int[] count = prepStmt.executeBatch();
 
-                                         //Explicitly commit statements to apply changes
-                                        conn.commit();
+                                //Explicitly commit statements to apply changes
+                                conn.commit();
+                                prepStmt.executeUpdate();
+			
+				SQL = "INSERT INTO employment (uid, organization, jobtitle, daterange) VALUES (?,?,?,?)";
+				prepStmt = conn.prepareStatement(SQL);
+				conn.setAutoCommit(false);
+				prepStmt.setString(1, pageUID);
+				prepStmt.setString(2, formOrg);
+				prepStmt.setString(3, formOrgJobTitle);
+				prepStmt.setString(4, formWorked);
+				prepStmt.addBatch();
+				count = prepStmt.executeBatch();
+				conn.commit();
+				prepStmt.executeUpdate();
 
-                                        //prepStmt.executeUpdate();
-			/*
+				SQL = "INSERT INTO bio (uid, school, degre, dateearned) VALUES (?,?,?,?)";
+				prepStmt = conn.prepareStatement(SQL);
+				conn.setAutoCommit(false);
+				prepStmt.setString(1,pageUID);
+				prepStmt.setString(2,formEarned);
+				prepStmt.setString(3,formDeg);
+				prepStmt.setString(4,formAttend);
+				count = prepStmt.executeBatch();
+				conn.commit();
+				prepStmt.executeUpdate();
+				
+				String SQL = "INSERT INTO funding (uid, granttitle, grandlength, grantnumber) VALUES (?,?,?,?)";
+				prepStmt = conn.prepareStatement(SQL);
+				conn.setAutoCommit(false);
+				prepStmt.setString(1,pageUID);
+				prepStmt.setString(2,formGrantTitle);
+				prepStmt.setString(3,formGrantLen);
+				prepStmt.setString(4,formGrantNum);
+				count = prepStmt.executeBatch();
+				conn.commit();
+				prepStmt.executeUpdate();
+				
+				String SQL = "INSERT INTO links (uid, orcid, academia, googleplus, linkedin, researchgate, twitter) VALUES (?,?,?,?,?,?,?)";
+				prepStmt = conn.prepareStatement(SQL);
+				prepStmt.setString(1,pageUID);
+				prepStmt.setString(2,formOrcid);
+				prepStmt.setString(3,formAcadem);
+				prepStmt.setString(4,formGP);
+				prepStmt.setString(5,formLink);
+				prepStmt.setString(6,formResGate);
+				prepStmt.setString(7,formTwitter);
+				count=prepStmt.executeBatch();
+				conn.commit();
+				prepStmt.executeUpdate();
 
+				/*
                                 //Old vulnerable code                         
                                 String insrtFac = "INSERT INTO faculty " + 
                                 "(uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) " + 
@@ -253,18 +299,18 @@ prepStmt.setString(4, formJobTitle);
                                 " ('" + pageUID + "', '" + formname + "', '" + formPicURL + "', '" + 
                                 formJobTitle + "', '" + formResearch + "', '" + formAddr + "', '" + 
                                 formPhone + "', '" + formEmail + "', '" + formWebsite + "');";
-                          */      
+                          
 		
                                 String insrtEmploy = "INSERT INTO employment"
                                         + "(uid, organization, jobtitle, daterange)"
                                         + " VALUES"
                                         + " ('" + pageUID + "', '" + formOrg + "', '" + formOrgJobTitle + "', '" + formWorked + "');";
-
+				
                                 String insrtBio = "INSERT INTO bio"
                                         + "(uid, school, degree, dateearned)"
                                         + " VALUES"
                                         + " ('" + pageUID + "', '" + formEarned + "', '" + formDeg + "', '" + formAttend + "');";
-
+				
                                 String insrtFund = "INSERT INTO funding" +
                                         "(uid, granttitle, grantlength, grantnumber)" +
                                         " VALUES" + " ('" + pageUID + "', '" + formGrantTitle +
@@ -276,13 +322,13 @@ prepStmt.setString(4, formJobTitle);
                                         + " ('" + pageUID + "', '" + formOrcid + "', '" + formAcadem
                                         + "', '" + formGP + "', '" + formLink
                                         + "', '" + formResGate + "', '" + formTwitter + "');";
-
-                                //stmt.executeUpdate(insrtFac);
+				
+                                stmt.executeUpdate(insrtFac);
 				stmt.executeUpdate(insrtEmploy);
                                 stmt.executeUpdate(insrtBio);
                                 stmt.executeUpdate(insrtFund);
 				stmt.executeUpdate(insrtLink);
-
+			*/
                         } catch (SQLException se) {
 				//Right now, editing doesnt properly update the databse
 				//you need to execute an update if the person already exists
