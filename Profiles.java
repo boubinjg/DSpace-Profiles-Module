@@ -337,7 +337,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		fundingContent.addPara(grantLength);
 		fundingContent.addPara(grantNumber);
 		
-                Division homePageLink = homePageContainer.addDivision("homePageLink");
+                Division homePageLink = page.addDivision("homePageLink");
 
 	public void addBody(Body body) throws SAXException, WingException {
 
