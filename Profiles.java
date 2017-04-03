@@ -321,8 +321,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		employmentHeader.addPara("Employment");
 		Division grantsHeader = grantsContainer.addDivision("grantsHeader");
 		grantsHeader.addPara("Funding");
-		Division publicationsHeader = publicationsContainer.addDivision("publicationsHeader");
-		publicationsHeader.addPara("Publications");
+		
 		
 		Division educationContent = academicContainer.addDivision("educationContent");
 		educationContent.addPara(school);
