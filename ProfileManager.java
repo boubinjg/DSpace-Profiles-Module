@@ -241,9 +241,6 @@ public class ProfileManager extends AbstractDSpaceTransformer
 			        // Create an int[] to hold returned values
                                 int[] count = prepStmt.executeBatch();
 
-                                //Explicitly commit statements to apply changes
-                                conn.commit();
-                                prepStmt.executeUpdate();
 				DBTest += "faculty,";
 				
 				SQL = "INSERT INTO employment (uid, organization, jobtitle, daterange) VALUES (?,?,?,?)";
@@ -254,9 +251,8 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.setString(3, formOrgJobTitle);
 				prepStmt.setString(4, formWorked);
 				prepStmt.addBatch();
-				count = prepStmt.executeBatch();
-				conn.commit();
-				prepStmt.executeUpdate();
+				count = prepStmt.executeBatch()
+
 				DBTest +="employment,";			
 				
 				SQL = "INSERT INTO bio (uid, school, degre, dateearned) VALUES (?,?,?,?)";
@@ -267,8 +263,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.setString(3,formDeg);
 				prepStmt.setString(4,formAttend);
 				count = prepStmt.executeBatch();
-				conn.commit();
-				prepStmt.executeUpdate();
+				
 				DBTest += "bio,";			
 	
 				SQL = "INSERT INTO funding (uid, granttitle, grandlength, grantnumber) VALUES (?,?,?,?)";
@@ -279,8 +274,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.setString(3,formGrantLen);
 				prepStmt.setString(4,formGrantNum);
 				count = prepStmt.executeBatch();
-				conn.commit();
-				prepStmt.executeUpdate();
+				
 				DBTest += "funding,";				
 
 				SQL = "INSERT INTO links (uid, orcid, academia, googleplus, linkedin, researchgate, twitter) VALUES (?,?,?,?,?,?,?)";
@@ -294,8 +288,8 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.setString(7,formTwitter);
 				count=prepStmt.executeBatch();
 				conn.commit();
-				prepStmt.executeUpdate();
 				DBTest += "links, done";
+				
 				/*
                                 //Old vulnerable code                         
                                 String insrtFac = "INSERT INTO faculty " + 

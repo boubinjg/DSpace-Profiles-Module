@@ -8,9 +8,6 @@ add first/last names to database and form to replace the name field
 
 add dummy accounts to database
 
-add getlinks/css to scholarProfiles homepage
-
-
 
 
 After capstone presentations tasks:

@@ -339,7 +339,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		fundingContent.addPara(grantNumber);
 		
 
-
+	}
 	public void addBody(Body body) throws SAXException, WingException {
 
 		//parses the request to obtain user information
