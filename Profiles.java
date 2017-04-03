@@ -336,8 +336,6 @@ public class Profiles extends AbstractDSpaceTransformer {
 		fundingContent.addPara(grantTitle);
 		fundingContent.addPara(grantLength);
 		fundingContent.addPara(grantNumber);
-		
-<<<<<<< HEAD
 
 	}
 =======

@@ -251,17 +251,18 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.setString(3, formOrgJobTitle);
 				prepStmt.setString(4, formWorked);
 				prepStmt.addBatch();
-				count = prepStmt.executeBatch()
+				count = prepStmt.executeBatch();
 
 				DBTest +="employment,";			
 				
-				SQL = "INSERT INTO bio (uid, school, degre, dateearned) VALUES (?,?,?,?)";
+				SQL = "INSERT INTO bio (uid, school, degree, dateearned) VALUES (?,?,?,?)";
 				prepStmt = conn.prepareStatement(SQL);
 				conn.setAutoCommit(false);
 				prepStmt.setString(1,pageUID);
 				prepStmt.setString(2,formEarned);
 				prepStmt.setString(3,formDeg);
 				prepStmt.setString(4,formAttend);
+				prepStmt.addBatch();
 				count = prepStmt.executeBatch();
 				
 				DBTest += "bio,";			
@@ -273,6 +274,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.setString(2,formGrantTitle);
 				prepStmt.setString(3,formGrantLen);
 				prepStmt.setString(4,formGrantNum);
+				prepStmt.addBatch();
 				count = prepStmt.executeBatch();
 				
 				DBTest += "funding,";				
@@ -286,6 +288,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.setString(5,formLink);
 				prepStmt.setString(6,formResGate);
 				prepStmt.setString(7,formTwitter);
+				prepStmt.addBatch();
 				count=prepStmt.executeBatch();
 				conn.commit();
 				DBTest += "links, done";
@@ -524,7 +527,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
                 //check to see if post request was received:
 		if(checkPost(eperson)) {
-			String link = "/xmlui/profiles/"+eperson;
+			String link = "/xmlui/scholarprofiles/"+eperson;
 			Para profileLink = page.addPara(null, "Profile Link");
 			profileLink.addXref(link).addContent(T_link);
 		}
