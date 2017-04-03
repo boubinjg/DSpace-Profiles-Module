@@ -336,12 +336,9 @@ public class Profiles extends AbstractDSpaceTransformer {
 		fundingContent.addPara(grantTitle);
 		fundingContent.addPara(grantLength);
 		fundingContent.addPara(grantNumber);
-
+		
 	}
-=======
-                Division homePageLink = page.addDivision("homePageLink");
-
->>>>>>> d6faac52c08f91bb5790f6f7973a4567ee1d8698
+               	
 	public void addBody(Body body) throws SAXException, WingException {
 
 		//parses the request to obtain user information
@@ -379,5 +376,8 @@ public class Profiles extends AbstractDSpaceTransformer {
 			Para homeLink = page.addPara(null, "Home Link");
 			homeLink.addXref(link).addContent(T_link);
 		}	
+		String homeLink = "/xmlui/scholarprofiles";
+		para hl = page.addPara(null, "Home Link");
+		editLink.addXref(link).addContent("Return to Scholar Profiles Home");
 	}
 }
