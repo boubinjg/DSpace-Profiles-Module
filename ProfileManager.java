@@ -222,13 +222,13 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 				DBTest += "new stuff,";
 				//new stuff
-				
+				String SQL;
 				if(edit)
 				{
-					String SQL = "UPDATE faculty SET uniqueid = ? name = ?, pictureurl = ?, jobtitle = ?, research = ?, address = ?, phone = ? email = ?, website = ? WHERE uniqueid = " +  pageUID;
+					SQL = "UPDATE faculty SET uniqueid = ?, name = ?, pictureurl = ?, jobtitle = ?, research = ?, address = ?, phone = ?, email = ?, website = ? WHERE uniqueid = " +  pageUID;
 				}
-				else{
-					String SQL = "INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				else
+					SQL = "INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				
 				prepStmt = conn.prepareStatement(SQL);
 
@@ -254,7 +254,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				
 				if(edit)
 				{
-					SQL = "UPDATE employment SET uid = ?, organization = ?, jobtitle = ?, daterange = ?) WHERE uid = " pageUID;
+					SQL = "UPDATE employment SET uid = ?, organization = ?, jobtitle = ?, daterange = ? WHERE uid = " + pageUID;
 				}
 				else
 					SQL = "INSERT INTO employment (uid, organization, jobtitle, daterange) VALUES (?,?,?,?)";
@@ -290,7 +290,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 	
 				if(edit)
 				{
-					SQL = "UPDATE funding SET uid = ?, granttitle = ?, grandlength = ?, grantnumber = ? WHERE VALUES uid = " + pageUID;
+					SQL = "UPDATE funding SET uid = ?, granttitle = ?, grandlength = ?, grantnumber = ? WHERE uid = " + pageUID;
 				}
 				else
 					SQL = "INSERT INTO funding (uid, granttitle, grandlength, grantnumber) VALUES (?,?,?,?)";
@@ -307,7 +307,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 				if(edit)
 				{
-					SQL = "UPDATE links SET uid = ?, orcid = ?, academia = ?, googleplus = ?, linkedin = ?, researchgate = ?, twitter = ? WHERE uid = " pageUID;
+					SQL = "UPDATE links SET uid = ?, orcid = ?, academia = ?, googleplus = ?, linkedin = ?, researchgate = ?, twitter = ? WHERE uid = " + pageUID;
 				}
 				else
 					SQL = "INSERT INTO links (uid, orcid, academia, googleplus, linkedin, researchgate, twitter) VALUES (?,?,?,?,?,?,?)";
