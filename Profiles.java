@@ -220,8 +220,8 @@ public class Profiles extends AbstractDSpaceTransformer {
 					uniqueId = rs1.getString("uid");
 					school = rs1.getString("school");
 					degreeAndAttended = rs1.getString("degree");
-					degreeAndAttended = ", ";
-					degreeAndAttended = rs1.getString("dateEarned");
+					degreeAndAttended += ", ";
+					degreeAndAttended += rs1.getString("dateEarned");
 				}
 				rs1.close();
 			
