@@ -243,30 +243,35 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		// the divisions for the page
 		Division page = division.addDivision("page");
 		
-		//top text
-		Division text = page.addDivision("test");
-		text.addPara("This is the Scholar Profiles Home Page");
-		text.addPara("Use the links below to navigate to a scholar's profile");
+		//page header container
+		Division header = page.addDivision("header");
+		header.addPara("Scholarly Commons Profiles Home Page");
+		
+		// scholar's container
+		Division scholarsContainer = page.addDivision("scholarsContainer");
+		Division scholarsHeader = scholarsContainer.addDivision("scholarsHeader");
+		scholarsHeader.addPara("Use the links below to navigate to a scholar's profile");
 
-		//thedivision that holds the links
-		Division links = page.addDivision("links");
+		// the division that holds the links by last name (A, B, C...Z)
+		Division scholarListLinks = scholarsContainer.addDivision("scholarListLinks");
 		
 		//Hash Table 
 		ArrayList<LinkData> users = new ArrayList<LinkData>();
 		users = generateTable(linkLetter);
 	
-		Division scholarList = page.addDivision("scholarList");
+		Division scholarList = scholarsContainer.addDivision("scholarList");
 		//add links to page
 		String link = "/xmlui/scholarprofiles/";
 		for(LinkData usr : users) {
 			Para scholarLink = scholarList.addPara(null, "page link");
 			scholarLink.addXref(link + usr.uid).addContent(usr.name);
 		}
-
-		Division editLink = page.addDivision("editlink");
+		
+		// create or edit profile container
+		Division createEditLink = page.addDivision("createEditLink");
 		EPerson loggedin = context.getCurrentUser();
 		if(loggedin != null) {
-			Para edit = editLink.addPara(null, "edit link");
+			Para edit = createEditLink.addPara(null, "edit link");
 			edit.addXref("/xmlui/scholarprofiles/profilemanager").addContent("Edit or Create Profile");
 		}
 	}
