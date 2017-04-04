@@ -148,10 +148,10 @@ public class ProfileManager extends AbstractDSpaceTransformer
     	private static Logger log = Logger.getLogger(ProfileManager.class);
  
 	private String uniqueId = "", name = "", pictureURL = "";
-        private String jobTitle = "", researchArea = "Research: ", address = "Address: ";
-        private String phone = "Phone: ", email = "Email: ", website = "Personal Website: ";
-        private String school = "", degreeAndAttended = "";
-        private String grantTitle = "Grant Title: ", grantLength = "Grant Length: ", grantNumber = "Grant Number: ";
+        private String jobTitle = "", researchArea = "", address = "";
+        private String phone = "", email = "", website = "";
+        private String school = "", degree = "", datesAttended = "";
+        private String grantTitle = "", grantLength = "", grantNumber = "";
         private String orcid = "", academia = "", googlePlus = "", linkedin = "", researchGate = "", twitter = "";
         private String organization = "", orgJobTitle = "", dateRange = "";
         private Request request;
@@ -221,7 +221,14 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 				DBTest += "new stuff,";
 				//new stuff
-                                String SQL = "INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				
+				if()
+				{
+					String SQL = "UPDATE faculty SET uniqueid = ? name = ?, pictureurl = ?, jobtitle = ?, research = ?, address = ?, phone = ? email = ?, website = ? WHERE uniqueid = " +  pageUID;
+				}
+				else{
+					String SQL = "INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				
 				prepStmt = conn.prepareStatement(SQL);
 
 				// Set auto-commit to false
@@ -236,6 +243,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.setString(7, formPhone);
 				prepStmt.setString(8, formEmail);
 				prepStmt.setString(9, formWebsite);
+				
 				prepStmt.addBatch();
 
 			        // Create an int[] to hold returned values
@@ -243,7 +251,13 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 				DBTest += "faculty,";
 				
-				SQL = "INSERT INTO employment (uid, organization, jobtitle, daterange) VALUES (?,?,?,?)";
+				if()
+				{
+					SQL = "UPDATE employment SET uid = ?, organization = ?, jobtitle = ?, daterange = ?) WHERE uid = " pageUID;
+				}
+				else
+					SQL = "INSERT INTO employment (uid, organization, jobtitle, daterange) VALUES (?,?,?,?)";
+					
 				prepStmt = conn.prepareStatement(SQL);
 				conn.setAutoCommit(false);
 				prepStmt.setString(1, pageUID);
@@ -255,7 +269,13 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 				DBTest +="employment,";			
 				
-				SQL = "INSERT INTO bio (uid, school, degree, dateearned) VALUES (?,?,?,?)";
+				if()
+				{
+					SQL = "UPDATE bio SET uid = ?, school = ?, degree = ?, dateearned = ? WHERE uid = " + pageUID;
+				}
+				else
+					SQL = "INSERT INTO bio (uid, school, degree, dateearned) VALUES (?,?,?,?)";
+					
 				prepStmt = conn.prepareStatement(SQL);
 				conn.setAutoCommit(false);
 				prepStmt.setString(1,pageUID);
@@ -267,7 +287,17 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				
 				DBTest += "bio,";			
 	
-				SQL = "INSERT INTO funding (uid, granttitle, grandlength, grantnumber) VALUES (?,?,?,?)";
+<<<<<<< HEAD
+				if()
+				{
+					SQL = "UPDATE funding SET uid = ?, granttitle = ?, grandlength = ?, grantnumber = ? WHERE VALUES uid = " + pageUID;
+				}
+				else
+					SQL = "INSERT INTO funding (uid, granttitle, grandlength, grantnumber) VALUES (?,?,?,?)";
+				
+=======
+				SQL = "INSERT INTO funding (uid, granttitle, grantlength, grantnumber) VALUES (?,?,?,?)";
+>>>>>>> d53e567da38fd8eb79b21db7b7020e057c75f6bd
 				prepStmt = conn.prepareStatement(SQL);
 				conn.setAutoCommit(false);
 				prepStmt.setString(1,pageUID);
@@ -277,9 +307,15 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.addBatch();
 				count = prepStmt.executeBatch();
 				
-				DBTest += "funding,";				
+				DBTest += "funding,";
 
-				SQL = "INSERT INTO links (uid, orcid, academia, googleplus, linkedin, researchgate, twitter) VALUES (?,?,?,?,?,?,?)";
+				if()
+				{
+					SQL = "UPDATE links SET uid = ?, orcid = ?, academia = ?, googleplus = ?, linkedin = ?, researchgate = ?, twitter = ? WHERE uid = " pageUID;
+				}
+				else
+					SQL = "INSERT INTO links (uid, orcid, academia, googleplus, linkedin, researchgate, twitter) VALUES (?,?,?,?,?,?,?)";
+
 				prepStmt = conn.prepareStatement(SQL);
 				prepStmt.setString(1,pageUID);
 				prepStmt.setString(2,formOrcid);
@@ -289,49 +325,11 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.setString(6,formResGate);
 				prepStmt.setString(7,formTwitter);
 				prepStmt.addBatch();
-				count=prepStmt.executeBatch();
+				count = prepStmt.executeBatch();
 				conn.commit();
+				
 				DBTest += "links, done";
-				
-				/*
-                                //Old vulnerable code                         
-                                String insrtFac = "INSERT INTO faculty " + 
-                                "(uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) " + 
-                                " VALUES" + 
-                                " ('" + pageUID + "', '" + formname + "', '" + formPicURL + "', '" + 
-                                formJobTitle + "', '" + formResearch + "', '" + formAddr + "', '" + 
-                                formPhone + "', '" + formEmail + "', '" + formWebsite + "');";
-                          
-		
-                                String insrtEmploy = "INSERT INTO employment"
-                                        + "(uid, organization, jobtitle, daterange)"
-                                        + " VALUES"
-                                        + " ('" + pageUID + "', '" + formOrg + "', '" + formOrgJobTitle + "', '" + formWorked + "');";
-				
-                                String insrtBio = "INSERT INTO bio"
-                                        + "(uid, school, degree, dateearned)"
-                                        + " VALUES"
-                                        + " ('" + pageUID + "', '" + formEarned + "', '" + formDeg + "', '" + formAttend + "');";
-				
-                                String insrtFund = "INSERT INTO funding" +
-                                        "(uid, granttitle, grantlength, grantnumber)" +
-                                        " VALUES" + " ('" + pageUID + "', '" + formGrantTitle +
-                                        "', '" + formGrantLen + "', '" + formGrantNum + "');";
-
-                                String insrtLink = "INSERT INTO links"
-                                        + "(uid, orcid, academia, googleplus, linkedin, researchgate, twitter)"
-                                        + " VALUES"
-                                        + " ('" + pageUID + "', '" + formOrcid + "', '" + formAcadem
-                                        + "', '" + formGP + "', '" + formLink
-                                        + "', '" + formResGate + "', '" + formTwitter + "');";
-				
-                                stmt.executeUpdate(insrtFac);
-				stmt.executeUpdate(insrtEmploy);
-                                stmt.executeUpdate(insrtBio);
-                                stmt.executeUpdate(insrtFund);
-				stmt.executeUpdate(insrtLink);
-			*/
-                        } catch (SQLException se) {
+			} catch (SQLException se) {
 				//Right now, editing doesnt properly update the databse
 				//you need to execute an update if the person already exists
 				//I didn't feel like doing that so I didnt.
@@ -367,9 +365,9 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 	Text fPhone = getText(form, "phone", F_phone, 12,phone);
                 	Text fEmail = getText(form, "email", F_email, 50,email);
                 	Text fWebsite = getText(form, "website", F_website, 100,website);
-                	Text fDegree = getText(form, "degree", F_degree, 100,degreeAndAttended);
-                	Text fEarnedFrom = getText(form, "earned from", F_earnedFrom, 100,degreeAndAttended);
-                	Text fDatesAttended = getText(form, "dates attended", F_datesAttended, 50,degreeAndAttended);
+                	Text fDegree = getText(form, "degree", F_degree, 100,degree);
+                	Text fEarnedFrom = getText(form, "earned from", F_earnedFrom, 100,school);
+                	Text fDatesAttended = getText(form, "dates attended", F_datesAttended, 50,datesAttended);
                 	Text fOrganization = getText(form, "organization", F_organization, 100,organization);
                 	Text fOrgJobTitle = getText(form, "forg job title", F_orgJobTitle, 100,orgJobTitle);
                 	Text fdateWorked = getText(form, "date worked", F_orgJobTitle, 50,dateRange);
@@ -396,7 +394,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 	Text fDatesAttended = getText(form, "dates attended", F_datesAttended, 50,"");
                 	Text fOrganization = getText(form, "organization", F_organization, 100,"");
                 	Text fOrgJobTitle = getText(form, "forg job title", F_orgJobTitle, 100,"");
-                	Text fdateWorked = getText(form, "date worked", F_orgJobTitle, 50,"");
+                	Text fdateWorked = getText(form, "date worked", F_dateWorked, 50,"");
                 	Text fGrantTitle = getText(form, "grant title", F_grantTitle, 100,"");
                 	Text fGrantLength = getText(form, "grant length", F_grantLength, 50,"");
                 	Text fGrantNumber = getText(form, "grant number", F_grantNumber, 50,"");
@@ -447,11 +445,11 @@ public class ProfileManager extends AbstractDSpaceTransformer
                                         name = rs.getString("name");
                                         pictureURL = rs.getString("pictureurl");
                                         jobTitle = rs.getString("jobtitle");
-                                        researchArea = "Research: " + rs.getString("research");
-                                        address = "Address: "+rs.getString("address");
-                                        phone = "Phone: "+rs.getString("phone");
-                                        email = "Email: "+rs.getString("email");
-                                        website = "Website: "+rs.getString("website");
+                                        researchArea = rs.getString("research");
+                                        address = rs.getString("address");
+                                        phone = rs.getString("phone");
+                                        email = rs.getString("email");
+                                        website = rs.getString("website");
                                 }
                                 rs.close();
 
@@ -460,18 +458,17 @@ public class ProfileManager extends AbstractDSpaceTransformer
                                 while(rs1.next()) {
                                         uniqueId = rs1.getString("uid");
                                         school = rs1.getString("school");
-                                        degreeAndAttended = rs1.getString("degree");
-                                        degreeAndAttended = ", ";
-                                        degreeAndAttended = rs1.getString("dateEarned");
+                                        degree  = rs1.getString("degree");
+                                        datesAttended = rs1.getString("dateearned");
                                 }
                                 rs1.close();
 				sql2 = "SELECT * FROM funding WHERE uid = '" + pageUID + "'";
                                 ResultSet rs2 = stmt.executeQuery(sql2);
                                 while(rs2.next()) {
                                         uniqueId = rs2.getString("uid");
-                                        grantTitle = "Grant Title: "+rs2.getString("granttitle");
-                                        grantLength = "Grant Length: "+rs2.getString("grantlength");
-                                        grantNumber = "Grant Number: "+rs2.getString("grantnumber");
+                                        grantTitle = rs2.getString("granttitle");
+                                        grantLength = rs2.getString("grantlength");
+                                        grantNumber = rs2.getString("grantnumber");
                                 }
                                 rs2.close();
 
