@@ -20,7 +20,6 @@ change LDAP authentication to only allow professors to make profiles.
 (test with brinkman)
 (dspace can't do this alone so it may have to be Miami specific)
 
-
 //User Views:
 Profiles:
 	if users page exists
@@ -60,13 +59,6 @@ list of people
 
 
 
-
-
-
-
-
-
 Tasks for next group:
 Integrate this with dspace's very shallow profiles system
 refactor the class system of our current setup so there is not so much code reuse
-

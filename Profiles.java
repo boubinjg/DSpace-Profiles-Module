@@ -322,7 +322,6 @@ public class Profiles extends AbstractDSpaceTransformer {
 		Division grantsHeader = grantsContainer.addDivision("grantsHeader");
 		grantsHeader.addPara("Funding");
 		
-		
 		Division educationContent = academicContainer.addDivision("educationContent");
 		educationContent.addPara(school);
 		educationContent.addPara(degreeAndAttended);
@@ -377,7 +376,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 			homeLink.addXref(link).addContent(T_link);
 		}	
 		String homeLink = "/xmlui/scholarprofiles";
-		para hl = page.addPara(null, "Home Link");
-		editLink.addXref(link).addContent("Return to Scholar Profiles Home");
+		Para hl = page.addPara(null, "Home Link");
+		hl.addXref(homeLink).addContent("Return to Scholar Profiles Home");
 	}
 }
