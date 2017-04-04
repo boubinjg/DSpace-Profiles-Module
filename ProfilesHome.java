@@ -249,11 +249,10 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		
 		// scholar's container
 		Division scholarsContainer = page.addDivision("scholarsContainer");
-		Division scholarsHeader = scholarsContainer.addDivision("scholarsHeader");
-		scholarsHeader.addPara("Use the links below to navigate to a scholar's profile");
-
+		Division linksContainer = scholarsContainer.addDivision("linksContainer");
+		
 		// the division that holds the links by last name (A, B, C...Z)
-		Division scholarListLinks = scholarsContainer.addDivision("scholarListLinks");
+		Division links = linksContainer.addDivision("scholarListLinks");
 		
 		//Hash Table 
 		ArrayList<LinkData> users = new ArrayList<LinkData>();

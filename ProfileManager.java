@@ -225,7 +225,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				String SQL;
 				if(edit)
 				{
-					SQL = "UPDATE faculty SET uniqueid = ?, name = ?, pictureurl = ?, jobtitle = ?, research = ?, address = ?, phone = ?, email = ?, website = ? WHERE uniqueid = " +  pageUID;
+					SQL = "UPDATE faculty SET uniqueid = ?, name = ?, pictureurl = ?, jobtitle = ?, research = ?, address = ?, phone = ?, email = ?, website = ? WHERE uniqueid = ?";
 				}
 				else
 					SQL = "INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -244,6 +244,9 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.setString(7, formPhone);
 				prepStmt.setString(8, formEmail);
 				prepStmt.setString(9, formWebsite);
+				
+				if(edit)
+					prepStmt.setString(10, pageUID);
 				
 				prepStmt.addBatch();
 

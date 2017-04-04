@@ -372,9 +372,9 @@ public class Profiles extends AbstractDSpaceTransformer {
 			Para homeLink = page.addPara(null, "Home Link");
 			homeLink.addXref(link).addContent(T_link);
 		}	
-		Division returnLinkContainer = page.addDivision("returnLinkContainer");
+		/*Division returnLinkContainer = page.addDivision("returnLinkContainer");
 		String homeLink = "/xmlui/scholarprofiles";
 		Para hl = returnLinkContainer.addPara(null, "Home Link");
-		editLink.addXref(link).addContent("Return to Scholar Profiles Home");
+		homeLink.addXref(homeLink).addContent("Return to Scholar Profiles Home");*/
 	}
 }
