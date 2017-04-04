@@ -179,7 +179,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 return t;
         }
 
-	public boolean checkPost(String pageUID)
+	public boolean checkPost(String pageUID, boolean edit)
         {	
 		boolean post = false;
                 String  formname = request.getParameter("name"),
@@ -209,6 +209,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 if (isSent != null && isSent.equals("true")) {
 			post = true;
                         try {
+				
                         	Connection conn = null;
 
                            	Statement stmt = null;
@@ -222,7 +223,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				DBTest += "new stuff,";
 				//new stuff
 				
-				if()
+				if(edit)
 				{
 					String SQL = "UPDATE faculty SET uniqueid = ? name = ?, pictureurl = ?, jobtitle = ?, research = ?, address = ?, phone = ? email = ?, website = ? WHERE uniqueid = " +  pageUID;
 				}
@@ -251,7 +252,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 				DBTest += "faculty,";
 				
-				if()
+				if(edit)
 				{
 					SQL = "UPDATE employment SET uid = ?, organization = ?, jobtitle = ?, daterange = ?) WHERE uid = " pageUID;
 				}
@@ -269,7 +270,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 				DBTest +="employment,";			
 				
-				if()
+				if(edit)
 				{
 					SQL = "UPDATE bio SET uid = ?, school = ?, degree = ?, dateearned = ? WHERE uid = " + pageUID;
 				}
@@ -287,17 +288,12 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				
 				DBTest += "bio,";			
 	
-<<<<<<< HEAD
-				if()
+				if(edit)
 				{
 					SQL = "UPDATE funding SET uid = ?, granttitle = ?, grandlength = ?, grantnumber = ? WHERE VALUES uid = " + pageUID;
 				}
 				else
 					SQL = "INSERT INTO funding (uid, granttitle, grandlength, grantnumber) VALUES (?,?,?,?)";
-				
-=======
-				SQL = "INSERT INTO funding (uid, granttitle, grantlength, grantnumber) VALUES (?,?,?,?)";
->>>>>>> d53e567da38fd8eb79b21db7b7020e057c75f6bd
 				prepStmt = conn.prepareStatement(SQL);
 				conn.setAutoCommit(false);
 				prepStmt.setString(1,pageUID);
@@ -309,7 +305,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				
 				DBTest += "funding,";
 
-				if()
+				if(edit)
 				{
 					SQL = "UPDATE links SET uid = ?, orcid = ?, academia = ?, googleplus = ?, linkedin = ?, researchgate = ?, twitter = ? WHERE uid = " pageUID;
 				}
@@ -521,16 +517,15 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
                 // the divisions for the page
                 Division page = division.addDivision("page");
-
+		
+		boolean containsUser = checkDB(eperson);
                 //check to see if post request was received:
-		if(checkPost(eperson)) {
+		if(checkPost(eperson, containsUser)) {
 			String link = "/xmlui/scholarprofiles/"+eperson;
 			Para profileLink = page.addPara(null, "Profile Link");
 			profileLink.addXref(link).addContent(T_link);
 		}
-                else {
-			boolean containsUser = checkDB(eperson);
-		
+                else {	
  	               	if(eperson != null)
         	        	createForm(page, containsUser);
                 	else
