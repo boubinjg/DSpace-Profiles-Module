@@ -246,14 +246,6 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		//page header container
 		Division header = page.addDivision("header");
 		header.addPara("Scholarly Commons Profiles Home Page");
-
-		// create or edit profile container
-		Division createEditLink = page.addDivision("createEditLink");
-		EPerson loggedin = context.getCurrentUser();
-		if(loggedin != null) {
-			Para edit = createEditLink.addPara(null, "edit link");
-			edit.addXref("/xmlui/scholarprofiles/profilemanager").addContent("Edit or Create Profile");
-		}
 		
 		// scholar's container
 		Division scholarsContainer = page.addDivision("scholarsContainer");
@@ -273,6 +265,14 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		for(LinkData usr : users) {
 			Para scholarLink = scholarList.addPara(null, "page link");
 			scholarLink.addXref(link + usr.uid).addContent(usr.name);
+		}
+		
+		// create or edit profile container
+		Division createEditLink = page.addDivision("createEditLink");
+		EPerson loggedin = context.getCurrentUser();
+		if(loggedin != null) {
+			Para edit = createEditLink.addPara(null, "edit link");
+			edit.addXref("/xmlui/scholarprofiles/profilemanager").addContent("Edit or Create Profile");
 		}
 	}
 }

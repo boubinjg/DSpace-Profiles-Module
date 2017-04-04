@@ -305,14 +305,12 @@ public class Profiles extends AbstractDSpaceTransformer {
 		// twitter
 		links.addParaFigure("", "", twitterLoc, twitter, "");
 		
-		
 		// Biography part of the profile module
 		Division bios = page.addDivision("bios");
 		
 		Division academicContainer = bios.addDivision("academicContainer");
 		Division employmentContainer = bios.addDivision("employmentContainer");
 		Division grantsContainer = bios.addDivision("grantsContainer");
-		Division publicationsContainer = bios.addDivision("publicationsContainer");
 		
 		// Set the headers of the bio containers
 		Division academicHeader = academicContainer.addDivision("academicHeader");
@@ -334,8 +332,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		Division fundingContent = grantsContainer.addDivision("fundingContent");
 		fundingContent.addPara(grantTitle);
 		fundingContent.addPara(grantLength);
-		fundingContent.addPara(grantNumber);
-		
+		fundingContent.addPara(grantNumber);	
 	}
                	
 	public void addBody(Body body) throws SAXException, WingException {
@@ -375,8 +372,9 @@ public class Profiles extends AbstractDSpaceTransformer {
 			Para homeLink = page.addPara(null, "Home Link");
 			homeLink.addXref(link).addContent(T_link);
 		}	
+		Division returnLinkContainer = page.addDivision("returnLinkContainer");
 		String homeLink = "/xmlui/scholarprofiles";
-		Para hl = page.addPara(null, "Home Link");
-		hl.addXref(homeLink).addContent("Return to Scholar Profiles Home");
+		para hl = returnLinkContainer.addPara(null, "Home Link");
+		editLink.addXref(link).addContent("Return to Scholar Profiles Home");
 	}
 }
