@@ -221,7 +221,14 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 				DBTest += "new stuff,";
 				//new stuff
-                                String SQL = "INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				
+				if()
+				{
+					String SQL = "UPDATE faculty SET uniqueid = ? name = ?, pictureurl = ?, jobtitle = ?, research = ?, address = ?, phone = ? email = ?, website = ? WHERE uniqueid = " +  pageUID;
+				}
+				else{
+					String SQL = "INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				
 				prepStmt = conn.prepareStatement(SQL);
 
 				// Set auto-commit to false
@@ -236,6 +243,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.setString(7, formPhone);
 				prepStmt.setString(8, formEmail);
 				prepStmt.setString(9, formWebsite);
+				
 				prepStmt.addBatch();
 
 			        // Create an int[] to hold returned values
@@ -243,7 +251,13 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 				DBTest += "faculty,";
 				
-				SQL = "INSERT INTO employment (uid, organization, jobtitle, daterange) VALUES (?,?,?,?)";
+				if()
+				{
+					SQL = "UPDATE employment SET uid = ?, organization = ?, jobtitle = ?, daterange = ?) WHERE uid = " pageUID;
+				}
+				else
+					SQL = "INSERT INTO employment (uid, organization, jobtitle, daterange) VALUES (?,?,?,?)";
+					
 				prepStmt = conn.prepareStatement(SQL);
 				conn.setAutoCommit(false);
 				prepStmt.setString(1, pageUID);
@@ -255,7 +269,13 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 				DBTest +="employment,";			
 				
-				SQL = "INSERT INTO bio (uid, school, degree, dateearned) VALUES (?,?,?,?)";
+				if()
+				{
+					SQL = "UPDATE bio SET uid = ?, school = ?, degree = ?, dateearned = ? WHERE uid = " + pageUID;
+				}
+				else
+					SQL = "INSERT INTO bio (uid, school, degree, dateearned) VALUES (?,?,?,?)";
+					
 				prepStmt = conn.prepareStatement(SQL);
 				conn.setAutoCommit(false);
 				prepStmt.setString(1,pageUID);
@@ -267,7 +287,13 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				
 				DBTest += "bio,";			
 	
-				SQL = "INSERT INTO funding (uid, granttitle, grandlength, grantnumber) VALUES (?,?,?,?)";
+				if()
+				{
+					SQL = "UPDATE funding SET uid = ?, granttitle = ?, grandlength = ?, grantnumber = ? WHERE VALUES uid = " + pageUID;
+				}
+				else
+					SQL = "INSERT INTO funding (uid, granttitle, grandlength, grantnumber) VALUES (?,?,?,?)";
+				
 				prepStmt = conn.prepareStatement(SQL);
 				conn.setAutoCommit(false);
 				prepStmt.setString(1,pageUID);
@@ -277,9 +303,15 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.addBatch();
 				count = prepStmt.executeBatch();
 				
-				DBTest += "funding,";				
+				DBTest += "funding,";
 
-				SQL = "INSERT INTO links (uid, orcid, academia, googleplus, linkedin, researchgate, twitter) VALUES (?,?,?,?,?,?,?)";
+				if()
+				{
+					SQL = "UPDATE links SET uid = ?, orcid = ?, academia = ?, googleplus = ?, linkedin = ?, researchgate = ?, twitter = ? WHERE uid = " pageUID;
+				}
+				else
+					SQL = "INSERT INTO links (uid, orcid, academia, googleplus, linkedin, researchgate, twitter) VALUES (?,?,?,?,?,?,?)";
+
 				prepStmt = conn.prepareStatement(SQL);
 				prepStmt.setString(1,pageUID);
 				prepStmt.setString(2,formOrcid);
@@ -289,8 +321,9 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.setString(6,formResGate);
 				prepStmt.setString(7,formTwitter);
 				prepStmt.addBatch();
-				count=prepStmt.executeBatch();
+				count = prepStmt.executeBatch();
 				conn.commit();
+				
 				DBTest += "links, done";
 				
 				/*
