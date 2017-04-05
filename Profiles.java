@@ -358,7 +358,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 		boolean containsUser = checkDB(pageUID);
 
-		//if user is in database, build profilea
+		//if user is in database, build profile
 		if (containsUser) {
 			createProfile(page);
 			if(eperson.equals(pageUID)) {
@@ -371,10 +371,10 @@ public class Profiles extends AbstractDSpaceTransformer {
 			String link = "/xmlui/scholarprofiles";
 			Para homeLink = page.addPara(null, "Home Link");
 			homeLink.addXref(link).addContent(T_link);
-		}	
-		/*Division returnLinkContainer = page.addDivision("returnLinkContainer");
+		}
+		Division returnHomeLink = page.addDivision("returnHomeLink");	
 		String homeLink = "/xmlui/scholarprofiles";
-		Para hl = returnLinkContainer.addPara(null, "Home Link");
-		homeLink.addXref(homeLink).addContent("Return to Scholar Profiles Home");*/
+		Para editLink = returnHomeLink.addPara(null, "Home Link");
+		editLink.addXref(homeLink).addContent("Return to Scholar Profiles Home");
 	}
 }

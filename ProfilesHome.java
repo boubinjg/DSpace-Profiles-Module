@@ -265,18 +265,17 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 			
 		Division bottomToolbar = page.addDivision("bottomToolbar");
 
-		// create or edit profile container
+                Division viewProfile = bottomToolbar.addDivision("viewProfile");
 		Division createEditLink = bottomToolbar.addDivision("createEditLink");
-		EPerson loggedin = context.getCurrentUser();
+
+                EPerson loggedin = context.getCurrentUser();
 		if(loggedin != null) {
-			Para edit = createEditLink.addPara(null, "edit link");
-			edit.addXref("/xmlui/scholarprofiles/profilemanager").addContent("Edit/Create Profile");
+                        Para view = viewProfile.addPara(null, "view profile");
+			String url = "/xmlui/scholarprofiles/" + loggedin.getNetid();
+                        view.addXref(url).addContent("View Profile");
+                        Para edit = createEditLink.addPara(null, "edit link");
+                        edit.addXref("/xmlui/scholarprofiles/profilemanager").addContent("Edit/Create Profile");
+
 		}
-		
-		Division viewProfile = bottomToolbar.addDivision("viewProfile");
-		if(loggedin != null) {
-			Para view = viewProfile.addPara(null, "view profile");
-			view.addXref("/xmlui/scholarprofiles/uid").addContent("View Profile");
-		}				
 	}
 }
