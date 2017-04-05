@@ -247,8 +247,9 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		Division header = page.addDivision("header");
 		header.addPara("Scholarly Commons Profiles Home Page");
 		
+		Division linksContainer = page.addDivision("linksContainer");
 		// the division that holds the links by last name (A, B, C...Z)
-		Division links = page.addDivision("scholarListLinks");
+		Division links = linksContainer.addDivision("links");
 		
 		//Hash Table 
 		ArrayList<LinkData> users = new ArrayList<LinkData>();
@@ -261,13 +262,21 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 			Para scholarLink = scholarList.addPara(null, "page link");
 			scholarLink.addXref(link + usr.uid).addContent(usr.name);
 		}
-		
+			
+		Division bottomToolbar = page.addDivision("bottomToolbar");
+
 		// create or edit profile container
-		Division createEditLink = page.addDivision("createEditLink");
+		Division createEditLink = bottomToolbar.addDivision("createEditLink");
 		EPerson loggedin = context.getCurrentUser();
 		if(loggedin != null) {
 			Para edit = createEditLink.addPara(null, "edit link");
-			edit.addXref("/xmlui/scholarprofiles/profilemanager").addContent("Edit or Create Profile");
+			edit.addXref("/xmlui/scholarprofiles/profilemanager").addContent("Edit/Create Profile");
 		}
+		
+		Division viewProfile = bottomToolbar.addDivision("viewProfile");
+		if(loggedin != null) {
+			Para view = viewProfile.addPara(null, "view profile");
+			view.addXref("/xmlui/scholarprofiles/uid").addContent("View Profile");
+		}				
 	}
 }
