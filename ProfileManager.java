@@ -69,8 +69,6 @@ public class ProfileManager extends AbstractDSpaceTransformer
  * Internationalization
  * 110523
  */
-	private String DBTest = "";
-
    	static final Message F_head_create =
                 message("Create Your Profile");
 	static final Message F_head_edit =
@@ -220,7 +218,6 @@ public class ProfileManager extends AbstractDSpaceTransformer
                               	conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
                                 stmt = conn.createStatement();
 
-				DBTest += "new stuff,";
 				//new stuff
 				String SQL;
 				if(edit)
@@ -252,8 +249,6 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 			        // Create an int[] to hold returned values
                                 int[] count = prepStmt.executeBatch();
-
-				DBTest += "faculty,";
 				
 				if(edit)
 				{
@@ -274,8 +269,6 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.addBatch();
 				count = prepStmt.executeBatch();
 
-				DBTest +="employment,";			
-				
 				if(edit)
 				{
 					SQL = "UPDATE bio SET uid = ?, school = ?, degree = ?, dateearned = ? WHERE uid = ?";
@@ -294,9 +287,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 				prepStmt.addBatch();
 				count = prepStmt.executeBatch();
-				
-				DBTest += "bio,";			
-	
+					
 				if(edit)
 				{
 					SQL = "UPDATE funding SET uid = ?, granttitle = ?, grantlength = ?, grantnumber = ? WHERE uid = ?";
@@ -315,8 +306,6 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.addBatch();
 				count = prepStmt.executeBatch();
 				
-				DBTest += "funding,";
-
 				if(edit)
 				{
 					SQL = "UPDATE links SET uid = ?, orcid = ?, academia = ?, googleplus = ?, linkedin = ?, researchgate = ?, twitter = ? WHERE uid = ?";
@@ -339,14 +328,9 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				count = prepStmt.executeBatch();
 				conn.commit();
 				
-				DBTest += "links, done";
 			} catch (SQLException se) {
-				//Right now, editing doesnt properly update the databse
-				//you need to execute an update if the person already exists
-				//I didn't feel like doing that so I didnt.
-				//when updating works, uncommend the line below.
-				//post = false;
-				DBTest += se.getSQLState();
+				post = false;
+				//DBTest += se.getSQLState();
                         }
                 }
 		return post;
@@ -546,6 +530,6 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 	else
                       		page.addPara("Please Log In To Create And Edit Your Profile");
 		}
-		page.addPara(DBTest);
+		//page.addPara(DBTest);
         }
 }
