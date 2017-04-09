@@ -1,12 +1,8 @@
-Make form (ProfileManager) properly submit:
-	make database submit everything for creation, currently only prepared statements work
-	make database update things on the form, again using prep-statements 
-
-change form degree variables so they can be edited
-
-add first/last names to database and form to replace the name field
+add first/last names to database and form to replace the name field 
 
 add dummy accounts to database
+
+change edit link in profiles.java 
 
 
 

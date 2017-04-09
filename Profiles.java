@@ -362,15 +362,12 @@ public class Profiles extends AbstractDSpaceTransformer {
 		if (containsUser) {
 			createProfile(page);
 			if(eperson.equals(pageUID)) {
-				String link = "/xmlui/profiles/ProfileManager";
+				String link = "/xmlui/scholarprofiles/profilemanager";
 				Para editLink = page.addPara(null, "Edit Link");
 				editLink.addXref(link).addContent(T_edit_link);
 			}
 		} else {
 			page.addPara("This Profile Does Not Exist");
-			String link = "/xmlui/scholarprofiles";
-			Para homeLink = page.addPara(null, "Home Link");
-			homeLink.addXref(link).addContent(T_link);
 		}
 		Division returnHomeLink = page.addDivision("returnHomeLink");	
 		String homeLink = "/xmlui/scholarprofiles";

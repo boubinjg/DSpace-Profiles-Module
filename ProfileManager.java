@@ -257,7 +257,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				
 				if(edit)
 				{
-					SQL = "UPDATE employment SET uid = ?, organization = ?, jobtitle = ?, daterange = ? WHERE uid = " + pageUID;
+					SQL = "UPDATE employment SET uid = ?, organization = ?, jobtitle = ?, daterange = ? WHERE uid = ?";
 				}
 				else
 					SQL = "INSERT INTO employment (uid, organization, jobtitle, daterange) VALUES (?,?,?,?)";
@@ -268,6 +268,9 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.setString(2, formOrg);
 				prepStmt.setString(3, formOrgJobTitle);
 				prepStmt.setString(4, formWorked);
+				if(edit)
+					prepStmt.setString(5, pageUID);
+
 				prepStmt.addBatch();
 				count = prepStmt.executeBatch();
 
@@ -275,7 +278,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				
 				if(edit)
 				{
-					SQL = "UPDATE bio SET uid = ?, school = ?, degree = ?, dateearned = ? WHERE uid = " + pageUID;
+					SQL = "UPDATE bio SET uid = ?, school = ?, degree = ?, dateearned = ? WHERE uid = ?";
 				}
 				else
 					SQL = "INSERT INTO bio (uid, school, degree, dateearned) VALUES (?,?,?,?)";
@@ -286,6 +289,9 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.setString(2,formEarned);
 				prepStmt.setString(3,formDeg);
 				prepStmt.setString(4,formAttend);
+				if(edit)
+					prepStmt.setString(5, pageUID);
+
 				prepStmt.addBatch();
 				count = prepStmt.executeBatch();
 				
@@ -293,7 +299,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 	
 				if(edit)
 				{
-					SQL = "UPDATE funding SET uid = ?, granttitle = ?, grandlength = ?, grantnumber = ? WHERE uid = " + pageUID;
+					SQL = "UPDATE funding SET uid = ?, granttitle = ?, grantlength = ?, grantnumber = ? WHERE uid = ?";
 				}
 				else
 					SQL = "INSERT INTO funding (uid, granttitle, grandlength, grantnumber) VALUES (?,?,?,?)";
@@ -303,6 +309,9 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.setString(2,formGrantTitle);
 				prepStmt.setString(3,formGrantLen);
 				prepStmt.setString(4,formGrantNum);
+				if(edit)
+					prepStmt.setString(5, pageUID);
+
 				prepStmt.addBatch();
 				count = prepStmt.executeBatch();
 				
@@ -310,7 +319,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 				if(edit)
 				{
-					SQL = "UPDATE links SET uid = ?, orcid = ?, academia = ?, googleplus = ?, linkedin = ?, researchgate = ?, twitter = ? WHERE uid = " + pageUID;
+					SQL = "UPDATE links SET uid = ?, orcid = ?, academia = ?, googleplus = ?, linkedin = ?, researchgate = ?, twitter = ? WHERE uid = ?";
 				}
 				else
 					SQL = "INSERT INTO links (uid, orcid, academia, googleplus, linkedin, researchgate, twitter) VALUES (?,?,?,?,?,?,?)";
@@ -323,6 +332,9 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.setString(5,formLink);
 				prepStmt.setString(6,formResGate);
 				prepStmt.setString(7,formTwitter);
+				if(edit)
+					prepStmt.setString(8, pageUID);
+
 				prepStmt.addBatch();
 				count = prepStmt.executeBatch();
 				conn.commit();
@@ -369,7 +381,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 	Text fDatesAttended = getText(form, "dates attended", F_datesAttended, 50,datesAttended);
                 	Text fOrganization = getText(form, "organization", F_organization, 100,organization);
                 	Text fOrgJobTitle = getText(form, "forg job title", F_orgJobTitle, 100,orgJobTitle);
-                	Text fdateWorked = getText(form, "date worked", F_orgJobTitle, 50,dateRange);
+                	Text fdateWorked = getText(form, "date worked", F_dateWorked, 50,dateRange);
                 	Text fGrantTitle = getText(form, "grant title", F_grantTitle, 100,grantTitle);
                 	Text fGrantLength = getText(form, "grant length", F_grantLength, 50,grantLength);
                 	Text fGrantNumber = getText(form, "grant number", F_grantNumber, 50,grantNumber);
@@ -392,9 +404,9 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 	Text fEarnedFrom = getText(form, "earned from", F_earnedFrom, 100,"");
                 	Text fDatesAttended = getText(form, "dates attended", F_datesAttended, 50,"");
                 	Text fOrganization = getText(form, "organization", F_organization, 100,"");
-                	Text fOrgJobTitle = getText(form, "forg job title", F_orgJobTitle, 100,"");
-                	Text fdateWorked = getText(form, "date worked", F_dateWorked, 50,"");
-                	Text fGrantTitle = getText(form, "grant title", F_grantTitle, 100,"");
+			Text fOrgJobTitle = getText(form, "forg job title", F_orgJobTitle, 100,"");
+			Text fdateWorked = getText(form, "date worked", F_dateWorked, 50,"");
+			Text fGrantTitle = getText(form, "grant title", F_grantTitle, 100,"");
                 	Text fGrantLength = getText(form, "grant length", F_grantLength, 50,"");
                 	Text fGrantNumber = getText(form, "grant number", F_grantNumber, 50,"");
                 	Text fOrcidURL = getText(form, "orcid", F_orcidURL,100,"");
