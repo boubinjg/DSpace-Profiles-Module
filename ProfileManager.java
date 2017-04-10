@@ -137,12 +137,6 @@ public class ProfileManager extends AbstractDSpaceTransformer
         public static final String databaseUsername = "postgres";
         public static final String databasePassword = "capstone";
         //image location information
-        public static final String orcidLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/orcid-logo.png";
-        public static final String academiaLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/academia-logo.png";
-        public static final String googlePlusLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/google-plus-logo.png";
-        public static final String linkedinLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/linkedin-logo.png";
-        public static final String researchGateLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/researchgate-logo.png";
-        public static final String twitterLoc = "http://172.17.31.180:8080/xmlui/themes/Mirage/images/twitter-logo.png";        
     	private static Logger log = Logger.getLogger(ProfileManager.class);
  
 	private String uniqueId = "", name = "", pictureURL = "";

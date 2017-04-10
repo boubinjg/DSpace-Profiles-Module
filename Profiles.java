@@ -359,19 +359,19 @@ public class Profiles extends AbstractDSpaceTransformer {
 		boolean containsUser = checkDB(pageUID);
 
 		//if user is in database, build profile
+		Division bottomLinks = page.addDivision("bottomToolBar");
 		if (containsUser) {
 			createProfile(page);
 			if(eperson.equals(pageUID)) {
 				String link = "/xmlui/scholarprofiles/profilemanager";
-				Para editLink = page.addPara(null, "Edit Link");
+				Para editLink = bottomLinks.addPara(null, "Edit Link");
 				editLink.addXref(link).addContent(T_edit_link);
 			}
 		} else {
 			page.addPara("This Profile Does Not Exist");
 		}
-		Division returnHomeLink = page.addDivision("returnHomeLink");	
 		String homeLink = "/xmlui/scholarprofiles";
-		Para editLink = returnHomeLink.addPara(null, "Home Link");
-		editLink.addXref(homeLink).addContent("Return to Scholar Profiles Home");
+		Para homeLink = bottomLinks.addPara(null, "Home Link");
+		homeLink.addXref(homeLink).addContent("Return to Scholar Profiles Home");
 	}
 }
