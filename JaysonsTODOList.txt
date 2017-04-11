@@ -2,8 +2,6 @@ add first/last names to database and form to replace the name field
 
 add dummy accounts to database
 
-change edit link in profiles.java 
-
 
 
 After capstone presentations tasks:

@@ -263,10 +263,10 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 			scholarLink.addXref(link + usr.uid).addContent(usr.name);
 		}
 			
-		Division bottomToolbar = page.addDivision("bottomToolbar");
+		Division bottomToolBar = page.addDivision("bottomToolBar");
 
-                Division viewProfile = bottomToolbar.addDivision("viewProfile");
-		Division createEditLink = bottomToolbar.addDivision("createEditLink");
+                Division viewProfile = bottomToolBar.addDivision("viewProfile");
+		Division createEditLink = bottomToolBar.addDivision("createEditLink");
 
                 EPerson loggedin = context.getCurrentUser();
 		if(loggedin != null) {

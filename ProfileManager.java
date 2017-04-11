@@ -77,8 +77,10 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 message("Test2");
         private static final Message F_jobTitle =
                 message("Job Title");
-        private static final Message F_name =
-                message("Name");
+        private static final Message F_fname =
+                message("First Name");
+	private static final Message F_lname =
+		message("Last Name");
         private static final Message F_research =
                 message("Research");
         private static final Message F_address =
@@ -127,7 +129,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 		message("Click Here To See Your Profile");
 
         //end formvariables
-
+	String DBTest = "";
         //breadcrumb information
         public static final Message T_dspace_home = message("xmlui.general.dspace_home");
         public static final Message T_title = message("Create Profile");
@@ -139,7 +141,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
         //image location information
     	private static Logger log = Logger.getLogger(ProfileManager.class);
  
-	private String uniqueId = "", name = "", pictureURL = "";
+	private String uniqueId = "", fname = "", lname = "", pictureURL = "";
         private String jobTitle = "", researchArea = "", address = "";
         private String phone = "", email = "", website = "";
         private String school = "", degree = "", datesAttended = "";
@@ -174,7 +176,8 @@ public class ProfileManager extends AbstractDSpaceTransformer
 	public boolean checkPost(String pageUID, boolean edit)
         {	
 		boolean post = false;
-                String  formname = request.getParameter("name"),
+                String  formfname = request.getParameter("fname"),
+		formlname = request.getParameter("lname"),
                 formPicURL = request.getParameter("Picture URL"),
                 formJobTitle = request.getParameter("job title"),
                 formResearch = request.getParameter("research"),
@@ -216,10 +219,10 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				String SQL;
 				if(edit)
 				{
-					SQL = "UPDATE faculty SET uniqueid = ?, name = ?, pictureurl = ?, jobtitle = ?, research = ?, address = ?, phone = ?, email = ?, website = ? WHERE uniqueid = ?";
+					SQL = "UPDATE faculty SET uniqueid = ?, firstName = ?, lastName = ?, pictureurl = ?, jobtitle = ?, research = ?, address = ?, phone = ?, email = ?, website = ? WHERE uniqueid = ?";
 				}
 				else
-					SQL = "INSERT INTO faculty (uniqueid, name, pictureurl, jobtitle, research, address, phone, email, website) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					SQL = "INSERT INTO faculty (uniqueid, firstName, lastName, pictureurl, jobtitle, research, address, phone, email, website) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				
 				prepStmt = conn.prepareStatement(SQL);
 
@@ -227,17 +230,18 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				conn.setAutoCommit(false);
 				
 				prepStmt.setString(1, pageUID);
-				prepStmt.setString(2, formname);
-				prepStmt.setString(3, formPicURL);
-				prepStmt.setString(4, formJobTitle);
-				prepStmt.setString(5, formResearch);
-				prepStmt.setString(6, formAddr);
-				prepStmt.setString(7, formPhone);
-				prepStmt.setString(8, formEmail);
-				prepStmt.setString(9, formWebsite);
+				prepStmt.setString(2, formfname);
+				prepStmt.setString(3, formlname);
+				prepStmt.setString(4, formPicURL);
+				prepStmt.setString(5, formJobTitle);
+				prepStmt.setString(6, formResearch);
+				prepStmt.setString(7, formAddr);
+				prepStmt.setString(8, formPhone);
+				prepStmt.setString(9, formEmail);
+				prepStmt.setString(10, formWebsite);
 				
 				if(edit)
-					prepStmt.setString(10, pageUID);
+					prepStmt.setString(11, pageUID);
 				
 				prepStmt.addBatch();
 
@@ -323,8 +327,8 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				conn.commit();
 				
 			} catch (SQLException se) {
-				post = false;
-				//DBTest += se.getSQLState();
+				//post = false;
+				DBTest += se.getSQLState();
                         }
                 }
 		return post;
@@ -346,7 +350,8 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
                 List form = formDiv.addList("form", List.TYPE_FORM);
 		if(edit) {
-			Text fname = getText(form, "name", F_name, 50,name);
+			Text ffname = getText(form, "first name", F_fname, 50, fname);
+			Text flname = getText(form, "last name", F_lname, 50, lname);
                		Text fPictureURL = getText(form, "Picture URL", F_picurl, 100, pictureURL);
                 	Text fJobTitle = getText(form, "job title", F_jobTitle, 100, jobTitle);
                 	Text fResearch = getText(form, "research", F_research, 100, researchArea);
@@ -370,7 +375,8 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 	Text fResearchGateURL = getText(form, "research gate", F_researchgateURL, 100,researchGate);
                 	Text fTwitterURL = getText(form, "twitter", F_twitterURL, 100,twitter);
 		} else {
-                	Text fname = getText(form, "name", F_name, 50, "");
+                	Text fname = getText(form, "first name", F_fname, 50, "");
+			Text flname = getText(form, "last name", F_lname, 50, "");
                		Text fPictureURL = getText(form, "Picture URL", F_picurl, 100, "");
                 	Text fJobTitle = getText(form, "job title", F_jobTitle, 100,"");
                 	Text fResearch = getText(form, "research", F_research, 100,"");
@@ -431,7 +437,8 @@ public class ProfileManager extends AbstractDSpaceTransformer
                                 ResultSet rs = stmt.executeQuery(sql);
                                 while (rs.next()) {
                                         uniqueId = rs.getString("uniqueid");
-                                        name = rs.getString("name");
+                                        fname = rs.getString("firstName");
+					lname = rs.getString("lastName");
                                         pictureURL = rs.getString("pictureurl");
                                         jobTitle = rs.getString("jobtitle");
                                         researchArea = rs.getString("research");
@@ -524,6 +531,6 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 	else
                       		page.addPara("Please Log In To Create And Edit Your Profile");
 		}
-		//page.addPara(DBTest);
+		page.addPara(DBTest);
         }
 }

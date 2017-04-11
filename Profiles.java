@@ -131,7 +131,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 	public static final Message T_title = message("Profiles");
 	public static final Message T_trail = message("Profiles");
 	//database information
-	public static final String databaseConnection = "jdbc:postgresql://localhost:5432/profiles";
+	public static final String databaseConnection = "jdbc:postgresql://localhost:5432/dspace";
 	public static final String databaseUsername = "postgres";
 	public static final String databasePassword = "capstone";
 	//image location information
@@ -145,7 +145,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 	private static Logger log = Logger.getLogger(Profiles.class);
 
 	//page data retrieved from database
-	private String uniqueId = "", name = "", pictureURL = "";
+	private String uniqueId = "", fname = "", lname="", pictureURL = "";
 	private String jobTitle = "", researchArea = "Research: ", address = "Address: ";
 	private String phone = "Phone: ", email = "Email: ", website = "Personal Website: ";
 	private String school = "", degreeAndAttended = "";
@@ -173,7 +173,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 	public boolean checkDB(String pageUID)
 	{
-		uniqueId = ""; name = ""; pictureURL = ""; jobTitle = ""; researchArea = "Research: "; 
+		uniqueId = ""; fname = ""; lname = ""; pictureURL = ""; jobTitle = ""; researchArea = "Research: "; 
 		address = "Address: "; phone = "Phone: "; email = "Email: "; website = "Personal Website: ";
         	school = ""; degreeAndAttended = ""; grantTitle = "Grant Title: "; grantLength = "Grant Length: "; 
 		grantNumber = "Grant Number: "; orcid = ""; academia = ""; googlePlus = ""; linkedin = ""; 
@@ -203,7 +203,8 @@ public class Profiles extends AbstractDSpaceTransformer {
 				ResultSet rs = stmt.executeQuery(sql);
 				while (rs.next()) {
 					uniqueId = rs.getString("uniqueid");
-					name = rs.getString("name");
+					fname = rs.getString("firstName");
+					lname = rs.getString("lastName");
 					pictureURL = rs.getString("pictureurl");
 					jobTitle = rs.getString("jobtitle");
 					researchArea = "Research: " + rs.getString("research");
@@ -277,7 +278,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		Division infoWithName = infoBar.addDivision("infoWithName");
 		
 		Division nameHeader = infoWithName.addDivision("nameHeader");
-		nameHeader.addPara(name);
+		nameHeader.addPara(fname + " " + lname);
 		
 		Division personalInfo = infoWithName.addDivision("personalInfo");
 		
@@ -359,19 +360,27 @@ public class Profiles extends AbstractDSpaceTransformer {
 		boolean containsUser = checkDB(pageUID);
 
 		//if user is in database, build profile
-		Division bottomLinks = page.addDivision("bottomToolBar");
 		if (containsUser) {
 			createProfile(page);
+			Division bottomToolBar = page.addDivision("bottomToolBar");
+			Division returnHomeLink = bottomToolBar.addDivision("returnHomeLink");
 			if(eperson.equals(pageUID)) {
+				Division editProfileLink = bottomToolBar.addDivision("editProfileLink");
 				String link = "/xmlui/scholarprofiles/profilemanager";
-				Para editLink = bottomLinks.addPara(null, "Edit Link");
+				Para editLink = editProfileLink.addPara(null, "Edit Link");
 				editLink.addXref(link).addContent(T_edit_link);
 			}
+		        String homeLink = "/xmlui/scholarprofiles";
+                	Para homeLinkp = returnHomeLink.addPara(null, "Home Link");
+                	homeLinkp.addXref(homeLink).addContent("Return to Scholar Profiles Home");
+
 		} else {
+			Division bottomToolBar = page.addDivision("bottomToolBar");
 			page.addPara("This Profile Does Not Exist");
+	                String homeLink = "/xmlui/scholarprofiles";
+        	        Para homeLinkp = bottomToolBar.addPara(null, "Home Link");
+	                homeLinkp.addXref(homeLink).addContent("Return to Scholar Profiles Home");
+
 		}
-		String homeLink = "/xmlui/scholarprofiles";
-		Para homeLink = bottomLinks.addPara(null, "Home Link");
-		homeLink.addXref(homeLink).addContent("Return to Scholar Profiles Home");
 	}
 }
