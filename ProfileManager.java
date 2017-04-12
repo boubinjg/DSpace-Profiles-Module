@@ -176,8 +176,8 @@ public class ProfileManager extends AbstractDSpaceTransformer
 	public boolean checkPost(String pageUID, boolean edit)
         {	
 		boolean post = false;
-                String  formfname = request.getParameter("fname"),
-		formlname = request.getParameter("lname"),
+                String  formfname = request.getParameter("first name"),
+		formlname = request.getParameter("last name"),
                 formPicURL = request.getParameter("Picture URL"),
                 formJobTitle = request.getParameter("job title"),
                 formResearch = request.getParameter("research"),

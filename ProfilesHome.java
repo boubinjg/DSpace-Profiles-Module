@@ -193,7 +193,7 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		return containsUser;
 	}
 	public class LinkData{
-		public String uid, name;
+		public String uid, fname, lname;
 		public LinkData(String u, String f, String l) {
 			uid = u;
 			fname = f;
@@ -228,7 +228,7 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		} catch (SQLException e) {
 			ret = new ArrayList<LinkData>();
 		}
-		collections.sort(ret, new Comparator<LinkData>() {
+		Collections.sort(ret, new Comparator<LinkData>() {
 			@Override
 			public int compare(LinkData l1, LinkData l2)
 			{
