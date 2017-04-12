@@ -178,7 +178,7 @@ public class Profiles extends AbstractDSpaceTransformer {
         	school = ""; degreeAndAttended = ""; grantTitle = "Grant Title: "; grantLength = "Grant Length: "; 
 		grantNumber = "Grant Number: "; orcid = ""; academia = ""; googlePlus = ""; linkedin = ""; 
 		researchGate = ""; twitter = ""; organization = ""; orgJobTitle = ""; dateRange = "";
-
+	
 		boolean containsUser = false;
 		try {
 			Connection conn = null;

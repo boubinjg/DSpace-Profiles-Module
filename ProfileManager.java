@@ -135,7 +135,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
         public static final Message T_title = message("Create Profile");
         public static final Message T_trail = message("Create Profile");
         //database information
-        public static final String databaseConnection = "jdbc:postgresql://localhost:5432/profiles";
+        public static final String databaseConnection = "jdbc:postgresql://localhost:5432/dspace";
         public static final String databaseUsername = "postgres";
         public static final String databasePassword = "capstone";
         //image location information
@@ -204,7 +204,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 if (isSent != null && isSent.equals("true")) {
 			post = true;
                         try {
-				
+				DBTest = "";
                         	Connection conn = null;
 
                            	Statement stmt = null;
@@ -216,13 +216,14 @@ public class ProfileManager extends AbstractDSpaceTransformer
                                 stmt = conn.createStatement();
 
 				//new stuff
+				DBTest += "new stuff";
 				String SQL;
 				if(edit)
 				{
-					SQL = "UPDATE faculty SET uniqueid = ?, firstName = ?, lastName = ?, pictureurl = ?, jobtitle = ?, research = ?, address = ?, phone = ?, email = ?, website = ? WHERE uniqueid = ?";
+					SQL = "UPDATE faculty SET uniqueid = ?, firstname = ?, lastname = ?, pictureurl = ?, jobtitle = ?, research = ?, address = ?, phone = ?, email = ?, website = ? WHERE uniqueid = ?";
 				}
 				else
-					SQL = "INSERT INTO faculty (uniqueid, firstName, lastName, pictureurl, jobtitle, research, address, phone, email, website) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					SQL = "INSERT INTO faculty (uniqueid, firstname, lastname, pictureurl, jobtitle, research, address, phone, email, website) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				
 				prepStmt = conn.prepareStatement(SQL);
 
@@ -247,7 +248,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 			        // Create an int[] to hold returned values
                                 int[] count = prepStmt.executeBatch();
-				
+				DBTest += "faculty";
 				if(edit)
 				{
 					SQL = "UPDATE employment SET uid = ?, organization = ?, jobtitle = ?, daterange = ? WHERE uid = ?";
@@ -266,7 +267,8 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 				prepStmt.addBatch();
 				count = prepStmt.executeBatch();
-
+				DBTest += "employment";
+	
 				if(edit)
 				{
 					SQL = "UPDATE bio SET uid = ?, school = ?, degree = ?, dateearned = ? WHERE uid = ?";
@@ -285,13 +287,14 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 				prepStmt.addBatch();
 				count = prepStmt.executeBatch();
-					
+				
+				DBTest += "bio";
 				if(edit)
 				{
 					SQL = "UPDATE funding SET uid = ?, granttitle = ?, grantlength = ?, grantnumber = ? WHERE uid = ?";
 				}
 				else
-					SQL = "INSERT INTO funding (uid, granttitle, grandlength, grantnumber) VALUES (?,?,?,?)";
+					SQL = "INSERT INTO funding (uid, granttitle, grantlength, grantnumber) VALUES (?,?,?,?)";
 				prepStmt = conn.prepareStatement(SQL);
 				conn.setAutoCommit(false);
 				prepStmt.setString(1,pageUID);
@@ -303,7 +306,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 				prepStmt.addBatch();
 				count = prepStmt.executeBatch();
-				
+				DBTest += "funding";
 				if(edit)
 				{
 					SQL = "UPDATE links SET uid = ?, orcid = ?, academia = ?, googleplus = ?, linkedin = ?, researchgate = ?, twitter = ? WHERE uid = ?";
@@ -324,7 +327,9 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 				prepStmt.addBatch();
 				count = prepStmt.executeBatch();
+				DBTest += "links";
 				conn.commit();
+				DBTest += "commit";
 				
 			} catch (SQLException se) {
 				//post = false;

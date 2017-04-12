@@ -73,14 +73,14 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 	public static final Message T_title = message("Profiles");
 	public static final Message T_trail = message("Profiles");
 	//database information
-	public static final String databaseConnection = "jdbc:postgresql://localhost:5432/profiles";
+	public static final String databaseConnection = "jdbc:postgresql://localhost:5432/dspace";
 	public static final String databaseUsername = "postgres";
 	public static final String databasePassword = "capstone";
 
 	private static Logger log = Logger.getLogger(ProfilesHome.class);
 
 	//page data retrieved from database
-	private String uniqueId = "", name = "", pictureURL = "";
+	private String uniqueId = "", fname = "", lname = "", pictureURL = "";
 	private String jobTitle = "", researchArea = "Research: ", address = "Address: ";
 	private String phone = "Phone: ", email = "Email: ", website = "Personal Website: ";
 	private String school = "", degreeAndAttended = "";
@@ -128,7 +128,8 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 				ResultSet rs = stmt.executeQuery(sql);
 				while (rs.next()) {
 					uniqueId = rs.getString("uniqueid");
-					name = rs.getString("name");
+					fname = rs.getString("firstname");
+					lname = rs.getString("lastname");
 					pictureURL = rs.getString("pictureurl");
 					jobTitle = rs.getString("jobtitle");
 					researchArea = "Research: " + rs.getString("research");
@@ -193,9 +194,10 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 	}
 	public class LinkData{
 		public String uid, name;
-		public LinkData(String u, String n) {
+		public LinkData(String u, String f, String l) {
 			uid = u;
-			name = n;
+			fname = f;
+			lname = l;
 		}
 	}
 	public ArrayList<LinkData> generateTable(String linkLetter)
@@ -210,13 +212,14 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 			conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
 			stmt = conn.createStatement();
 			
-			String sql = "SELECT uniqueid, name FROM faculty";
+			String sql = "SELECT uniqueid, firstname, lastname FROM faculty";
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()) {
 				//put things into arrayList by uniqueid
-				String uid = rs.getString("uniqueid");
-				if(uid.toUpperCase().substring(0,1).equals(linkLetter)) {
-					LinkData l = new LinkData(uid, rs.getString("name"));
+				String last = rs.getString("lastname");
+				if(last.toUpperCase().substring(0,1).equals(linkLetter)) {
+					LinkData l = new LinkData(rs.getString("uniqueid"), 
+								  rs.getString("firstname"), last);
 					ret.add(l);
 				}
 			}
@@ -225,6 +228,13 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		} catch (SQLException e) {
 			ret = new ArrayList<LinkData>();
 		}
+		collections.sort(ret, new Comparator<LinkData>() {
+			@Override
+			public int compare(LinkData l1, LinkData l2)
+			{
+				return l1.lname.compareTo(l2.lname);
+			}
+		});
 		return ret;
 	}
 	public void addBody(Body body) throws SAXException, WingException {
@@ -260,7 +270,7 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		String link = "/xmlui/scholarprofiles/";
 		for(LinkData usr : users) {
 			Para scholarLink = scholarList.addPara(null, "page link");
-			scholarLink.addXref(link + usr.uid).addContent(usr.name);
+			scholarLink.addXref(link + usr.uid).addContent(usr.fname + " " + usr.lname);
 		}
 			
 		Division bottomToolBar = page.addDivision("bottomToolBar");
