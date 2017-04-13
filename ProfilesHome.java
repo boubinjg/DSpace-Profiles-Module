@@ -255,7 +255,7 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		
 		//page header container
 		Division header = page.addDivision("header");
-		header.addPara("Scholarly Commons Profiles Home Page");
+		header.addPara("Author Profiles");
 		
 		Division linksContainer = page.addDivision("linksContainer");
 		// the division that holds the links by last name (A, B, C...Z)
