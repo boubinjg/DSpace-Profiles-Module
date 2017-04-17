@@ -363,6 +363,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		if (containsUser) {
 			createProfile(page);
 			Division bottomToolBar = page.addDivision("bottomToolBar");
+                        Division publications = bottomToolBar.addDivision("publications");
 			Division returnHomeLink = bottomToolBar.addDivision("returnHomeLink");
 			if(eperson.equals(pageUID)) {
 				Division editProfileLink = bottomToolBar.addDivision("editProfileLink");
