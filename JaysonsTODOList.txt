@@ -1,56 +1,15 @@
-add first/last names to database and form to replace the name field 
-
-add dummy accounts to database
-
+add dummy accounts/publications to database
+create poster
+practice presentation?
 
 
 After capstone presentations tasks:
-
-create an install script/instructions (maybe one that uses ANT) (may not be possible)
-
-Create documentation for Next group
-
-change LDAP authentication to only allow professors to make profiles.
-(test with brinkman)
-(dspace can't do this alone so it may have to be Miami specific)
-
-//User Views:
-Profiles:
-	if users page exists
-		load page
-	else
-		"This page cannot be found"
-		Link to profile home
-
-profileManager:
-	create:
-	if the person isn't logged in
-		show a generic message
-	
-	If the person is logged in:
-		if they do have a profile:
-		Profile edit:
-			if they do have a profile
-				load the form, but with all boxes filled with current information
-				allow for the same functionality as create, but with full input boxes
-		
-		if they don't have a profile:
-		Do form stuff
-		when form is submitted, redirect to profile
-	
-
-ProfilesHome:
-
-generic message
-
-If person is logged in:
-	if person has profile:
-		link to profile edit
-	else
-		link to profile create
-
-list of people
-
+-create an install script/instructions 
+-Create documentation for Next group/document code
+-Do a complete reinstall
+-upgrade to dspace6 and see if it still works
+-get an image of the VM
+-immediately redirect from profile create to profile
 
 
 Tasks for next group:

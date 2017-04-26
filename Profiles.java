@@ -312,7 +312,8 @@ public class Profiles extends AbstractDSpaceTransformer {
 		Division academicContainer = bios.addDivision("academicContainer");
 		Division employmentContainer = bios.addDivision("employmentContainer");
 		Division grantsContainer = bios.addDivision("grantsContainer");
-		
+		Division publicationsContainer = bios.addDivision("publicationsContainer");		
+
 		// Set the headers of the bio containers
 		Division academicHeader = academicContainer.addDivision("academicHeader");
 		academicHeader.addPara("Education");
@@ -320,6 +321,8 @@ public class Profiles extends AbstractDSpaceTransformer {
 		employmentHeader.addPara("Employment");
 		Division grantsHeader = grantsContainer.addDivision("grantsHeader");
 		grantsHeader.addPara("Funding");
+		Division publicationsHeader = publicationsContainer.addDivision("publicationsHeader");
+		publicationsHeader.addPara("Publications");
 		
 		Division educationContent = academicContainer.addDivision("educationContent");
 		educationContent.addPara(school);
@@ -334,6 +337,9 @@ public class Profiles extends AbstractDSpaceTransformer {
 		fundingContent.addPara(grantTitle);
 		fundingContent.addPara(grantLength);
 		fundingContent.addPara(grantNumber);	
+
+		Division publicationsContent = publicationsContainer.addDivision("publicationsContent");
+
 	}
                	
 	public void addBody(Body body) throws SAXException, WingException {
@@ -363,8 +369,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 		if (containsUser) {
 			createProfile(page);
 			Division bottomToolBar = page.addDivision("bottomToolBar");
-                        Division publications = bottomToolBar.addDivision("publications");
-			Division returnHomeLink = bottomToolBar.addDivision("returnHomeLink");
+                      	Division returnHomeLink = bottomToolBar.addDivision("returnHomeLink");
 			if(eperson.equals(pageUID)) {
 				Division editProfileLink = bottomToolBar.addDivision("editProfileLink");
 				String link = "/xmlui/scholarprofiles/profilemanager";

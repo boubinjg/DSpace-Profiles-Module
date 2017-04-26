@@ -70,9 +70,9 @@ public class ProfileManager extends AbstractDSpaceTransformer
  * 110523
  */
    	static final Message F_head_create =
-                message("Create Your Profile");
+                message("Create Profile");
 	static final Message F_head_edit =
-		message("Edit Your Profile");
+		message("Edit Profile");
         private static final Message F_para1 =
                 message("Test2");
         private static final Message F_jobTitle =
@@ -132,8 +132,8 @@ public class ProfileManager extends AbstractDSpaceTransformer
 	String DBTest = "";
         //breadcrumb information
         public static final Message T_dspace_home = message("xmlui.general.dspace_home");
-        public static final Message T_title = message("Create Profile");
-        public static final Message T_trail = message("Create Profile");
+        public static final Message T_title = message("Create/Edit Profile");
+        public static final Message T_trail = message("Create/Edit Profile");
         //database information
         public static final String databaseConnection = "jdbc:postgresql://localhost:5432/dspace";
         public static final String databaseUsername = "postgres";
@@ -351,8 +351,6 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 // Build the item viewer division.
                 Division formDiv = page.addInteractiveDivision("form", request.getRequestURI(), Division.METHOD_POST, "primary");
 
-                formDiv.addPara("Faculty Information");
-
                 List form = formDiv.addList("form", List.TYPE_FORM);
 		if(edit) {
 			Text ffname = getText(form, "first name", F_fname, 50, fname);
@@ -536,6 +534,5 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 	else
                       		page.addPara("Please Log In To Create And Edit Your Profile");
 		}
-		page.addPara(DBTest);
         }
 }
