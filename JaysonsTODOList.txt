@@ -14,4 +14,6 @@ After capstone presentations tasks:
 
 Tasks for next group:
 Integrate this with dspace's very shallow profiles system
-refactor the class system of our current setup so there is not so much code reuse
+Refactor the class system of our current setup so there is not so much code reuse
+Upload button to upload a picture, as an author
+Allow an author to add more than one education, employment, grant, etc.
