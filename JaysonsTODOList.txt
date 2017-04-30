@@ -1,8 +1,3 @@
-add dummy accounts/publications to database
-create poster
-practice presentation?
-
-
 After capstone presentations tasks:
 -create an install script/instructions 
 -Create documentation for Next group/document code
@@ -13,5 +8,9 @@ After capstone presentations tasks:
 
 
 Tasks for next group:
-Integrate this with dspace's very shallow profiles system
-refactor the class system of our current setup so there is not so much code reuse
+-Integrate this with dspace's very shallow profiles system
+-refactor the class system of our current setup so there is not so much code reuse
+-integrate with dspace 6
+-connect with/submit to open source community
+-search functionality for profiles
+

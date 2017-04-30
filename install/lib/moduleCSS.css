@@ -1,0 +1,598 @@
+p {
+	padding-left: 3px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	letter-spacing: -0.8px;
+}
+
+.ds-div-head {
+	text-align: center;
+}
+
+.ds-text-field {
+	width: 85%;
+}
+
+#aspect_artifactbrowser_Profiles_div_links a{
+	font-size:16px; 
+}
+
+/*Resize filler image that pops up when not in database*/
+#aspect-artifactbrowser_Profiles_p_ . img {
+	width: 150px;
+	height: 150px;
+}
+
+#aspect_artifactbrowser_Profiles_div_page {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	margin-top: 25px;
+}
+
+#aspect_artifactbrowser_Profiles_div_infoBar {
+	display: flex;
+	flex-flow: row;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+#aspect_artifactbrowser_Profiles_div_picture img {
+	display: block; /*removes the white space below picture */
+	border: 3px solid black;
+	margin-top: 3%;
+	border-radius: 2px;
+}
+
+#aspect_artifactbrowser_Profiles_div_infoWithName {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 100%;
+}
+
+#aspect_artifactbrowser_Profiles_div_nameHeader p {
+	color: #B61E2E;
+	font-weight: bold;
+	font-size: 24px;
+	margin-left: 10px;
+	width: 100%;
+}
+
+#aspect_artifactbrowser_Profiles_div_personalInfo {
+	display: flex;
+	flex-flow: row;
+	justify-content: space-between;
+	margin-top: 15px;
+	width: 100%;
+}
+
+#aspect_artifactbrowser_Profiles_div_infoLeftContainer { 
+	height: 95%;
+	width: 95%;
+	margin-top: -25px;
+	margin-left: 10px;
+}
+
+#aspect_artifactbrowser_Profiles_div_infoRightContainer {
+	height: 95%;
+	width: 95%;
+	margin-top: -25px;
+	margin-left: 10px;
+}
+
+#aspect_artifactbrowser_Profiles_div_links {
+	display: flex;
+	flex-flow: row;	
+}
+
+#aspect_artifactbrowser_Profiles_div_links img {
+	height: 40px;
+	width: 40px;
+	margin: 2px;
+}
+
+#aspect_artifactbrowser_Profiles_div_bios {
+	margin-top: -2%;
+	width: 100%;
+	display: flex;
+	flex-flow: column;
+	align-content: flex-end;
+	justify-content: flex-end;
+}
+
+#aspect_artifactbrowser_Profiles_div_academicContainer {
+	margin-top: 10px;
+	display: flex;
+	flex-flow: column;
+}
+
+#aspect_artifactbrowser_Profiles_div_academicHeader {
+	border-radius: 7px 7px 1px 1px;
+	background-color: #B61E2E;
+	margin: 0px;
+	padding-left: 7px;
+}
+
+#aspect_artifactbrowser_Profiles_div_academicHeader p {
+	color: white;
+	font-weight: bold;
+	margin-top: 6px;
+	margin-bottom: 6px;
+	margin-left: 1px;
+}
+
+#aspect_artifactbrowser_Profiles_div_educationContent { 
+	margin-top: 2px;
+	border: solid #e6e6e6;
+	border-style: outset;
+	border-radius: 0px 0px 15px;
+}
+
+#aspect_artifactbrowser_Profiles_div_educationContent p {
+	margin-top: 10px;
+	margin-left: 5px;
+	line-height: 0.8;
+
+}
+
+#aspect_artifactbrowser_Profiles_div_employmentContainer {
+	margin-top: 10px;
+	display: flex;
+	flex-flow: column;
+}
+
+#aspect_artifactbrowser_Profiles_div_employmentHeader {
+	border-radius: 7px 7px 1px 1px;
+	background-color: #B61E2E;
+	margin: 0px;
+	padding-left: 7px;
+}
+
+#aspect_artifactbrowser_Profiles_div_employmentHeader p {
+	color: white;
+	font-weight: bold;
+	margin-top: 6px;
+	margin-bottom: 6px;
+	margin-left: 1px;
+}
+
+#aspect_artifactbrowser_Profiles_div_employmentContent {
+	margin-top: 2px;
+	border: solid #e6e6e6;
+	border-style: outset;
+	border-radius: 0px 0px 15px;
+}
+
+#aspect_artifactbrowser_Profiles_div_employmentContent p {
+	margin-top: 10px;
+	margin-left: 5px;
+	line-height: 0.8;
+}
+
+#aspect_artifactbrowser_Profiles_div_grantsContainer {
+	margin-top: 10px;
+	display: flex;
+	flex-flow: column;
+}
+
+#aspect_artifactbrowser_Profiles_div_grantsHeader {
+	border-radius: 7px 7px 1px 1px;
+	background-color: #B61E2E;
+	margin: 0px;
+	padding-left: 7px;
+}
+
+#aspect_artifactbrowser_Profiles_div_grantsHeader p {
+	color: white;
+	font-weight: bold;
+	margin-top: 6px;
+	margin-bottom: 6px;
+	margin-left: 1px;
+}
+
+#aspect_artifactbrowser_Profiles_div_fundingContent {
+	margin-top: 2px;
+	border: solid #e6e6e6;
+	border-style: outset;
+	border-radius: 0px 0px 15px;
+}
+
+#aspect_artifactbrowser_Profiles_div_fundingContent p {
+	margin-top: 10px;
+	margin-left: 5px;
+	line-height: 0.8;
+}
+
+#aspect_artifactbrowser_Profiles_div_publicationsContainer {
+	margin-top: 10px;
+	display: flex;
+	flex-flow: column;
+}
+
+#aspect_artifactbrowser_Profiles_div_publicationsHeader {
+	border-radius: 7px 7px 1px 1px;
+	background-color: #B61E2E;
+	margin: 0px;
+	padding-left: 7px;
+}
+
+#aspect_artifactbrowser_Profiles_div_publicationsHeader p {
+	color: white;
+	font-weight: bold;
+	margin-top: 6px;
+	margin-bottom: 6px;
+	margin-left: 1px;
+}
+
+#aspect_artifactbrowser_Profiles_div_publicationsContent {
+	margin-top: 2px;
+	padding-left: 5px;
+	border: solid #e6e6e6;
+	border-style: outset;
+	border-radius: 0px 0px 15px;
+	min-height: 1.00cm;
+	max-height: 4.00cm;
+	overflow: auto;
+	overflow-x: hidden;
+}
+
+#aspect_artifactbrowser_Profiles_div_publicationsContent p {
+	margin-top: 10px;
+	margin-left: 5px;
+	line-height: 0.8;
+}
+
+#aspect_artifactbrowser_Profiles_div_publicationsContent a {
+	font-size: 16px;
+	color: #007b89;
+}
+
+#aspect_artifactbrowser_Profiles_div_publicationsContent::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.9);
+	border-radius: 0px 0px 15px;
+	background-color: #CCCCCC;
+}
+
+#aspect_artifactbrowser_Profiles_div_publicationsContent::-webkit-scrollbar {
+        width: 13px;
+	border-radius: 0px 0px 15px;
+        background-color: #F5F5F5;
+}
+
+#aspect_artifactbrowser_Profiles_div_publicationsContent::-webkit-scrollbar-thumb {
+        border-radius: 0px 0px 15px;
+        background-color: #B61E2E;
+        background-image: -webkit-linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.4) 50%, transparent, transparent);
+}
+
+#aspect_artifactbrowser_Profiles_div_bottomToolBar {
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+        margin-top: 10px;
+        width: 100%;
+}
+
+#aspect_artifactbrowser_Profiles_div_bottomToolBar a {
+	font-size: 18px;
+	color: #007b89;
+}
+
+#aspect_artifactbrowser_ProfilesHome_div_page {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+#aspect_artifactbrowser_ProfilesHome_div_linksContainer {
+        display: flex;
+	justify-content: center;
+	border-radius: 7px 7px 2px 2px;
+        background-color: #B61E2E;
+        width: 90%;
+	margin-top: 10px;
+}
+
+#aspect_artifactbrowser_ProfilesHome_div_links {
+        display: block;
+	padding: 5px;
+}
+
+#aspect_artifactbrowser_ProfilesHome_div_links a {
+        font-size:18px;
+        padding: 2px;
+        color: white;
+}
+
+#aspect_artifactbrowser_ProfilesHome_div_header p {
+        color: #B61E2E;
+        font-weight: bold;
+        font-size: 24px;
+        margin-left: 10px;
+        text-align: center;
+        padding: 5px;
+}
+
+#aspect_artifactbrowser_ProfilesHome_div_scholarList {
+        margin-top: 2px;
+        border: solid #e6e6e6;
+	border-style: outset;
+	border-radius: 0px 0px 15px;
+	max-height: 6.05cm;
+	overflow: auto;
+	overflow-x: hidden;
+        width: 89%;
+}
+
+#aspect_artifactbrowser_ProfilesHome_div_scholarList::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.9);
+	border-radius: 0px 0px 15px;
+	background-color: #CCCCCC;
+}
+
+#aspect_artifactbrowser_ProfilesHome_div_scholarList::-webkit-scrollbar {
+        width: 13px;
+	border-radius: 0px 0px 15px;
+        background-color: #F5F5F5;
+}
+
+#aspect_artifactbrowser_ProfilesHome_div_scholarList::-webkit-scrollbar-thumb {
+        border-radius: 0px 0px 15px;
+        background-color: #B61E2E;
+        background-image: -webkit-linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.4) 50%, transparent, transparent);
+}
+
+#aspect_artifactbrowser_ProfilesHome_div_scholarList p {
+        margin-left: 5px;
+	margin-top: 5px;
+	font-size: 16px;
+}
+
+#aspect_artifactbrowser_ProfilesHome_div_scholarList a {
+	color: #007b89;
+}
+
+#aspect_artifactbrowser_ProfilesHome_div_bottomToolBar {
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+        margin-top: 10px;
+        width: 89%;
+}
+
+#aspect_artifactbrowser_ProfilesHome_div_bottomToolBar a {
+	font-size: 18px;
+	color: #007b89;
+}
+
+#aspect_artifactbrowser_ProfileManager_div_form label {
+	color: #B61E2E;
+}
+
+#aspect_artifactbrowser_ProfileManager_div_formHeader {
+	padding: 10px;
+	align-content: center;
+}
+
+#aspect_artifactbrowser_ProfileManager_div_formHeader p {
+	text-align: center;
+	font-size: 24px;
+	color: #B61E2E;
+	font-weight: bold;
+}
+
+li:nth-child(1).ds-form-item { 
+	float: left;
+	padding-left: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+} 
+
+li:nth-child(2).ds-form-item { 
+	float: right;
+	padding-right: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+	top: -53px;
+} 
+
+li:nth-child(3).ds-form-item { 
+	float: left;
+	padding-left: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+}
+ 
+li:nth-child(4).ds-form-item { 
+	float: right;
+	padding-right: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+	top: -53px;
+}
+ 
+li:nth-child(5).ds-form-item { 
+	float: left;
+	padding-left: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+}
+
+li:nth-child(6).ds-form-item { 
+	float: right;
+	padding-right: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+	top: -53px;
+}
+ 
+li:nth-child(7).ds-form-item { 
+	float: left;
+	padding-left: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+}
+ 
+li:nth-child(8).ds-form-item { 
+	float: right;
+	padding-right: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+	top: -53px;
+}
+ 
+li:nth-child(9).ds-form-item { 
+	float: left;
+	padding-left: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+}
+ 
+li:nth-child(10).ds-form-item { 
+	float: left;
+	padding-left: 15%;
+	margin-top: 40px;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+}
+ 
+li:nth-child(11).ds-form-item { 
+	float: right;
+	padding-right: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+	top: -53px;
+}
+ 
+li:nth-child(12).ds-form-item { 
+	float: left;
+	padding-left: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+}
+ 
+li:nth-child(13).ds-form-item { 
+	float: left;
+	padding-left: 15%;
+	margin-top: 40px;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+}
+
+li:nth-child(14).ds-form-item { 
+	float: right;
+	padding-right: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+	top: -53px;
+}
+
+li:nth-child(15).ds-form-item { 
+	float: left;
+	padding-left: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+}
+
+li:nth-child(16).ds-form-item { 
+	float: left;
+	padding-left: 15%;
+	margin-top: 40px;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+}
+
+li:nth-child(17).ds-form-item { 
+	float: right;
+	padding-right: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+	top: -53px;
+}
+
+li:nth-child(18).ds-form-item { 
+	float: left;
+	padding-left: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+}
+
+li:nth-child(19).ds-form-item { 
+	float: left;
+	padding-left: 15%;
+	margin-top: 40px;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+}
+
+li:nth-child(20).ds-form-item { 
+	float: right;
+	padding-right: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+	top: -53px;
+}
+
+li:nth-child(21).ds-form-item { 
+	float: left;
+	padding-left: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+}
+
+li:nth-child(22).ds-form-item { 
+	float: right;
+	padding-right: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+	top: -53px;
+}
+
+li:nth-child(23).ds-form-item { 
+	float: left;
+	padding-left: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+}
+
+li:nth-child(24).ds-form-item { 
+	float: right;
+	padding-right: 15%;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0;
+	top: -53px;
+}
+ 
+.ds-form-item.odd.last {
+	position: absolute;
+	margin: auto;
+	margin-top: -20px;
+	left: 32.5%;
+}
