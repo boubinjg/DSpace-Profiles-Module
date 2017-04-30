@@ -14,3 +14,8 @@ Tasks for next group:
 -connect with/submit to open source community
 -search functionality for profiles
 
+Integrate this with dspace's very shallow profiles system
+Refactor the class system of our current setup so there is not so much code reuse
+Upload button to upload a picture, as an author
+Allow an author to add more than one education, employment, grant, etc.
+
