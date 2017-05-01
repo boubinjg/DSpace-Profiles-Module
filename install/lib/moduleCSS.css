@@ -384,215 +384,54 @@ p {
 	font-weight: bold;
 }
 
-li:nth-child(1).ds-form-item { 
-	float: left;
-	padding-left: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-} 
-
-li:nth-child(2).ds-form-item { 
-	float: right;
-	padding-right: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-	top: -53px;
-} 
-
-li:nth-child(3).ds-form-item { 
-	float: left;
-	padding-left: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-}
- 
-li:nth-child(4).ds-form-item { 
-	float: right;
-	padding-right: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-	top: -53px;
-}
- 
-li:nth-child(5).ds-form-item { 
-	float: left;
-	padding-left: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-}
-
-li:nth-child(6).ds-form-item { 
-	float: right;
-	padding-right: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-	top: -53px;
-}
- 
-li:nth-child(7).ds-form-item { 
-	float: left;
-	padding-left: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-}
- 
-li:nth-child(8).ds-form-item { 
-	float: right;
-	padding-right: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-	top: -53px;
-}
- 
-li:nth-child(9).ds-form-item { 
-	float: left;
-	padding-left: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-}
- 
 li:nth-child(10).ds-form-item { 
-	float: left;
-	padding-left: 15%;
-	margin-top: 40px;
+	margin-top: 0;
+} 
+
+li:nth-child(11).ds-form-item {
+	margin-top: 50px;
+}
+
+li:nth-child(13).ds-form-item {
+	margin-top: 50px;
+}
+
+li:nth-child(16).ds-form-item {
+	margin-top: 50px;
+}
+
+li:nth-child(17).ds-form-item {
+	margin-top: 50px;
+}
+
+li:nth-child(18).ds-form-item {
+	margin-top: 0px;
+}
+
+li:nth-child(19).ds-form-item {
+	margin-top: 100px;
+}
+
+.ds-form-item.odd {
 	text-align: center;
 	font-size: 14px;
-	margin-bottom: 0;
-}
- 
-li:nth-child(11).ds-form-item { 
 	float: right;
-	padding-right: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-	top: -53px;
-}
- 
-li:nth-child(12).ds-form-item { 
-	float: left;
-	padding-left: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-}
- 
-li:nth-child(13).ds-form-item { 
-	float: left;
-	padding-left: 15%;
-	margin-top: 40px;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-}
-
-li:nth-child(14).ds-form-item { 
-	float: right;
-	padding-right: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-	top: -53px;
-}
-
-li:nth-child(15).ds-form-item { 
-	float: left;
-	padding-left: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-}
-
-li:nth-child(16).ds-form-item { 
-	float: left;
-	padding-left: 15%;
-	margin-top: 40px;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-}
-
-li:nth-child(17).ds-form-item { 
-	float: right;
-	padding-right: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-	top: -53px;
-}
-
-li:nth-child(18).ds-form-item { 
-	float: left;
-	padding-left: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-}
-
-li:nth-child(19).ds-form-item { 
-	float: left;
-	padding-left: 15%;
-	margin-top: 40px;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-}
-
-li:nth-child(20).ds-form-item { 
-	float: right;
-	padding-right: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-	top: -53px;
-}
-
-li:nth-child(21).ds-form-item { 
-	float: left;
-	padding-left: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-}
-
-li:nth-child(22).ds-form-item { 
-	float: right;
-	padding-right: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-	top: -53px;
-}
-
-li:nth-child(23).ds-form-item { 
-	float: left;
-	padding-left: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-}
-
-li:nth-child(24).ds-form-item { 
-	float: right;
-	padding-right: 15%;
-	text-align: center;
-	font-size: 14px;
-	margin-bottom: 0;
-	top: -53px;
-}
- 
-.ds-form-item.odd.last {
-	position: absolute;
 	margin: auto;
-	margin-top: -20px;
-	left: 32.5%;
+	margin-top: -54px;
+	margin-bottom: 0;
+	padding-right: 15%;
+}
+
+.ds-form-item.even {
+	text-align: center;
+	font-size: 14px;
+	float: left;
+	margin: auto;
+	margin-bottom 0;
+	padding-left: 15%;
+}
+
+.ds-form-item.odd.last {
+	margin-top: 10px;
+	padding-right: 45%;
 }
