@@ -2,7 +2,6 @@ After capstone presentations tasks:
 -create an install script/instructions 
 -Create documentation for Next group/document code
 -Do a complete reinstall
--upgrade to dspace6 and see if it still works
 -get an image of the VM
 -immediately redirect from profile create to profile
 
@@ -13,9 +12,4 @@ Tasks for next group:
 -integrate with dspace 6
 -connect with/submit to open source community
 -search functionality for profiles
-
-Integrate this with dspace's very shallow profiles system
-Refactor the class system of our current setup so there is not so much code reuse
-Upload button to upload a picture, as an author
-Allow an author to add more than one education, employment, grant, etc.
 
