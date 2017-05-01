@@ -47,9 +47,20 @@ document.getElementById('aspect_artifactbrowser_Profiles_div_publicationsContent
   });
 }
 
+function redirect() {
+  var linksOnPage = document.getElementsByTagName('a');
+  for (var x in linksOnPage){
+    var redirectLink = linksOnPage[x];
+    if(redirectLink.innerHTML === "Click Here To See Your Profile"){
+      window.location.replace(redirectLink.href);
+    }
+  }
+}
+
 window.onload = function() {
 	 	  letterLinks();
 		  getPublications();
+                  redirect();
 		}
 
  
