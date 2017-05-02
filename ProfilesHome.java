@@ -104,6 +104,7 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 
 	public boolean checkDB(String pageUID)
 	{
+		//same as Profiles.java, this could be put into a superclass to limit code reuse
 		boolean containsUser = false;
 		try {
 			Connection conn = null;
@@ -193,6 +194,7 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		return containsUser;
 	}
 	public class LinkData{
+		//a small struct to hold link information such as uid, first name and last name
 		public String uid, fname, lname;
 		public LinkData(String u, String f, String l) {
 			uid = u;
@@ -202,7 +204,7 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 	}
 	public ArrayList<LinkData> generateTable(String linkLetter)
 	{
-		
+		//generates the table for a given link letter
 		ArrayList<LinkData> ret = new ArrayList<LinkData>();
 		
 		try{
@@ -214,6 +216,7 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 			
 			String sql = "SELECT uniqueid, firstname, lastname FROM faculty";
 			ResultSet rs = stmt.executeQuery(sql);
+			//gather all data from users whose last name starts with "linkletter"
 			while(rs.next()) {
 				//put things into arrayList by uniqueid
 				String last = rs.getString("lastname");
@@ -242,6 +245,7 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		request = ObjectModelHelper.getRequest(objectModel);
 		String req = null;
 		String linkLetter = "A";
+		//determine whether a link letter exists, if not, use A by default
 		try{
 			req = request.getParameter("letter").toUpperCase();
 			if(req.length() == 1)
@@ -261,7 +265,7 @@ public class ProfilesHome extends AbstractDSpaceTransformer {
 		// the division that holds the links by last name (A, B, C...Z)
 		Division links = linksContainer.addDivision("links");
 		
-		//Hash Table 
+		//Array of users
 		ArrayList<LinkData> users = new ArrayList<LinkData>();
 		users = generateTable(linkLetter);
 		

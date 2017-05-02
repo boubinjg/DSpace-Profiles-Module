@@ -164,9 +164,9 @@ public class ProfileManager extends AbstractDSpaceTransformer
         /**
         * Add some basic contents
         */
-
+	//returns a Text element which is used to create the form input boxes.
 	public Text getText(List form, String textTitle, Message textLabel, int size, String value) throws WingException {
-                Text t = form.addItem().addText(textTitle);
+		Text t = form.addItem().addText(textTitle);
                 t.setLabel(textLabel);
                 t.setValue(parameters.getParameter(textTitle, value));
                 t.setSize(0, size);
@@ -175,6 +175,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 	public boolean checkPost(String pageUID, boolean edit)
         {	
+		//handles post requests to the page
 		boolean post = false;
                 String  formfname = request.getParameter("first name"),
 		formlname = request.getParameter("last name"),
@@ -201,25 +202,22 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 formResGate = request.getParameter("research gate"),
                 formTwitter = request.getParameter("twitter");
                 String isSent = request.getParameter("isSent");
+		//puts post requests into the database (uses prepared statements so the DB is injection safe)
                 if (isSent != null && isSent.equals("true")) {
 			post = true;
                         try {
-				DBTest = "";
+				//connect to the database, create local variables
                         	Connection conn = null;
-
                            	Statement stmt = null;
-
                                 PreparedStatement prepStmt = null;
-
-
                               	conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
                                 stmt = conn.createStatement();
 
-				//new stuff
-				DBTest += "new stuff";
+				//switch between strings based on whether user is editing profile or creating profile
 				String SQL;
 				if(edit)
 				{
+					//update profile
 					SQL = "UPDATE faculty SET uniqueid = ?, firstname = ?, lastname = ?, pictureurl = ?, jobtitle = ?, research = ?, address = ?, phone = ?, email = ?, website = ? WHERE uniqueid = ?";
 				}
 				else
@@ -229,7 +227,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 				// Set auto-commit to false
 				conn.setAutoCommit(false);
-				
+				//fill prepared statement "?"s with data
 				prepStmt.setString(1, pageUID);
 				prepStmt.setString(2, formfname);
 				prepStmt.setString(3, formlname);
@@ -241,6 +239,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				prepStmt.setString(9, formEmail);
 				prepStmt.setString(10, formWebsite);
 				
+				//if editing, add last element
 				if(edit)
 					prepStmt.setString(11, pageUID);
 				
@@ -332,8 +331,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
 				DBTest += "commit";
 				
 			} catch (SQLException se) {
-				//post = false;
-				DBTest += se.getSQLState();
+				post = false;
                         }
                 }
 		return post;
@@ -342,7 +340,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
         {
 	
                 Division formHeader = page.addDivision("formHeader");
-               
+                //change form header depending on edit
 		if(edit)
 			formHeader.addPara(F_head_edit);
 		else
@@ -352,7 +350,9 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 Division formDiv = page.addInteractiveDivision("form", request.getRequestURI(), Division.METHOD_POST, "primary");
 
                 List form = formDiv.addList("form", List.TYPE_FORM);
+		//this statement is disgusting, please fix this for the love of god.
 		if(edit) {
+			//create form boxes, but fill them with existing data
 			Text ffname = getText(form, "first name", F_fname, 50, fname);
 			Text flname = getText(form, "last name", F_lname, 50, lname);
                		Text fPictureURL = getText(form, "Picture URL", F_picurl, 100, pictureURL);
@@ -378,6 +378,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 	Text fResearchGateURL = getText(form, "research gate", F_researchgateURL, 100,researchGate);
                 	Text fTwitterURL = getText(form, "twitter", F_twitterURL, 100,twitter);
 		} else {
+			//create form boxes, but with no data
                 	Text fname = getText(form, "first name", F_fname, 50, "");
 			Text flname = getText(form, "last name", F_lname, 50, "");
                		Text fPictureURL = getText(form, "Picture URL", F_picurl, 100, "");
@@ -403,6 +404,7 @@ public class ProfileManager extends AbstractDSpaceTransformer
                 	Text fResearchGateURL = getText(form, "research gate", F_researchgateURL, 100,"");
                 	Text fTwitterURL = getText(form, "twitter", F_twitterURL, 100,"");
 		}
+		//add form buttons, hidden button is used to determine whether the data was posted
                 form.addItem().addHidden("isSent").setValue("true");
                 form.addItem().addButton("submit").setValue("Submit");
 
@@ -416,6 +418,8 @@ public class ProfileManager extends AbstractDSpaceTransformer
 
 	public boolean checkDB(String pageUID)
         {
+		//same as in Profiles.java, check there for better documentation
+		//This could be put into a superclass to limit code reuse.
                 boolean containsUser = false;
                 try {
                         Connection conn = null;

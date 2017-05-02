@@ -17,8 +17,10 @@ cp lib/Division.java $value/dspace-xmlui/src/main/java/org/dspace/app/xmlui/wing
 #install CSS
 echo "installing CSS"
 cp lib/moduleCSS.css $value/dspace-xmlui/src/main/webapp/themes/Mirage/lib/css
+#install javascript
 echo "installing Javascript"
 cp lib/moduleJS.js $value/dspace-xmlui/src/main/webapp/themes/Mirage/lib/js
+#install images
 echo "installing images"
 cp lib/academia-logo.png $value/dspace-xmlui/src/main/webapp/themes/Mirage/images
 cp lib/orcid-logo.png $value/dspace-xmlui/src/main/webapp/themes/Mirage/images

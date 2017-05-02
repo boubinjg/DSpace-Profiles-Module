@@ -173,21 +173,24 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 	public boolean checkDB(String pageUID)
 	{
+		//clear global variables.
 		uniqueId = ""; fname = ""; lname = ""; pictureURL = ""; jobTitle = ""; researchArea = "Research: "; 
 		address = "Address: "; phone = "Phone: "; email = "Email: "; website = "Personal Website: ";
         	school = ""; degreeAndAttended = ""; grantTitle = "Grant Title: "; grantLength = "Grant Length: "; 
 		grantNumber = "Grant Number: "; orcid = ""; academia = ""; googlePlus = ""; linkedin = ""; 
 		researchGate = ""; twitter = ""; organization = ""; orgJobTitle = ""; dateRange = "";
 	
+		//bool refering to whether the DB contains this specific user
 		boolean containsUser = false;
 		try {
+			//create database connection
 			Connection conn = null;
-			
 			Statement stmt = null;
 			conn = DriverManager.getConnection(databaseConnection, databaseUsername, databasePassword);
 			stmt = conn.createStatement();
 			String sql, sql1, sql2, sql3, sql4, sql5;
 			
+			//see if the pageUID (obtained from the request path) is in the database
 			sql5 = "SELECT * FROM faculty WHERE uniqueid = '" + pageUID + "'";
 			ResultSet rs5 = stmt.executeQuery(sql5);		
 			String uniqueIdCheck = "";
@@ -197,8 +200,9 @@ public class Profiles extends AbstractDSpaceTransformer {
 			rs5.close();
 			if(!uniqueIdCheck.isEmpty())
 				containsUser = true;
-			
+			//if the user is in the DB
 			if(containsUser) {
+				//get information from faculty table
 				sql = "SELECT * FROM faculty WHERE uniqueid = '" + pageUID + "'";
 				ResultSet rs = stmt.executeQuery(sql);
 				while (rs.next()) {
@@ -214,7 +218,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 					website = "Website: "+rs.getString("website");
 				}
 				rs.close();
-			
+				//get information from bio table
 				sql1 = "SELECT * FROM bio WHERE uid = '" + pageUID + "'";
 				ResultSet rs1 = stmt.executeQuery(sql1);
 				while(rs1.next()) {
@@ -225,7 +229,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 					degreeAndAttended += rs1.getString("dateEarned");
 				}
 				rs1.close();
-			
+				//get information from funding table
 				sql2 = "SELECT * FROM funding WHERE uid = '" + pageUID + "'";
 				ResultSet rs2 = stmt.executeQuery(sql2);
 				while(rs2.next()) {
@@ -235,7 +239,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 					grantNumber = "Grant Number: "+rs2.getString("grantnumber");
 				}
 				rs2.close();
-			
+				//get information from links table
 				sql3 = "SELECT * FROM links WHERE uid = '" + pageUID + "'";
 				ResultSet rs3 = stmt.executeQuery(sql3);
 				while(rs3.next()) {
@@ -248,7 +252,7 @@ public class Profiles extends AbstractDSpaceTransformer {
 					twitter = rs3.getString("twitter");
 				}
 				rs3.close();
-			
+				//get information from employment table
 				sql4 = "SELECT * FROM employment WHERE uid = '" + pageUID + "'";
 				ResultSet rs4 = stmt.executeQuery(sql4);
 				while(rs4.next()) {
@@ -270,30 +274,34 @@ public class Profiles extends AbstractDSpaceTransformer {
 
 	public void createProfile(Division page) throws WingException
 	{
+		//add info bar
 		Division infoBar = page.addDivision("infoBar");
-		
+		//add picture
 		Division picture = infoBar.addDivision("picture");
 		picture.addParaFigure("", "", pictureURL, "", "");
-
-		Division infoWithName = infoBar.addDivision("infoWithName");
 		
+		Division infoWithName = infoBar.addDivision("infoWithName");
+		//add name 
 		Division nameHeader = infoWithName.addDivision("nameHeader");
 		nameHeader.addPara(fname + " " + lname);
 		
 		Division personalInfo = infoWithName.addDivision("personalInfo");
 		
 		Division infoLeftContainer = personalInfo.addDivision("infoLeftContainer");
+		//add job info
 		infoLeftContainer.addPara(jobTitle);
 		infoLeftContainer.addPara(researchArea);
 
+		//add right side info
 		Division infoRightContainer = personalInfo.addDivision("infoRightContainer");
 		infoRightContainer.addPara(address);
 		infoRightContainer.addPara(phone);
 		infoRightContainer.addPara(email);
 		infoRightContainer.addPara(website);
 		
+		//add links to page
 		Division links = infoRightContainer.addDivision("links");
-		// orcid/
+		// orcid
 		links.addParaFigure("", "", orcidLoc, orcid, "");
 		// adacemia.edu
 		links.addParaFigure("", "", academiaLoc, academia, "");
@@ -323,21 +331,21 @@ public class Profiles extends AbstractDSpaceTransformer {
 		grantsHeader.addPara("Funding");
 		Division publicationsHeader = publicationsContainer.addDivision("publicationsHeader");
 		publicationsHeader.addPara("Publications");
-		
+		//displays education info
 		Division educationContent = academicContainer.addDivision("educationContent");
 		educationContent.addPara(school);
 		educationContent.addPara(degreeAndAttended);
-		
+		//displays employment info
 		Division employmentContent = employmentContainer.addDivision("employmentContent");
 		employmentContent.addPara(organization);
 		employmentContent.addPara(orgJobTitle);
 		employmentContent.addPara(dateRange);
-		
+		//displays employment info
 		Division fundingContent = grantsContainer.addDivision("fundingContent");
 		fundingContent.addPara(grantTitle);
 		fundingContent.addPara(grantLength);
 		fundingContent.addPara(grantNumber);	
-
+		//a div that is filled by the ajax publication javascript function in moduleJS.js
 		Division publicationsContent = publicationsContainer.addDivision("publicationsContent");
 
 	}
@@ -370,17 +378,20 @@ public class Profiles extends AbstractDSpaceTransformer {
 			createProfile(page);
 			Division bottomToolBar = page.addDivision("bottomToolBar");
                       	Division returnHomeLink = bottomToolBar.addDivision("returnHomeLink");
+			//if this is the page for the user who is logged in, display edit link
 			if(eperson.equals(pageUID)) {
 				Division editProfileLink = bottomToolBar.addDivision("editProfileLink");
 				String link = "/xmlui/scholarprofiles/profilemanager";
 				Para editLink = editProfileLink.addPara(null, "Edit Link");
 				editLink.addXref(link).addContent(T_edit_link);
 			}
+			//display homepage link
 		        String homeLink = "/xmlui/scholarprofiles";
                 	Para homeLinkp = returnHomeLink.addPara(null, "Home Link");
                 	homeLinkp.addXref(homeLink).addContent("Return to Author Profiles");
 
 		} else {
+			//display link to author profiles
 			Division bottomToolBar = page.addDivision("bottomToolBar");
 			page.addPara("This Profile Does Not Exist");
 	                String homeLink = "/xmlui/scholarprofiles";
